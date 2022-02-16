@@ -7,7 +7,7 @@ const ProjectsPage: NextPage = () => {
   return (
     <Layout title="Projects">
       <Container>
-        <Title>These are my projects</Title>
+        <Title>These are my testimonials</Title>
       </Container>
     </Layout>
   );

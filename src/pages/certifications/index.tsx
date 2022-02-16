@@ -3,13 +3,13 @@ import { NextPage } from 'next';
 import Layout from '@/components/Layout';
 import { Container, Title } from '@/styles/global.styles';
 
-const ProjectsPage: NextPage = () => {
+const CertificationsPage: NextPage = () => {
   return (
-    <Layout title="Projects">
+    <Layout title="Certifications">
       <Container>
-        <Title>These are my projects</Title>
+        <Title>These are my Certifications</Title>
       </Container>
     </Layout>
   );
 };
-export default ProjectsPage;
+export default CertificationsPage;

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Layout from '@/components/Layout';
 import { Container, Title } from '@/styles/global.styles';
 
-const Project: NextPage = () => {
+const Experience: NextPage = () => {
   const router = useRouter();
   const { slug } = router.query;
   return (
@@ -15,4 +15,4 @@ const Project: NextPage = () => {
     </Layout>
   );
 };
-export default Project;
+export default Experience;
