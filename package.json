@@ -1,7 +1,7 @@
 {
-  "name": "next-typescript-twin-styled-eslint-starter",
+  "name": "myPortfolio",
   "version": "1.0.0",
-  "author": "Vincent Nguyen @vinhvn",
+  "author": "Diego Chuman @dcvdiego",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
