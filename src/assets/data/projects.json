@@ -1,0 +1,77 @@
+[
+  {
+    "name": "London Fashion Week",
+    "infrastructure": [
+      "Next",
+      "React",
+      "Javascript",
+      "HTML",
+      "CSS",
+      "styled-components",
+      "Google Cloud Platform",
+      "Bitbucket Pipelines",
+      "PHP",
+      "Laravel",
+      "Laravel Nova",
+      "Prismic",
+      "MySQL",
+      "GraphQL",
+      "REST"
+    ],
+    "client": 3,
+    "project": 1,
+    "description": "",
+    "dates": "4/10/21 - Present",
+    "link": "londonfashionweek.co.uk",
+    "repository": "IBM-Owned Private Repo"
+  },
+  {
+    "name": "WelcomeBlue",
+    "infrastructure": [
+      "React",
+      "Javascript",
+      "HTML",
+      "CSS",
+      "Sass",
+      "AWS",
+      "Strapi",
+      "Node.js",
+      "Express.js",
+      "Docker",
+      "Jest",
+      "MySQL",
+      "GraphQL",
+      "Redux"
+    ],
+    "client": 3,
+    "project": 1,
+    "description": "",
+    "dates": "4/10/21 - Present",
+    "repository": "IBM-Owned Private Repo"
+  },
+  {
+    "name": "up2date",
+    "infrastructure": [
+      "React",
+      "Javascript",
+      "Typescript",
+      "HTML",
+      "CSS",
+      "styled-components",
+      "TailwindCSS",
+      "NodeJS",
+      "NestJS",
+      "ExpressJS",
+      "TypeORM",
+      "NGINX",
+      "Docket",
+      "MySQL",
+      "GraphQL"
+    ],
+    "project": 1,
+    "client": 1,
+    "description": "",
+    "dates": "22/09/21 - Present",
+    "repository": "github.com/dcvdiego/up2date"
+  }
+]
