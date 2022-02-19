@@ -1,6 +1,7 @@
 [
   {
     "name": "London Fashion Week",
+    "slug": "london-fashion-week",
     "infrastructure": [
       "Next",
       "React",

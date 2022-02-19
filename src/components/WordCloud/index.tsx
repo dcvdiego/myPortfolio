@@ -5,15 +5,17 @@ import { Canvas, ThreeEvent, useFrame } from '@react-three/fiber';
 import { Text, TrackballControls } from '@react-three/drei';
 import testimonials from '../../assets/data/testimonials.json';
 import Testimonial from '../Testimonial';
-import { useTestimonialContext } from '../../pages/testimonials/testimonials.context';
-
 interface IWordProps {
   wordChildren: any;
   position: any;
+  onTextClick: any;
 }
 
-const Word: FC<IWordProps> = ({ wordChildren, ...props }: IWordProps) => {
-  const { setActiveWord } = useTestimonialContext();
+const Word: FC<IWordProps> = ({
+  wordChildren,
+  onTextClick,
+  ...props
+}: IWordProps) => {
   const color = new THREE.Color();
   const fontProps = {
     font: '/Inter-Bold.woff',
@@ -53,7 +55,7 @@ const Word: FC<IWordProps> = ({ wordChildren, ...props }: IWordProps) => {
         ref={ref}
         onPointerOver={over}
         onPointerOut={out}
-        onClick={() => setActiveWord(wordChildren)}
+        onClick={() => onTextClick(wordChildren)}
         {...props}
         {...fontProps}
         // eslint-disable-next-line react/no-children-prop
@@ -66,8 +68,14 @@ interface ICloudProps {
   dist: number;
   radius: number;
   data: Array<String>;
+  onTextClick: any;
 }
-const Cloud: Function = ({ dist = 5, radius = 20, data }: ICloudProps) => {
+const Cloud: Function = ({
+  dist = 5,
+  radius = 20,
+  data,
+  onTextClick
+}: ICloudProps) => {
   // Create a count x count random words with spherical distribution
   const words = useMemo(() => {
     const temp = [];
@@ -92,15 +100,13 @@ const Cloud: Function = ({ dist = 5, radius = 20, data }: ICloudProps) => {
         key={index}
         position={pos}
         wordChildren={word}
+        onTextClick={onTextClick}
       />
     </>
   ));
 };
 const WordCloud = () => {
-  const { activeWord } = useTestimonialContext();
-  useEffect(() => {
-    console.log(activeWord, 'fromContext');
-  }, [activeWord]);
+  const [activeWord, setActiveWord] = useState<string>('');
   interface ITestimonialObject {
     from: string;
     title: string;
@@ -138,12 +144,15 @@ const WordCloud = () => {
           radius={20}
           data={linkArray}
           finalTestimonials={finalTestimonials}
+          onTextClick={setActiveWord}
         />
         <TrackballControls />
       </Canvas>
-      {activeWord !== '' && finalTestimonials ? (
-        <Testimonial data={finalTestimonials.get(activeWord)} />
-      ) : null}
+      {activeWord !== ''
+        ? finalTestimonials?.get(activeWord)?.map((testimonial) => {
+            return <Testimonial data={testimonial} />;
+          })
+        : null}
     </>
   );
 };

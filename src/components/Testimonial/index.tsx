@@ -36,6 +36,7 @@ interface IData {
   data: ITestimonialObject | undefined;
 }
 const Testimonial = ({ data }: IData) => {
+  console.log(data);
   return (
     <TestimonialContainer>
       <TestimonialTitle>{data?.from}</TestimonialTitle>
