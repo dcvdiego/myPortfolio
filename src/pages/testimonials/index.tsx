@@ -10,10 +10,6 @@ const TestimonialsPage: NextPage = () => {
       <Container>
         <Title>These are my testimonials</Title>
         <WordCloud />
-        {/* <Title>Or you can look at them below!</Title>
-        {testimonials.map((testimonial) => (
-          <Testimonial data={testimonial} />
-        ))} */}
       </Container>
     </Layout>
   );

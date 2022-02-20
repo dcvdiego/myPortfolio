@@ -150,7 +150,7 @@ const WordCloud = () => {
       </Canvas>
       {activeWord !== ''
         ? finalTestimonials?.get(activeWord)?.map((testimonial) => {
-            return <Testimonial data={testimonial} />;
+            return <Testimonial data={testimonial} word={activeWord} />;
           })
         : null}
     </>
@@ -158,4 +158,4 @@ const WordCloud = () => {
 };
 export default WordCloud;
 
-// thank you Paul Henschel
+// thank you Paul Henschel for codesandbox 3D word cloud

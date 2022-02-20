@@ -33,15 +33,19 @@ interface ITestimonialObject {
   content: string;
 }
 interface IData {
-  data: ITestimonialObject | undefined;
+  data: ITestimonialObject;
+  word: string;
 }
-const Testimonial = ({ data }: IData) => {
-  console.log(data);
+const Testimonial = ({ data, word }: IData) => {
   return (
     <TestimonialContainer>
-      <TestimonialTitle>{data?.from}</TestimonialTitle>
-      <TestimonialSubtitle>{data?.title}</TestimonialSubtitle>
-      <TestimonialContent>{data?.content}</TestimonialContent>
+      <TestimonialTitle>{data.from}</TestimonialTitle>
+      <TestimonialSubtitle>{data.title}</TestimonialSubtitle>
+      <TestimonialContent
+        dangerouslySetInnerHTML={{
+          __html: data.content.replaceAll(word, `<b>${word}</b>`)
+        }}
+      ></TestimonialContent>
     </TestimonialContainer>
   );
 };
