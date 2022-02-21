@@ -20,6 +20,16 @@ export const Title = styled.h1`
   mb-12`}
 `;
 
+export const SubHeading = styled.h3`
+  ${tw`
+    text-xl
+    sm:text-2xl
+    font-medium
+    tracking-wide
+    mb-12
+  `}
+`;
+
 const linkStyles: Record<string, TwStyle> = {
   red: tw`text-red-500 
   hover:text-red-700`

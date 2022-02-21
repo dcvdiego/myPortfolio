@@ -5,6 +5,7 @@ import { Canvas, ThreeEvent, useFrame } from '@react-three/fiber';
 import { Text, TrackballControls } from '@react-three/drei';
 import testimonials from '../../assets/data/testimonials.json';
 import Testimonial from '../Testimonial';
+
 interface IWordProps {
   wordChildren: any;
   position: any;
@@ -109,6 +110,7 @@ const WordCloud = () => {
   const [activeWord, setActiveWord] = useState<string>('');
   interface ITestimonialObject {
     from: string;
+    project: string;
     title: string;
     content: string;
     // TODO: add project so that it can link to it

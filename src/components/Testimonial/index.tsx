@@ -29,12 +29,14 @@ const TestimonialContent = styled.p`
 `;
 interface ITestimonialObject {
   from: string;
+  project: string;
   title: string;
   content: string;
 }
 interface IData {
   data: ITestimonialObject;
-  word: string;
+  // eslint-disable-next-line react/require-default-props
+  word?: string;
 }
 const Testimonial = ({ data, word }: IData) => {
   return (
@@ -45,7 +47,7 @@ const Testimonial = ({ data, word }: IData) => {
         dangerouslySetInnerHTML={{
           __html: data.content.replaceAll(word, `<b>${word}</b>`)
         }}
-      ></TestimonialContent>
+      />
     </TestimonialContainer>
   );
 };

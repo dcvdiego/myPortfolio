@@ -188,9 +188,9 @@ const Footer = () => {
               </Link>
             </ListItem>
             <ListItem>
-              <Link href="/experience">
+              <Link href="/experiences">
                 {/* eslint-disable-next-line */}
-                <a>Experience</a>
+                <a>Experiences</a>
               </Link>
             </ListItem>
             <ListItem>
