@@ -1,14 +1,7 @@
-import React, {
-  useRef,
-  useState,
-  useMemo,
-  useEffect,
-  FC,
-  Suspense
-} from 'react';
+import React, { useRef,useState,useMemo,useEffect,FC,Suspense } from 'react';
 
 import * as THREE from 'three';
-import { Camera, Canvas, ThreeEvent, useFrame } from '@react-three/fiber';
+import {Camera,Canvas,ThreeEvent,useFrame} from '@react-three/fiber';
 import { Text, TrackballControls } from '@react-three/drei';
 import testimonials from '../../assets/data/testimonials.json';
 import Testimonial from '../Testimonial';
@@ -148,14 +141,16 @@ const WordCloud = () => {
       <Suspense fallback={null}>
         <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 35], fov: 90 }}>
           <fog attach="fog" args={['#202025', 0, 80]} />
-          <Cloud
-            dist={linkArray.length}
-            radius={20}
-            data={linkArray}
-            finalTestimonials={finalTestimonials}
-            onTextClick={setActiveWord}
-          />
-          <TrackballControls />
+          <group dispose={null}>
+            <Cloud
+              dist={linkArray.length}
+              radius={20}
+              data={linkArray}
+              finalTestimonials={finalTestimonials}
+              onTextClick={setActiveWord}
+            />
+            <TrackballControls />
+          </group>
         </Canvas>
       </Suspense>
       {activeWord !== ''
