@@ -1,18 +1,17 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import dynamic from 'next/dynamic';
 
 interface IIConProps {
-  isLiked: boolean;
+  isSelected: boolean;
   isHover: boolean;
 }
 
-// const ModelComponent = lazy(() => import('./model'));
 const ModelComponent = dynamic(() => import('./model'), {
   ssr: false
 });
 
-export default function Icon({ isLiked, isHover }: IIConProps) {
+export default function Icon({ isSelected, isHover }: IIConProps) {
   return (
     <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 5.5], fov: 45 }}>
       {lights.map(([x, y, z, intensity], i) => (
@@ -24,7 +23,7 @@ export default function Icon({ isLiked, isHover }: IIConProps) {
         />
       ))}
       <group dispose={null}>
-        <ModelComponent isLiked={isLiked} isHover={isHover} />
+        <ModelComponent isSelected={isSelected} isHover={isHover} />
       </group>
     </Canvas>
   );

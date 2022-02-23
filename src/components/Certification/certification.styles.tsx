@@ -1,8 +1,22 @@
+import { Canvas } from '@react-three/fiber';
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import tw from 'twin.macro';
+import Icon from './icon';
 
 const StyledCertification = styled.div`
+  box-sizing: border-box;
+
+  * {
+    box-sizing: inherit;
+  }
+
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
   button {
-    --button-star-greyscale: 100%;
+    --button-star-greyscale: 0%;
     --button-star-contrast: 0%;
     --button-star-hue: 170deg;
 
@@ -16,7 +30,6 @@ const StyledCertification = styled.div`
     margin: 0;
     padding: 0;
     padding-left: 50px;
-    font-family: 'Poppins';
     font-size: 28px;
     font-weight: 600;
     line-height: 40px;
@@ -35,9 +48,8 @@ const StyledCertification = styled.div`
     z-index: 1;
     pointer-events: none;
     transform-origin: 50% 52%;
-    filter: grayscale(var(--button-star-greyscale))
-      contrast(var(--button-star-contrast));
-    opacity: 0.45;
+    filter: contrast(var(--button-cert-contrast));
+    opacity: 1;
     position: absolute;
     top: -110px;
     left: -250px;
@@ -58,15 +70,22 @@ const StyledCertification = styled.div`
   .default {
     display: block;
   }
-
-  .number {
+  .description {
+    h3 {
+      font-size: medium;
+    }
+    p {
+      font-size: small;
+    }
+  }
+  .cta {
     padding: 20px 0;
     width: 88px;
     position: relative;
     transform: translateZ(0);
   }
 
-  .number:before {
+  .cta:before {
     content: '';
     position: absolute;
     left: 0;
@@ -76,14 +95,14 @@ const StyledCertification = styled.div`
     background-color: #35373f;
   }
 
-  .current {
-    color: #8a8d9b;
+  .ctaText {
+    color: #b1b3bd;
     opacity: 1;
     display: block;
   }
 
-  .new {
-    color: #fbfaaa;
+  .close {
+    color: #fbaaaa;
     position: absolute;
     top: 20px;
     left: 0;
@@ -102,123 +121,117 @@ const StyledCertification = styled.div`
     color: #d0d0db;
     display: block;
   }
+`;
 
-  html {
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-  }
+export const CertificationContainer = styled(motion.div)`
+  --button-star-greyscale: 0%;
+  --button-star-contrast: 0%;
+  --button-star-hue: 170deg;
+  border: none;
+  border-radius: 26px;
+  outline: none;
+  box-shadow: inset 0 0 0 1px #35373f, 0px 1px 3px rgba(52, 54, 63, 0.1),
+    0px 4px 10px rgba(52, 54, 63, 0.15);
+  ${tw`appearance-none 
+  cursor-pointer 
+  bg-gray-900 
+  text-white 
+  m-0 
+  p-0 
+  pl-12 
+  text-3xl 
+  font-semibold 
+  leading-10
+   relative 
+   text-center 
+   flex 
+   items-center`}
+`;
 
-  * {
-    box-sizing: inherit;
-  }
+export const StyledIcon = styled(Icon)`
+  width: 600px;
+  height: 300px;
+  z-index: 1;
+  transform-origin: 50% 52%;
+  filter: contrast(var(--button-cert-contrast));
+  top: -110px;
+  left: -250px;
+  ${tw`
+    block 
+    pointer-events-none 
+    opacity-100 
+    absolute
+  `}
+`;
 
-  *:before,
-  *:after {
-    box-sizing: inherit;
-  }
+export const StyledCanvas = styled(Canvas)`
+  ${tw`
+    absolute 
+    w-full 
+    h-full
+  `}
+`;
 
-  body {
-    min-height: 100vh;
-    display: flex;
-    font-family: 'Inter', Arial;
-    justify-content: center;
-    align-items: center;
-    background: #f4f5fa;
-  }
+export const Label = styled.div`
+  ${tw`
+  w-48
+  `}
+  padding: 20px 0;
+  transform: translateZ(0);
+`;
 
-  /* devanagari */
-  @font-face {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 400;
-    src: url(https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJbecnFHGPezSQ.woff2)
-      format('woff2');
-    unicode-range: U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8,
-      U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
-  }
-  /* latin-ext */
-  @font-face {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 400;
-    src: url(https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJnecnFHGPezSQ.woff2)
-      format('woff2');
-    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
-      U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-  }
-  /* latin */
-  @font-face {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 400;
-    src: url(https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2)
-      format('woff2');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-      U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212,
-      U+2215, U+FEFF, U+FFFD;
-  }
-  /* devanagari */
-  @font-face {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 600;
-    src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLEj6Z11lFd2JQEl8qw.woff2)
-      format('woff2');
-    unicode-range: U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8,
-      U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
-  }
-  /* latin-ext */
-  @font-face {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 600;
-    src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLEj6Z1JlFd2JQEl8qw.woff2)
-      format('woff2');
-    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
-      U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-  }
-  /* latin */
-  @font-face {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 600;
-    src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLEj6Z1xlFd2JQEk.woff2)
-      format('woff2');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-      U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212,
-      U+2215, U+FEFF, U+FFFD;
-  }
-  /* devanagari */
-  @font-face {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 700;
-    src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLCz7Z11lFd2JQEl8qw.woff2)
-      format('woff2');
-    unicode-range: U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8,
-      U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
-  }
-  /* latin-ext */
-  @font-face {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 700;
-    src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLCz7Z1JlFd2JQEl8qw.woff2)
-      format('woff2');
-    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
-      U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-  }
-  /* latin */
-  @font-face {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 700;
-    src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLCz7Z1xlFd2JQEk.woff2)
-      format('woff2');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-      U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212,
-      U+2215, U+FEFF, U+FFFD;
+export const Default = styled(motion.span)`
+  ${tw`
+    block
+  `}
+`;
+
+export const DescriptionContainer = styled(motion.span)``;
+
+export const DescriptionTitle = styled.h3`
+  ${tw`
+  text-sm
+  `}
+`;
+
+export const DescriptionContent = styled.p`
+  ${tw`
+  text-xs
+  `}
+`;
+
+export const CTAContainer = styled.div`
+  ${tw`
+    w-20 
+    relative
+  `}
+  padding: 20px 0;
+  transform: translateZ(0);
+  &:before {
+    ${tw`
+      absolute left-0 w-px bg-gray-800
+    `}
+    content: '';
+    top: 1px;
+    bottom: 1px;
   }
 `;
+
+export const CTAText = styled(motion.span)`
+  ${tw`
+  text-gray-500 
+  opacity-100 
+  block
+`}
+`;
+
+export const CTAClose = styled(motion.span)`
+  top: 20px;
+  ${tw`
+  text-red-300 absolute left-0 right-0 block
+`}
+`;
+
+// do we need an add? wot
 
 export default StyledCertification;

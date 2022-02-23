@@ -6,45 +6,52 @@ import StyledCertification from './certification.styles';
 // Ported from https://codepen.io/popmotion/pen/oNGxjpr?editors=1111 and Framer Motion 3D example
 export default function Certification() {
   const [isHover, setIsHover] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
+  const [isSelected, setIsSelected] = useState(false);
 
   return (
     <StyledCertification>
       <motion.button
         initial={false}
-        animate={[isLiked ? 'liked' : 'unliked', isHover ? 'hover' : 'rest']}
+        animate={[
+          isSelected ? 'selected' : 'unselected',
+          isHover ? 'hover' : 'rest'
+        ]}
         whileTap="press"
         variants={buttonVariants}
         onHoverStart={() => setIsHover(true)}
         onHoverEnd={() => setIsHover(false)}
-        onClick={() => setIsLiked(!isLiked)}
+        onClick={() => setIsSelected(!isSelected)}
       >
         <motion.div
           className="icon"
           variants={{
-            liked: { opacity: 0, transition: iconFadeTransition },
-            hover: isLiked
+            selected: { opacity: 0, transition: iconFadeTransition },
+            hover: isSelected
               ? { opacity: 0, transition: iconFadeTransition }
               : { opacity: 1 }
           }}
         >
           <Suspense fallback={null}>
-            <Icon isHover={isHover} isLiked={isLiked} />
+            <Icon isHover={isHover} isSelected={isSelected} />
           </Suspense>
         </motion.div>
         <div className="label">
           <motion.span variants={labelTextVariants} className="default">
-            AWS Certified Cloud Practitioner
-            <motion.span variants={successTextVariants} className="success">
-              red
+            <motion.span variants={labelTitleVariants}>AWS</motion.span>
+            <motion.span
+              variants={descriptionTextVariants}
+              className="description"
+            >
+              <h3>Description</h3>
+              <p>This certification...</p>
             </motion.span>
           </motion.span>
         </div>
-        <div className="number">
-          <motion.span variants={currentCountVariants} className="current">
+        <div className="cta">
+          <motion.span variants={ctaTextVariants} className="ctaText">
             See More
           </motion.span>
-          <motion.span variants={newCountVariants} className="new">
+          <motion.span variants={closeVariants} className="close">
             Close
           </motion.span>
         </div>
@@ -57,39 +64,42 @@ const iconFadeTransition: Transition = { duration: 0.2, delay: 0.5 };
 
 const buttonVariants: Variants = {
   rest: {
-    '--button-star-greyscale': '100%',
-    '--button-star-contrast': '0%',
+    '--button-cert-contrast': '100%',
     transition: { duration: 0.7 }
   },
   hover: {
-    '--button-star-greyscale': '0%',
-    '--button-star-contrast': '100%',
+    '--button-cert-contrast': '50%',
     scale: 1.05
   },
   press: { scale: 0.95 }
 };
 
 const labelTextVariants: Variants = {
-  unliked: { x: 24 },
-  liked: { x: -20 }
+  unselected: { x: 30 },
+  selected: { x: -50 }
 };
 
-const successTextVariants: Variants = {
-  unliked: { opacity: 0 },
-  liked: { opacity: 1 }
+const labelTitleVariants: Variants = {
+  unselected: { opacity: 1 },
+  selected: { opacity: 0 }
 };
 
-const likedTransition: Transition = {
+const descriptionTextVariants: Variants = {
+  unselected: { opacity: 0 },
+  selected: { opacity: 1 }
+};
+
+const selectedTransition: Transition = {
   duration: 0.25,
   delay: 0.5
 };
 
-const currentCountVariants: Variants = {
-  unliked: { opacity: 1, y: 0, transition: { duration: 0.25 } },
-  liked: { opacity: 0, y: -40, transition: likedTransition }
+const ctaTextVariants: Variants = {
+  unselected: { opacity: 1, y: 0, transition: { duration: 0.25 } },
+  selected: { opacity: 0, y: -40, transition: selectedTransition }
 };
 
-const newCountVariants: Variants = {
-  unliked: { opacity: 0, y: 40, transition: { duration: 0.25 } },
-  liked: { opacity: 1, y: 0, transition: likedTransition }
+const closeVariants: Variants = {
+  unselected: { opacity: 0, y: 40, transition: { duration: 0.25 } },
+  selected: { opacity: 1, y: 0, transition: selectedTransition }
 };
