@@ -18,14 +18,14 @@ const Project: NextPage = () => {
   const TestimonialsContainer = styled.div``;
 
   return (
-    <Layout title={project?.name as string}>
+    <Layout title={project!.name as string}>
       <Container>
-        <Title>{project?.name}</Title>
+        <Title>{project!.name}</Title>
         <TestimonialsContainer>
           <SubHeading>Testimonials from this project</SubHeading>
           {/* eslint-disable-next-line array-callback-return */}
           {testimonials.map((testimonial) => {
-            return testimonial.project.includes(project.name) ? (
+            return testimonial.project.includes(project!.name) ? (
               <Testimonial data={testimonial} />
             ) : null;
           })}

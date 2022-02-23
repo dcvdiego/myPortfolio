@@ -1,15 +1,22 @@
-import React, { useRef, useState, useMemo, useEffect, FC } from 'react';
+import React, {
+  useRef,
+  useState,
+  useMemo,
+  useEffect,
+  FC,
+  Suspense
+} from 'react';
 
 import * as THREE from 'three';
-import { Canvas, ThreeEvent, useFrame } from '@react-three/fiber';
+import { Camera, Canvas, ThreeEvent, useFrame } from '@react-three/fiber';
 import { Text, TrackballControls } from '@react-three/drei';
 import testimonials from '../../assets/data/testimonials.json';
 import Testimonial from '../Testimonial';
 
 interface IWordProps {
-  wordChildren: any;
+  wordChildren: String | THREE.Vector3;
   position: any;
-  onTextClick: any;
+  onTextClick: React.Dispatch<React.SetStateAction<String | THREE.Vector3>>;
 }
 
 const Word: FC<IWordProps> = ({
@@ -25,7 +32,7 @@ const Word: FC<IWordProps> = ({
     lineHeight: 1,
     'material-toneMapped': false
   };
-  const ref = useRef();
+  const ref = useRef<Camera | any>();
   const [hovered, setHovered] = useState(false);
   const over = (e: ThreeEvent<PointerEvent>) => {
     // eslint-disable-next-line no-sequences
@@ -43,9 +50,9 @@ const Word: FC<IWordProps> = ({
   // Tie component to the render-loop
   useFrame(({ camera }) => {
     // Make text face the camera I am confused please help
-    ref?.current?.quaternion.copy(camera.quaternion);
+    ref!.current!.quaternion.copy(camera!.quaternion);
     // Animate font color
-    ref?.current?.material.color.lerp(
+    ref!.current!.material.color.lerp(
       color.set(hovered ? '#5e2dff' : 'gray'),
       0.1
     );
@@ -69,7 +76,7 @@ interface ICloudProps {
   dist: number;
   radius: number;
   data: Array<String>;
-  onTextClick: any;
+  onTextClick: React.Dispatch<React.SetStateAction<String | THREE.Vector3>>;
 }
 const Cloud: Function = ({
   dist = 5,
@@ -83,7 +90,6 @@ const Cloud: Function = ({
     const spherical = new THREE.Spherical();
     const phiSpan = Math.PI / (dist + 1);
     const thetaSpan = (Math.PI * 2) / dist;
-    // for (let i = 1; i < count + 1; i++)
     // Taken from https://discourse.threejs.org/t/can-i-place-obects-on-a-sphere-surface-evenly/4773/6
     for (let j = 0; j < data.length; j += 1)
       temp.push([
@@ -128,10 +134,10 @@ const WordCloud = () => {
     linkArray.forEach((word) => {
       if (testimonial.content.includes(word)) {
         if (finalTestimonials.get(word)) {
-          finalTestimonials.get(word)?.push(testimonial);
+          finalTestimonials.get(word)!.push(testimonial);
         } else {
           finalTestimonials.set(word, []);
-          finalTestimonials.get(word)?.push(testimonial);
+          finalTestimonials.get(word)!.push(testimonial);
         }
       }
     });
@@ -139,19 +145,21 @@ const WordCloud = () => {
   });
   return (
     <>
-      <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 35], fov: 90 }}>
-        <fog attach="fog" args={['#202025', 0, 80]} />
-        <Cloud
-          dist={linkArray.length}
-          radius={20}
-          data={linkArray}
-          finalTestimonials={finalTestimonials}
-          onTextClick={setActiveWord}
-        />
-        <TrackballControls />
-      </Canvas>
+      <Suspense fallback={null}>
+        <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 35], fov: 90 }}>
+          <fog attach="fog" args={['#202025', 0, 80]} />
+          <Cloud
+            dist={linkArray.length}
+            radius={20}
+            data={linkArray}
+            finalTestimonials={finalTestimonials}
+            onTextClick={setActiveWord}
+          />
+          <TrackballControls />
+        </Canvas>
+      </Suspense>
       {activeWord !== ''
-        ? finalTestimonials?.get(activeWord)?.map((testimonial) => {
+        ? finalTestimonials.get(activeWord)!.map((testimonial) => {
             return <Testimonial data={testimonial} word={activeWord} />;
           })
         : null}
