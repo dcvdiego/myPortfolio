@@ -1,7 +1,18 @@
-import React, { useState, Suspense, useEffect } from 'react';
+import React, { useState, Suspense } from 'react';
 import { motion, Variants, Transition } from 'framer-motion';
 import Icon from './icon';
-import StyledCertification from './certification.styles';
+import StyledCertification, {
+  CertificationContainer,
+  CTAClose,
+  CTAContainer,
+  CTAText,
+  Default,
+  DescriptionContainer,
+  DescriptionContent,
+  DescriptionTitle,
+  Label,
+  StyledIcon
+} from './certification.styles';
 
 // Ported from https://codepen.io/popmotion/pen/oNGxjpr?editors=1111 and Framer Motion 3D example
 export default function Certification() {
@@ -10,7 +21,7 @@ export default function Certification() {
 
   return (
     <StyledCertification>
-      <motion.button
+      <CertificationContainer
         initial={false}
         animate={[
           isSelected ? 'selected' : 'unselected',
@@ -22,7 +33,7 @@ export default function Certification() {
         onHoverEnd={() => setIsHover(false)}
         onClick={() => setIsSelected(!isSelected)}
       >
-        <motion.div
+        <StyledIcon
           className="icon"
           variants={{
             selected: { opacity: 0, transition: iconFadeTransition },
@@ -34,28 +45,28 @@ export default function Certification() {
           <Suspense fallback={null}>
             <Icon isHover={isHover} isSelected={isSelected} />
           </Suspense>
-        </motion.div>
-        <div className="label">
-          <motion.span variants={labelTextVariants} className="default">
+        </StyledIcon>
+        <Label>
+          <Default>
             <motion.span variants={labelTitleVariants}>AWS</motion.span>
-            <motion.span
+            <DescriptionContainer
               variants={descriptionTextVariants}
               className="description"
             >
-              <h3>Description</h3>
-              <p>This certification...</p>
-            </motion.span>
-          </motion.span>
-        </div>
-        <div className="cta">
-          <motion.span variants={ctaTextVariants} className="ctaText">
+              <DescriptionTitle>Description</DescriptionTitle>
+              <DescriptionContent>This certification...</DescriptionContent>
+            </DescriptionContainer>
+          </Default>
+        </Label>
+        <CTAContainer>
+          <CTAText variants={ctaTextVariants} className="ctaText">
             See More
-          </motion.span>
-          <motion.span variants={closeVariants} className="close">
+          </CTAText>
+          <CTAClose variants={closeVariants} className="close">
             Close
-          </motion.span>
-        </div>
-      </motion.button>
+          </CTAClose>
+        </CTAContainer>
+      </CertificationContainer>
     </StyledCertification>
   );
 }

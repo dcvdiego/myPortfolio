@@ -8,7 +8,7 @@ interface IIConProps {
   isHover: boolean;
 }
 
-export default function Model({ isSelected, isHover }: IIConProps) {
+export default function Model({ isHover, isSelected }: IIConProps) {
   const { nodes, materials }: any = useGLTF(
     'http://localhost:3000/glb/AWSCP.glb'
   );
@@ -16,15 +16,14 @@ export default function Model({ isSelected, isHover }: IIConProps) {
     <motion.mesh
       material={materials.AWS}
       geometry={nodes.Circle.geometry}
-      rotation={[Math.PI / 2, 0, degreesToRadians(360)]}
+      rotation={[Math.PI / 2, degreesToRadians(120), degreesToRadians(360)]}
       scale={1}
       animate={[isSelected ? 'selected' : 'unselected', isHover ? 'hover' : '']}
       variants={{
         unselected: {
           x: [0, 0],
           y: [0, 0],
-          scale: 1,
-          rotateY: degreesToRadians(120)
+          scale: 1
         },
         selected: {
           x: 4,

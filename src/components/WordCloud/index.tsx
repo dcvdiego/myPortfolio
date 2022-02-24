@@ -1,7 +1,14 @@
-import React, { useRef,useState,useMemo,useEffect,FC,Suspense } from 'react';
+import React, {
+  useRef,
+  useState,
+  useMemo,
+  useEffect,
+  FC,
+  Suspense
+} from 'react';
 
 import * as THREE from 'three';
-import {Camera,Canvas,ThreeEvent,useFrame} from '@react-three/fiber';
+import { Camera, Canvas, ThreeEvent, useFrame } from '@react-three/fiber';
 import { Text, TrackballControls } from '@react-three/drei';
 import testimonials from '../../assets/data/testimonials.json';
 import Testimonial from '../Testimonial';
@@ -42,7 +49,7 @@ const Word: FC<IWordProps> = ({
 
   // Tie component to the render-loop
   useFrame(({ camera }) => {
-    // Make text face the camera I am confused please help
+    // Make text face the camera
     ref!.current!.quaternion.copy(camera!.quaternion);
     // Animate font color
     ref!.current!.material.color.lerp(

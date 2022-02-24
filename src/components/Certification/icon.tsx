@@ -1,6 +1,7 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import dynamic from 'next/dynamic';
+import { MotionCanvas } from 'framer-motion-3d';
 
 interface IIConProps {
   isSelected: boolean;
@@ -11,9 +12,13 @@ const ModelComponent = dynamic(() => import('./model'), {
   ssr: false
 });
 
-export default function Icon({ isSelected, isHover }: IIConProps) {
+export default function Icon({ isHover, isSelected }: IIConProps) {
   return (
-    <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 5.5], fov: 45 }}>
+    <Canvas
+      style={{ position: 'absolute', width: '100%', height: '100%' }}
+      dpr={[1, 2]}
+      camera={{ position: [0, 0, 5.5], fov: 45 }}
+    >
       {lights.map(([x, y, z, intensity], i) => (
         <pointLight
           key={i}
@@ -23,7 +28,7 @@ export default function Icon({ isSelected, isHover }: IIConProps) {
         />
       ))}
       <group dispose={null}>
-        <ModelComponent isSelected={isSelected} isHover={isHover} />
+        <ModelComponent isHover={isHover} isSelected={isSelected} />
       </group>
     </Canvas>
   );
