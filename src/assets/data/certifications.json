@@ -1,0 +1,16 @@
+[
+  {
+    "threedid": "AWSCP",
+    "name": "AWS Certified Cloud Practitioner",
+    "awardingBody": "AWS",
+    "description": "Description here",
+    "date": "02/2022"
+  },
+  {
+    "threedid": "IBMDSO",
+    "name": "IBM DevSecOps Essentials",
+    "awardingBody": "IBM",
+    "description": "Description here",
+    "date": "i dont remember"
+  }
+]

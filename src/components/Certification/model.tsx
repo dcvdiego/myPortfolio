@@ -6,16 +6,19 @@ import { degreesToRadians } from 'popmotion';
 interface IIConProps {
   isSelected: boolean;
   isHover: boolean;
+  url: string;
 }
 
-export default function Model({ isHover, isSelected }: IIConProps) {
+export default function Model({ isHover, isSelected, url }: IIConProps) {
   const { nodes, materials }: any = useGLTF(
-    'http://localhost:3000/glb/AWSCP.glb'
+    `http://localhost:3000/glb/${url}.glb`
   );
+  console.log(nodes);
+  const shape = url === 'AWSCP' ? 'Circle' : 'Cube';
   return (
     <motion.mesh
-      material={materials.AWS}
-      geometry={nodes.Circle.geometry}
+      material={materials.Material}
+      geometry={nodes[shape].geometry}
       rotation={[Math.PI / 2, degreesToRadians(120), degreesToRadians(360)]}
       scale={1}
       animate={[isSelected ? 'selected' : 'unselected', isHover ? 'hover' : '']}

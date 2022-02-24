@@ -1,24 +1,8 @@
 <h2 align="center">
-  ✨ TypeScript + Twin + Styled + Eslint + Airbnb + Prettier + Next.js Starter ✨
+  ✨ MyPortfolio ✨
 </h2>
 
-A lightweight boilerplate to get up and running with TypeScript, Tailwind CSS, Twin, Styled Components, ESLint with Airbnb/Prettier set up with Next.js.
-
-## 🔍 Preview
-
-![Preview](https://s.vincentnguyen.ca/FarcicalSemiparalysisCaimanlizard.png)
-
-## 🔧 Getting Started
-
-You can generate your own repo from this template by using [this link](https://github.com/vinhvn/next-typescript-twin-styled-eslint-starter/generate).
-
-You can also clone this repository by using the command line:
-
-```bash
-git clone https://github.com/vinhvn/next-typescript-twin-styled-eslint-starter app
-cd app
-yarn # npm i
-```
+My name is Diego Chuman. I am an aspiring full stack developer and this is my portfolio repository, why not keep it open-source :D.
 
 Remember to install dependencies after cloning it locally.
 
@@ -51,6 +35,7 @@ The `export` script will build the files to be served statically. Note that this
 yarn export # npm run export
 ```
 
-## 📝 Important Notes
+### CURRENT BUGS
 
-* Be sure to update the `package.json` to include your own information for the project you're working on.
+- rotateX repeat does not work in `src/components/Certification/model.tsx` have tried using MotionCanvas (giving another error) and taking out rotateX from transition object
+- WordCloud does not load immediately (WebGL context loss), only after navigating from Certifications to Testimonials (hacky fix imminent :) ) This started happening from upgrading to React 18, half fixed it by doing dynamic imports but typescript does not like it (even though it is the same as the model.tsx for certifications)

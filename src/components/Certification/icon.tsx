@@ -6,29 +6,29 @@ import { MotionCanvas } from 'framer-motion-3d';
 interface IIConProps {
   isSelected: boolean;
   isHover: boolean;
+  url: string;
 }
 
 const ModelComponent = dynamic(() => import('./model'), {
   ssr: false
 });
 
-export default function Icon({ isHover, isSelected }: IIConProps) {
+export default function Icon({ isHover, isSelected, url }: IIConProps) {
   return (
     <Canvas
       style={{ position: 'absolute', width: '100%', height: '100%' }}
       dpr={[1, 2]}
       camera={{ position: [0, 0, 5.5], fov: 45 }}
     >
-      {lights.map(([x, y, z, intensity], i) => (
+      {lights.map(([x, y, z, intensity]) => (
         <pointLight
-          key={i}
           intensity={intensity}
-          position={[x / 8, y / 8, z / 8]}
+          position={[x / 8, y / 8, z / 2]}
           color="#fff"
         />
       ))}
       <group dispose={null}>
-        <ModelComponent isHover={isHover} isSelected={isSelected} />
+        <ModelComponent isHover={isHover} isSelected={isSelected} url={url} />
       </group>
     </Canvas>
   );

@@ -14,8 +14,19 @@ import StyledCertification, {
   StyledIcon
 } from './certification.styles';
 
+interface IProjectObject {
+  threedid: string;
+  name: string;
+  awardingBody: string;
+  description: string;
+  date: string;
+}
+interface IData {
+  data: IProjectObject;
+}
+
 // Ported from https://codepen.io/popmotion/pen/oNGxjpr?editors=1111 and Framer Motion 3D example
-export default function Certification() {
+export default function Certification({ data }: IData) {
   const [isHover, setIsHover] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
 
@@ -43,18 +54,24 @@ export default function Certification() {
           }}
         >
           <Suspense fallback={null}>
-            <Icon isHover={isHover} isSelected={isSelected} />
+            <Icon
+              isHover={isHover}
+              isSelected={isSelected}
+              url={data.threedid}
+            />
           </Suspense>
         </StyledIcon>
         <Label>
-          <Default>
-            <motion.span variants={labelTitleVariants}>AWS</motion.span>
+          <Default variants={labelTextVariants}>
+            <motion.span variants={labelTitleVariants}>
+              {data.awardingBody}
+            </motion.span>
             <DescriptionContainer
               variants={descriptionTextVariants}
               className="description"
             >
               <DescriptionTitle>Description</DescriptionTitle>
-              <DescriptionContent>This certification...</DescriptionContent>
+              <DescriptionContent>{data.description}.</DescriptionContent>
             </DescriptionContainer>
           </Default>
         </Label>
@@ -79,7 +96,7 @@ const buttonVariants: Variants = {
     transition: { duration: 0.7 }
   },
   hover: {
-    '--button-cert-contrast': '50%',
+    '--button-cert-contrast': '100%',
     scale: 1.05
   },
   press: { scale: 0.95 }
