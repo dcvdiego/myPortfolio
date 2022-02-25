@@ -13,13 +13,17 @@ export default function Model({ isHover, isSelected, url }: IIConProps) {
   const { nodes, materials }: any = useGLTF(
     `http://localhost:3000/glb/${url}.glb`
   );
-  console.log(nodes);
-  const shape = url === 'AWSCP' ? 'Circle' : 'Cube';
+  console.log(nodes, materials);
+  const shape = url === 'AWSCP' ? 'Circle' : 'Plane';
   return (
     <motion.mesh
       material={materials.Material}
       geometry={nodes[shape].geometry}
-      rotation={[Math.PI / 2, degreesToRadians(120), degreesToRadians(360)]}
+      rotation={[
+        Math.PI / 2,
+        url === 'AWSCP' ? degreesToRadians(120) : degreesToRadians(180),
+        degreesToRadians(360)
+      ]}
       scale={1}
       animate={[isSelected ? 'selected' : 'unselected', isHover ? 'hover' : '']}
       variants={{
