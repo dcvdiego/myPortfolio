@@ -14,15 +14,16 @@ import StyledCertification, {
   StyledIcon
 } from './certification.styles';
 
-interface IProjectObject {
+export interface ICertificationObject {
   threedid: string;
   name: string;
   awardingBody: string;
   description: string;
   date: string;
+  shape: 'Circle' | 'Plane' | 'Hexagon';
 }
 interface IData {
-  data: IProjectObject;
+  data: ICertificationObject;
 }
 
 // Ported from https://codepen.io/popmotion/pen/oNGxjpr?editors=1111 and Framer Motion 3D example
@@ -58,6 +59,7 @@ export default function Certification({ data }: IData) {
               isHover={isHover}
               isSelected={isSelected}
               url={data.threedid}
+              shape={data.shape}
             />
           </Suspense>
         </StyledIcon>

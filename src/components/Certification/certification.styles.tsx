@@ -25,6 +25,9 @@ const StyledCertification = styled.div`
     color: #d0d0db;
     display: block;
   }
+  ${tw`
+    p-12
+  `}
 `;
 
 export const CertificationContainer = styled(motion.button)`

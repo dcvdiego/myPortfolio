@@ -7,13 +7,14 @@ interface IIConProps {
   isSelected: boolean;
   isHover: boolean;
   url: string;
+  shape: 'Circle' | 'Plane' | 'Hexagon';
 }
 
 const ModelComponent = dynamic(() => import('./model'), {
   ssr: false
 });
 
-export default function Icon({ isHover, isSelected, url }: IIConProps) {
+export default function Icon({ isHover, isSelected, url, shape }: IIConProps) {
   return (
     <Canvas
       style={{ position: 'absolute', width: '100%', height: '100%' }}
@@ -23,12 +24,17 @@ export default function Icon({ isHover, isSelected, url }: IIConProps) {
       {lights.map(([x, y, z, intensity]) => (
         <pointLight
           intensity={intensity}
-          position={[x / 8, y / 8, z / 2]}
+          position={[x / 8, y / 8, z / 4]}
           color="#fff"
         />
       ))}
       <group dispose={null}>
-        <ModelComponent isHover={isHover} isSelected={isSelected} url={url} />
+        <ModelComponent
+          isHover={isHover}
+          isSelected={isSelected}
+          url={url}
+          shape={shape}
+        />
       </group>
     </Canvas>
   );

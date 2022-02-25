@@ -39,3 +39,4 @@ yarn export # npm run export
 
 - rotateX repeat does not work in `src/components/Certification/model.tsx` have tried using MotionCanvas (giving another error) and taking out rotateX from transition object
 - WordCloud does not load immediately (WebGL context loss), only after navigating from Certifications to Testimonials (hacky fix imminent :) ) This started happening from upgrading to React 18, half fixed it by doing dynamic imports but typescript does not like it (even though it is the same as the model.tsx for certifications)
+- fix all any so that we do not generalize
