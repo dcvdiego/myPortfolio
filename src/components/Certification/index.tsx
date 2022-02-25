@@ -64,26 +64,29 @@ export default function Certification({ data }: IData) {
           </Suspense>
         </StyledIcon>
         <Label>
-          <Default variants={labelTextVariants}>
+          <Default
+            variants={
+              isSelected
+                ? labelTextVariantsSelected
+                : labelTextVariantsUnselected
+            }
+          >
             <motion.span variants={labelTitleVariants}>
               {data.awardingBody}
             </motion.span>
-            <DescriptionContainer
-              variants={descriptionTextVariants}
-              className="description"
-            >
-              <DescriptionTitle>Description</DescriptionTitle>
-              <DescriptionContent>{data.description}.</DescriptionContent>
+            <DescriptionContainer variants={descriptionTextVariants}>
+              <DescriptionTitle variants={descriptionTextVariants}>
+                Description
+              </DescriptionTitle>
+              <DescriptionContent variants={descriptionTextVariants}>
+                {data.description}.
+              </DescriptionContent>
             </DescriptionContainer>
           </Default>
         </Label>
         <CTAContainer>
-          <CTAText variants={ctaTextVariants} className="ctaText">
-            See More
-          </CTAText>
-          <CTAClose variants={closeVariants} className="close">
-            Close
-          </CTAClose>
+          <CTAText variants={ctaTextVariants}>See More</CTAText>
+          <CTAClose variants={closeVariants}>Close</CTAClose>
         </CTAContainer>
       </CertificationContainer>
     </StyledCertification>
@@ -104,8 +107,13 @@ const buttonVariants: Variants = {
   press: { scale: 0.95 }
 };
 
-const labelTextVariants: Variants = {
-  unselected: { x: 30 },
+const labelTextVariantsUnselected: Variants = {
+  unselected: { x: 20 },
+  hover: { x: 30 },
+  selected: { x: -50 }
+};
+const labelTextVariantsSelected: Variants = {
+  unselected: { x: 20 },
   selected: { x: -50 }
 };
 
@@ -115,8 +123,8 @@ const labelTitleVariants: Variants = {
 };
 
 const descriptionTextVariants: Variants = {
-  unselected: { opacity: 0 },
-  selected: { opacity: 1 }
+  unselected: { opacity: 0, y: 0 },
+  selected: { opacity: 1, y: -20 }
 };
 
 const selectedTransition: Transition = {
@@ -131,5 +139,5 @@ const ctaTextVariants: Variants = {
 
 const closeVariants: Variants = {
   unselected: { opacity: 0, y: 40, transition: { duration: 0.25 } },
-  selected: { opacity: 1, y: 0, transition: selectedTransition }
+  selected: { opacity: 1, y: 20, transition: selectedTransition }
 };

@@ -86,15 +86,20 @@ export const Default = styled(motion.span)`
   `}
 `;
 
-export const DescriptionContainer = styled(motion.span)``;
-
-export const DescriptionTitle = styled.h3`
+export const DescriptionContainer = styled(motion.span)`
   ${tw`
-  text-sm
+  flex
+  flex-col
+`}
+`;
+
+export const DescriptionTitle = styled(motion.span)`
+  ${tw`
+  text-base
   `}
 `;
 
-export const DescriptionContent = styled.p`
+export const DescriptionContent = styled(motion.span)`
   ${tw`
   text-xs
   `}
