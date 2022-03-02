@@ -1,7 +1,8 @@
-import React, { useState, Suspense } from 'react';
+import React, { useState, Suspense, useRef } from 'react';
 
 import { Canvas } from '@react-three/fiber';
-import { TrackballControls } from '@react-three/drei';
+import { OrbitControls, TrackballControls } from '@react-three/drei';
+
 import dynamic from 'next/dynamic';
 import testimonials from '../../assets/data/testimonials.json';
 import Testimonial from '../Testimonial';
@@ -45,6 +46,7 @@ const WordCloud = () => {
     <>
       <Suspense fallback={null}>
         <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 35], fov: 90 }}>
+          {/* <OrbitControls enableZoom={false} /> */}
           <fog attach="fog" args={['#202025', 0, 80]} />
           <group dispose={null}>
             <Cloud
@@ -54,6 +56,7 @@ const WordCloud = () => {
               finalTestimonials={finalTestimonials}
               onTextClick={setActiveWord}
             />
+            {/* <OrbitControls enableZoom={false} /> */}
             <TrackballControls />
           </group>
         </Canvas>

@@ -1,3 +1,5 @@
+const withTM = require('next-transpile-modules')(['three']);
+// withTM still gives me issues, it only just makes things slower :D
 module.exports = {
   experimental: {
     runtime: 'nodejs'

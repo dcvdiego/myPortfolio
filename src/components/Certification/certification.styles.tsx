@@ -14,17 +14,6 @@ const StyledCertification = styled.div`
     box-sizing: inherit;
   }
 
-  .add {
-    position: absolute;
-    bottom: 100%;
-    left: 0;
-    right: 0;
-    opacity: 0;
-    transform: translateY(38px);
-    pointer-events: none;
-    color: #d0d0db;
-    display: block;
-  }
   ${tw`
     p-12
   `}
@@ -37,8 +26,8 @@ export const CertificationContainer = styled(motion.button)`
   border: none;
   border-radius: 26px;
   outline: none;
-  box-shadow: inset 0 0 0 1px #35373f, 0px 1px 3px rgba(52, 54, 63, 0.1),
-    0px 4px 10px rgba(52, 54, 63, 0.15);
+  box-shadow: inset 0 0 0 1px #3b353f, 0px 1px 3px rgba(52, 54, 63, 0.1),
+    0px 4px 10px rgba(59, 52, 63, 0.15);
   ${tw`
   appearance-none 
   cursor-pointer 
@@ -136,7 +125,5 @@ export const CTAClose = styled(motion.span)`
   text-red-300 absolute left-0 right-0 block
 `}
 `;
-
-// do we need an add? wot
 
 export default StyledCertification;

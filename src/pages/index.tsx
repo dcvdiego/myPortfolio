@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NextPage } from 'next';
 
 import Layout from '@/components/Layout';
+import MeModel from '@/components/MeModel';
 import { Container, Link, Title } from '../styles/global.styles';
+import { Marginer } from '@/components/Marginer';
 
 const LandingPage: NextPage = () => {
+  const [action, setAction] = useState('Idle');
   return (
     <Layout title="Welcome">
       <Container>
@@ -15,6 +18,16 @@ const LandingPage: NextPage = () => {
           <Link color="red" href="https://reactjs.org/">
             React
           </Link>
+          <Marginer direction="vertical" margin="8em" />
+          <div style={{ height: '20rem' }}>
+            <MeModel action={action} />
+          </div>
+          <button type="button" onClick={() => setAction('Wave')}>
+            Wave
+          </button>
+          <button type="button" onClick={() => setAction('Dance')}>
+            Dance
+          </button>
         </div>
       </Container>
     </Layout>

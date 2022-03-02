@@ -17,7 +17,6 @@ export default function Model({ isHover, isSelected, url, shape }: IIConProps) {
   const { nodes, materials }: any = useGLTF(
     `http://localhost:3000/glb/${url}.glb`
   );
-  console.log(nodes, materials);
   return (
     <motion.mesh
       material={materials.Material}

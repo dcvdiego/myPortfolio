@@ -2,7 +2,7 @@ import React, { useRef, useState, useMemo, useEffect, FC } from 'react';
 
 import * as THREE from 'three';
 import { Camera, ThreeEvent, useFrame } from '@react-three/fiber';
-import { Text } from '@react-three/drei';
+import { OrbitControls, Text } from '@react-three/drei';
 
 interface IWordProps {
   wordChildren: String | THREE.Vector3;
