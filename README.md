@@ -41,3 +41,5 @@ yarn export # npm run export
 - WordCloud does not load immediately (WebGL context loss), only after navigating from Certifications to Testimonials (hacky fix imminent :) ) This started happening from upgrading to React 18, half fixed it by doing dynamic imports but typescript does not like it (even though it is the same as the model.tsx for certifications)
 - fix all any so that we do not generalize
 - Figure out how to do something when first loop ends so it goes back to being Idle!
+
+TODO: stop using next

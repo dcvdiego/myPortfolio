@@ -15,9 +15,9 @@ const MeModel = ({ action }: IMeModelProps) => {
       <ambientLight intensity={0.6} />
       <directionalLight intensity={0.5} />
       {/* {lights.map(([x, y, z, intensity]) => (
-            <pointLight intensity={intensity} position={[x, y, z]} color="#fff" />
-        ))} */}
-      {/* <OrbitControls makeDefault /> */}
+        <pointLight intensity={intensity} position={[x, y, z]} color="#fff" />
+      ))} */}
+      <OrbitControls makeDefault />
       <Suspense fallback={null}>
         <Bounds fit clip margin={0.9}>
           <MyModel action={action} scale={[10.5, 10.5, 10.5]} />
@@ -26,11 +26,11 @@ const MeModel = ({ action }: IMeModelProps) => {
     </Canvas>
   );
 };
-// const lights = [
-//   [0, 1, 25, 0.4],
-//   [0, 2, -20, 0.6],
-//   [5, 0, 21, 0.6],
-//   [-5, 0, -21, 0.6],
-//   [3, 0, 25, 0.9]
-// ];
+const lights = [
+  [0, 1, 25, 0.2],
+  [0, 2, -20, 0.4],
+  [5, 0, 21, 0.4],
+  [-5, 0, -21, 0.4],
+  [3, 0, 25, 0.7]
+];
 export default MeModel;

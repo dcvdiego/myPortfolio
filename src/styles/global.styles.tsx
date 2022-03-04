@@ -33,6 +33,14 @@ export const SubHeading = styled.h3`
   `}
 `;
 
+export const Button = styled.button`
+  ${tw`
+  bg-gray-500
+  p-4
+  m-6
+  `}
+`;
+
 const linkStyles: Record<string, TwStyle> = {
   red: tw`text-red-500 
   hover:text-red-700`
