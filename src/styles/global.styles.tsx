@@ -4,10 +4,13 @@ export const Container = styled.div`
   ${tw`
   flex 
   flex-col 
-  w-full 
+  w-full
   h-screen 
   items-center
   overflow-x-hidden
+  bg-black
+  text-white
+  pt-4
   `}
 `;
 
@@ -18,6 +21,24 @@ export const Title = styled.h1`
   font-semibold 
   tracking-wide 
   mb-12`}
+`;
+
+export const SubHeading = styled.h3`
+  ${tw`
+    text-xl
+    sm:text-2xl
+    font-medium
+    tracking-wide
+    mb-12
+  `}
+`;
+
+export const Button = styled.button`
+  ${tw`
+  bg-gray-500
+  p-4
+  m-6
+  `}
 `;
 
 const linkStyles: Record<string, TwStyle> = {

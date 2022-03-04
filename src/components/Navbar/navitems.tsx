@@ -59,9 +59,9 @@ const NavItems = () => {
             </Link>
           </NavItem>
           <NavItem menu>
-            <Link href="/experience">
+            <Link href="/experiences">
               {/* eslint-disable-next-line */}
-              <a>Experience</a>
+              <a>Experiences</a>
             </Link>
           </NavItem>
           <NavItem menu>
@@ -95,9 +95,9 @@ const NavItems = () => {
         </Link>
       </NavItem>
       <NavItem>
-        <Link href="/experience">
+        <Link href="/experiences">
           {/* eslint-disable-next-line */}
-          <a>Experience</a>
+          <a>Experiences</a>
         </Link>
       </NavItem>
       <NavItem>

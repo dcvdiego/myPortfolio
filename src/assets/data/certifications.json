@@ -1,0 +1,78 @@
+{
+  "Technical": [
+    {
+      "threedid": "AWSCP",
+      "name": "AWS Certified Cloud Practitioner",
+      "awardingBody": "AWS",
+      "description": "Description here",
+      "date": "02/2022",
+      "shape": "Hexagon"
+    },
+    {
+      "threedid": "IBMDSO",
+      "name": "IBM DevSecOps Essentials",
+      "awardingBody": "IBM",
+      "description": "Description here",
+      "date": "i dont remember",
+      "shape": "Plane"
+    },
+    {
+      "threedid": "IBMDER",
+      "name": "IBM Carbon Design - React",
+      "awardingBody": "IBM",
+      "description": "Description here",
+      "date": "i dont remember",
+      "shape": "Plane"
+    },
+    {
+      "threedid": "IBMBE2",
+      "name": "IBM Blockchain Essentials v2",
+      "awardingBody": "IBM",
+      "description": "Description here",
+      "date": "i dont remember",
+      "shape": "Plane"
+    },
+    {
+      "threedid": "IBMCKE",
+      "name": "IBM Containers & Kubernetes Essentials",
+      "awardingBody": "IBM",
+      "description": "Description here",
+      "date": "i dont remember",
+      "shape": "Circle"
+    },
+    {
+      "threedid": "IBMQCF",
+      "name": "IBM Quantum Conversations Foundational",
+      "awardingBody": "IBM",
+      "description": "Description here",
+      "date": "i dont remember",
+      "shape": "Plane"
+    }
+  ],
+  "Consulting": [
+    {
+      "threedid": "IBMGBI",
+      "name": "IBM Growth Behaviors Intermediate",
+      "awardingBody": "IBM",
+      "description": "Description here",
+      "date": "i dont remember",
+      "shape": "Plane"
+    },
+    {
+      "threedid": "IBMDTP",
+      "name": "IBM Design Thinking Practitioner",
+      "awardingBody": "IBM",
+      "description": "Description here",
+      "date": "i dont remember",
+      "shape": "Circle"
+    },
+    {
+      "threedid": "IBMAEF",
+      "name": "IBM Agile Explorer Foundational",
+      "awardingBody": "IBM",
+      "description": "Description here",
+      "date": "i dont remember",
+      "shape": "Plane"
+    }
+  ]
+}
