@@ -1,5 +1,5 @@
-import { Container, SubHeading, Title } from '@/styles/global.styles';
 import React from 'react';
+import { Container, SubHeading, Title } from '../styles/global.styles';
 
 const Custom404 = () => {
   return (

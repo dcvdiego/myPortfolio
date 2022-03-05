@@ -1,6 +1,6 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
-import dynamic from 'next/dynamic';
+import ModelComponent from './model';
 import { MotionCanvas } from 'framer-motion-3d';
 
 interface IIConProps {
@@ -9,10 +9,6 @@ interface IIConProps {
   url: string;
   shape: 'Circle' | 'Plane' | 'Hexagon';
 }
-
-const ModelComponent = dynamic(() => import('./model'), {
-  ssr: false
-});
 
 export default function Icon({ isHover, isSelected, url, shape }: IIConProps) {
   return (
@@ -45,5 +41,5 @@ const lights = [
   [0, 2, 0, 0.3],
   [5, 0, 1, 0.2],
   [-5, 0, 1, 0.2],
-  [3, 0, 5, 0.6]
+  [3, 0, 5, 0.6],
 ];

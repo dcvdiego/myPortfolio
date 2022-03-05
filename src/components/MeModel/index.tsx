@@ -1,11 +1,7 @@
 import { Bounds, OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import dynamic from 'next/dynamic';
 import React, { Suspense } from 'react';
-
-const MyModel = dynamic(() => import('./model'), {
-  ssr: false
-});
+import MyModel from './model.jsx';
 interface IMeModelProps {
   action: string;
 }
@@ -31,6 +27,6 @@ const lights = [
   [0, 2, -20, 0.4],
   [5, 0, 21, 0.4],
   [-5, 0, -21, 0.4],
-  [3, 0, 25, 0.7]
+  [3, 0, 25, 0.7],
 ];
 export default MeModel;

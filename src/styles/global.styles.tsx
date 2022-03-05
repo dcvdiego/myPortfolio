@@ -1,4 +1,5 @@
-import tw, { styled, TwStyle } from 'twin.macro';
+import styled from 'styled-components';
+import tw, { TwStyle } from 'twin.macro';
 
 export const Container = styled.div`
   ${tw`
@@ -43,7 +44,7 @@ export const Button = styled.button`
 
 const linkStyles: Record<string, TwStyle> = {
   red: tw`text-red-500 
-  hover:text-red-700`
+  hover:text-red-700`,
 };
 
 export const Link = styled.a(({ color }) => [
@@ -52,5 +53,5 @@ export const Link = styled.a(({ color }) => [
   font-semibold 
   transition-colors 
   duration-300`,
-  color && linkStyles[color]
+  color && linkStyles[color],
 ]);

@@ -3,13 +3,9 @@ import React, { useState, Suspense, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, TrackballControls } from '@react-three/drei';
 
-import dynamic from 'next/dynamic';
+import Cloud from './model';
 import testimonials from '../../assets/data/testimonials.json';
 import Testimonial from '../Testimonial';
-
-const Cloud = dynamic(() => import('./model') as any, {
-  ssr: false
-});
 
 const WordCloud = () => {
   const [activeWord, setActiveWord] = useState<string>('');
@@ -27,7 +23,7 @@ const WordCloud = () => {
     'dedication',
     'commitment',
     'pragmatic',
-    'leadership'
+    'leadership',
   ];
   testimonials.map((testimonial) => {
     linkArray.forEach((word) => {

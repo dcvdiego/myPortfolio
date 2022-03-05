@@ -1,11 +1,11 @@
 import React from 'react';
-import { NextPage } from 'next';
-import Layout from '@/components/Layout';
-import { Container, Title, SubHeading } from '@/styles/global.styles';
+
+import Layout from '../../components/Layout';
+import { Container, Title, SubHeading } from '../../styles/global.styles';
 import tw, { styled } from 'twin.macro';
 import Certification, {
-  ICertificationObject
-} from '@/components/Certification';
+  ICertificationObject,
+} from '../../components/Certification';
 import certifications from '../../assets/data/certifications.json';
 
 const CategoryContainer = styled.div`
@@ -27,7 +27,7 @@ interface ICertificationsObject {
   [key: string]: Array<any>;
 }
 const typedCertifications: ICertificationsObject = certifications;
-const CertificationsPage: NextPage = () => {
+const CertificationsPage = () => {
   return (
     <Layout title="Certifications">
       <Container>

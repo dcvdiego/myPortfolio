@@ -1,10 +1,10 @@
 import React from 'react';
-import { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import Layout from '@/components/Layout';
-import { Container, Title } from '@/styles/global.styles';
 
-const Experience: NextPage = () => {
+import { useRouter } from 'next/router';
+import Layout from '../..//components/Layout';
+import { Container, Title } from '../../styles/global.styles';
+
+const Experience = () => {
   const router = useRouter();
   const { slug } = router.query;
   return (

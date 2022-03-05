@@ -3,10 +3,10 @@ import {
   faCodeBranch,
   faEnvelope,
   faPhoneAlt,
-  faUserGroup
+  faUserGroup,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import {
   AboutContainer,
   AboutText,
@@ -21,7 +21,7 @@ import {
   LinksList,
   ListItem,
   SectionContainer,
-  SmallText
+  SmallText,
 } from './footer.styles';
 
 // import { Logo } from '../logo';
@@ -41,31 +41,31 @@ const Footer = () => {
           <LinksList>
             <HeaderTitle>Get Started</HeaderTitle>
             <ListItem>
-              <Link href="/">
+              <Link to="/">
                 {/* eslint-disable-next-line */}
                 <a>Home</a>
               </Link>
             </ListItem>
             <ListItem>
-              <Link href="/certifications">
+              <Link to="/certifications">
                 {/* eslint-disable-next-line */}
                 <a>Certifications</a>
               </Link>
             </ListItem>
             <ListItem>
-              <Link href="/projects">
+              <Link to="/projects">
                 {/* eslint-disable-next-line */}
                 <a>Projects</a>
               </Link>
             </ListItem>
             <ListItem>
-              <Link href="/experiences">
+              <Link to="/experiences">
                 {/* eslint-disable-next-line */}
                 <a>Experiences</a>
               </Link>
             </ListItem>
             <ListItem>
-              <Link href="/testimonials">
+              <Link to="/testimonials">
                 {/* eslint-disable-next-line */}
                 <a>Testimonials</a>
               </Link>
@@ -78,7 +78,7 @@ const Footer = () => {
             <ListItem>
               <HorizontalContainer>
                 <HorizontalTag
-                  href="https://www.linkedin.com/in/diegochuman/"
+                  to="https://www.linkedin.com/in/diegochuman/"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -92,7 +92,7 @@ const Footer = () => {
             <ListItem>
               <HorizontalContainer>
                 <HorizontalTag
-                  href="https://github.com/dcvdiego"
+                  to="https://github.com/dcvdiego"
                   target="_blank"
                   rel="noreferrer"
                 >

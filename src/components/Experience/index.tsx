@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 
 const ExperienceContainer = styled.div`
   ${tw`
@@ -45,7 +45,7 @@ const Experience = ({ data }: IData) => {
   return (
     <ExperienceContainer>
       <ExperienceTitle>
-        <Link href={`/experiences/${data?.slug ? data.slug : data.name}`}>
+        <Link to={`/experiences/${data?.slug ? data.slug : data.name}`}>
           <a>{data.name}</a>
         </Link>
       </ExperienceTitle>

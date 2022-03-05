@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import { Routes, Route, Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import tw from 'twin.macro';
 import { slide as Menu } from 'react-burger-menu';
@@ -38,7 +38,21 @@ const NavItem = styled.li<{ menu?: any }>`
     `};
     `};
 `;
-
+const routes = [
+  {
+    path: '/',
+    exact: true,
+    main: () => <h2>Home</h2>,
+  },
+  {
+    path: '/certifications',
+    main: () => <h2>Bubblegum</h2>,
+  },
+  {
+    path: '/shoelaces',
+    main: () => <h2>Shoelaces</h2>,
+  },
+];
 const NavItems = () => {
   const isMobile = useMediaQuery({ maxWidth: SCREENS.sm });
 
@@ -47,31 +61,31 @@ const NavItems = () => {
       <Menu right styles={menuStyles}>
         <ListContainer>
           <NavItem menu>
-            <Link href="/">
+            <Link to="/">
               {/* eslint-disable-next-line */}
               <a>Home</a>
             </Link>
           </NavItem>
           <NavItem menu>
-            <Link href="/certifications">
+            <Link to="/certifications">
               {/* eslint-disable-next-line */}
               <a>Certifications</a>
             </Link>
           </NavItem>
           <NavItem menu>
-            <Link href="/experiences">
+            <Link to="/experiences">
               {/* eslint-disable-next-line */}
               <a>Experiences</a>
             </Link>
           </NavItem>
           <NavItem menu>
-            <Link href="/projects">
+            <Link to="/projects">
               {/* eslint-disable-next-line */}
               <a>Projects</a>
             </Link>
           </NavItem>
           <NavItem menu>
-            <Link href="/testimonials">
+            <Link to="/testimonials">
               {/* eslint-disable-next-line */}
               <a>Testimonials</a>
             </Link>
@@ -83,31 +97,31 @@ const NavItems = () => {
   return (
     <ListContainer>
       <NavItem>
-        <Link href="/">
+        <Link to="/">
           {/* eslint-disable-next-line */}
           <a>Home</a>
         </Link>
       </NavItem>
       <NavItem>
-        <Link href="/certifications">
+        <Link to="/certifications">
           {/* eslint-disable-next-line */}
           <a>Certifications</a>
         </Link>
       </NavItem>
       <NavItem>
-        <Link href="/experiences">
+        <Link to="/experiences">
           {/* eslint-disable-next-line */}
           <a>Experiences</a>
         </Link>
       </NavItem>
       <NavItem>
-        <Link href="/projects">
+        <Link to="/projects">
           {/* eslint-disable-next-line */}
           <a>Projects</a>
         </Link>
       </NavItem>
       <NavItem>
-        <Link href="/testimonials">
+        <Link to="/testimonials">
           {/* eslint-disable-next-line */}
           <a>Testimonials</a>
         </Link>

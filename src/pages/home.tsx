@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { NextPage } from 'next';
 
-import Layout from '@/components/Layout';
-import MeModel from '@/components/MeModel';
-import { Marginer } from '@/components/Marginer';
+import Layout from '../components/Layout';
+import MeModel from '../components/MeModel';
+import { Marginer } from '../components/Marginer';
 import { motion, Variants } from 'framer-motion';
-import { styled } from 'twin.macro';
-import { Button, Container, Link, Title } from '../styles/global.styles';
+import styled from 'styled-components';
+import { Button, Container, Title } from '../styles/global.styles';
 
 const Bubble = styled(motion.span)`
   display: inline-block;
@@ -53,7 +52,7 @@ const Bubble = styled(motion.span)`
 const ModelContainer = styled(motion.div)`
   height: 18rem;
 `;
-const LandingPage: NextPage = () => {
+function Home() {
   const [action, setAction] = useState('Idle');
   return (
     <Layout title="Welcome">
@@ -77,10 +76,10 @@ const LandingPage: NextPage = () => {
       </Container>
     </Layout>
   );
-};
+}
 
 const bubbleVariants: Variants = {
   idle: { opacity: 0 },
-  wave: { opacity: 1 }
+  wave: { opacity: 1 },
 };
-export default LandingPage;
+export default Home;
