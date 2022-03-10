@@ -4,8 +4,10 @@ import React, { Suspense } from 'react';
 import MyModel from './model.jsx';
 interface IMeModelProps {
   action: string;
+  state: any;
+  mouse: any;
 }
-const MeModel = ({ action }: IMeModelProps) => {
+const MeModel = ({ action, state, mouse }: IMeModelProps) => {
   return (
     <Canvas dpr={[1, 2]} camera={{ position: [0, 12.5, 10], fov: 90 }}>
       <ambientLight intensity={0.6} />
@@ -16,7 +18,12 @@ const MeModel = ({ action }: IMeModelProps) => {
       <OrbitControls makeDefault />
       <Suspense fallback={null}>
         <Bounds fit clip margin={0.9}>
-          <MyModel action={action} scale={[10.5, 10.5, 10.5]} />
+          <MyModel
+            action={action}
+            state={state}
+            mouse={mouse}
+            scale={[10.5, 10.5, 10.5]}
+          />
         </Bounds>
       </Suspense>
     </Canvas>

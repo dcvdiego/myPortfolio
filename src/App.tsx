@@ -1,12 +1,14 @@
 import React from 'react';
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import GlobalStyles from './components/GlobalStyles';
 import Home from './pages/home';
 import CertificationsPage from './pages/certifications/index';
 import ExperiencesPage from './pages/experiences/index';
 import ProjectsPage from './pages/projects/index';
 import TestimonialsPage from './pages/testimonials/index';
-import Navbar from './components/Navbar/index';
+import Project from './pages/projects/[slug]';
+import Experience from './pages/experiences/[slug]';
+import Custom404 from './pages/404';
 function App() {
   return (
     <>
@@ -16,8 +18,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="certifications" element={<CertificationsPage />} />
           <Route path="experiences" element={<ExperiencesPage />} />
-          <Route path="experiences" element={<ProjectsPage />} />
+          <Route path="experiences/:slug" element={<Experience />} />
+          <Route path="projects" element={<ProjectsPage />} />
+          <Route path="projects/:slug" element={<Project />} />
           <Route path="testimonials" element={<TestimonialsPage />} />
+          <Route path="*" element={<Custom404 />} />
         </Routes>
       </Router>
     </>

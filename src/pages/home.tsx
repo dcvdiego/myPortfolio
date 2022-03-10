@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import Layout from '../components/Layout';
 import MeModel from '../components/MeModel';
@@ -6,10 +6,13 @@ import { Marginer } from '../components/Marginer';
 import { motion, Variants } from 'framer-motion';
 import styled from 'styled-components';
 import { Button, Container, Title } from '../styles/global.styles';
-
+import { HexColorPicker } from 'react-colorful';
+import { proxy, useSnapshot } from 'valtio';
+import quote from '../assets/data/quote.json';
 const Bubble = styled(motion.span)`
   display: inline-block;
   vertical-align: middle;
+  text-align: center;
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
@@ -52,8 +55,41 @@ const Bubble = styled(motion.span)`
 const ModelContainer = styled(motion.div)`
   height: 18rem;
 `;
+
+const state = proxy({
+  current: null,
+  // has to be white, it is a bit weird
+  items: {
+    Top: '#ffffff',
+    Bottom: '#ffffff',
+    Footwear: '#ffffff',
+  },
+});
+const ColorPicker = styled(HexColorPicker)`
+  .react-colorful {
+    padding: 16px;
+    border-radius: 12px;
+    background: #33333a;
+    box-shadow: 0 6px 12px #999;
+  }
+`;
+function Picker() {
+  const snap = useSnapshot(state);
+  return (
+    <div style={{ display: snap.current ? 'flex' : 'none' }}>
+      <ColorPicker
+        className="picker"
+        color={snap.items[snap.current]}
+        onChange={(color) => (state.items[snap.current] = color)}
+      />
+      <h1 style={{ color: 'white' }}>{snap.current}</h1>
+    </div>
+  );
+}
+
 function Home() {
   const [action, setAction] = useState('Idle');
+  const mouse = useRef({ x: 0, y: 0 });
   return (
     <Layout title="Welcome">
       <Container>
@@ -64,11 +100,19 @@ function Home() {
           onHoverEnd={() => setAction('Idle')}
         >
           <Title>
-            <Bubble variants={bubbleVariants}>Hello , my name is Diego</Bubble>
+            <Bubble variants={bubbleVariants}>
+              {
+                quote.quoteArray[
+                  Math.floor(Math.random() * quote.quoteArray.length)
+                ]
+              }
+            </Bubble>
           </Title>
 
-          <MeModel action={action} />
+          <MeModel action={action} state={state} mouse={mouse} />
+          <Picker />
         </ModelContainer>
+
         <Marginer direction="vertical" margin="6em" />
         <Button type="button" onClick={() => setAction('Dance')}>
           Dance

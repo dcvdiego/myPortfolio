@@ -1,12 +1,11 @@
 import React from 'react';
 
-import { useRouter } from 'next/router';
 import Layout from '../..//components/Layout';
 import { Container, Title } from '../../styles/global.styles';
+import { useParams } from 'react-router-dom';
 
 const Experience = () => {
-  const router = useRouter();
-  const { slug } = router.query;
+  let { slug } = useParams();
   return (
     <Layout title={slug as string}>
       <Container>

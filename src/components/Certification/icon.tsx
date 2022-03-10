@@ -1,6 +1,8 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
-import ModelComponent from './model';
+import { useGLTF } from '@react-three/drei';
+import { motion } from 'framer-motion-3d';
+import { degreesToRadians } from 'popmotion';
 import { MotionCanvas } from 'framer-motion-3d';
 
 interface IIConProps {
@@ -11,6 +13,9 @@ interface IIConProps {
 }
 
 export default function Icon({ isHover, isSelected, url, shape }: IIConProps) {
+  const { nodes, materials }: any = useGLTF(
+    `http://localhost:3000/glb/${url}.glb`
+  );
   return (
     <Canvas
       style={{ position: 'absolute', width: '100%', height: '100%' }}
@@ -25,11 +30,47 @@ export default function Icon({ isHover, isSelected, url, shape }: IIConProps) {
         />
       ))}
       <group dispose={null}>
-        <ModelComponent
-          isHover={isHover}
-          isSelected={isSelected}
-          url={url}
-          shape={shape}
+        <motion.mesh
+          material={materials.Material}
+          geometry={nodes[shape].geometry}
+          rotation={[
+            Math.PI / 2,
+            shape === 'Circle'
+              ? degreesToRadians(298)
+              : shape === 'Hexagon'
+              ? degreesToRadians(120)
+              : degreesToRadians(180),
+            degreesToRadians(360),
+          ]}
+          scale={1}
+          animate={[
+            isSelected ? 'selected' : 'unselected',
+            isHover ? 'hover' : '',
+          ]}
+          variants={{
+            unselected: {
+              x: [0, 0],
+              y: [0, 0],
+              scale: 1,
+            },
+            selected: {
+              x: 4,
+              y: [0, -1.5, 2],
+              scale: 1,
+              transition: { duration: 0.7 },
+            },
+            hover: {
+              rotateZ: 0,
+              scale: 1.4,
+              transition: {
+                rotateZ: {
+                  duration: 1.5,
+                  ease: 'linear',
+                  repeat: Infinity,
+                },
+              },
+            },
+          }}
         />
       </group>
     </Canvas>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import Layout from '../../components/Layout';
 import { Container, Title, SubHeading } from '../../styles/global.styles';
@@ -7,6 +7,8 @@ import Certification, {
   ICertificationObject,
 } from '../../components/Certification';
 import certifications from '../../assets/data/certifications.json';
+import { Canvas } from '@react-three/fiber';
+import Icon from '@/components/Certification/icon';
 
 const CategoryContainer = styled.div`
   ${tw`
