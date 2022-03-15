@@ -1,14 +1,15 @@
 import React, { useRef, useState } from 'react';
 
 import Layout from '../components/Layout';
-import MeModel from '../components/MeModel';
+import AvatarModel from '../components/AvatarModel';
 import { Marginer } from '../components/Marginer';
 import { motion, Variants } from 'framer-motion';
 import styled from 'styled-components';
 import { Button, Container, Title } from '../styles/global.styles';
 import { HexColorPicker } from 'react-colorful';
-import { proxy, useSnapshot } from 'valtio';
+import { useSnapshot } from 'valtio';
 import quote from '../assets/data/quote.json';
+import state from '../utils/store';
 const Bubble = styled(motion.span)`
   display: inline-block;
   vertical-align: middle;
@@ -56,15 +57,6 @@ const ModelContainer = styled(motion.div)`
   height: 18rem;
 `;
 
-const state = proxy({
-  current: null,
-  // has to be white, it is a bit weird
-  items: {
-    Top: '#ffffff',
-    Bottom: '#ffffff',
-    Footwear: '#ffffff',
-  },
-});
 const ColorPicker = styled(HexColorPicker)`
   .react-colorful {
     padding: 16px;
@@ -91,6 +83,7 @@ function Picker() {
 
 function Home() {
   const [action, setAction] = useState('Idle');
+  const [avatarName, setAvatarName] = useState('modelwanim');
   const mouse = useRef({ x: 0, y: 0 });
   return (
     <Layout title="Welcome">
@@ -111,11 +104,11 @@ function Home() {
             </Bubble>
           </Title>
 
-          <MeModel
-            ref={useRef(false)}
+          <AvatarModel
             action={action}
             state={state}
             mouse={mouse}
+            name={avatarName}
           />
           <Picker />
         </ModelContainer>
@@ -123,6 +116,9 @@ function Home() {
         <Marginer direction="vertical" margin="6em" />
         <Button type="button" onClick={() => setAction('Dance')}>
           Dance
+        </Button>
+        <Button type="button" onClick={() => setAvatarName('TJModel')}>
+          Change Avatar
         </Button>
       </Container>
     </Layout>

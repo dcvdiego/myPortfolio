@@ -9,6 +9,7 @@ import TestimonialsPage from './pages/testimonials/index';
 import Project from './pages/projects/[slug]';
 import Experience from './pages/experiences/[slug]';
 import Custom404 from './pages/404';
+
 function App() {
   return (
     <>
@@ -16,8 +17,9 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="certifications" element={<CertificationsPage />} />
           <Route path="experiences" element={<ExperiencesPage />} />
+
+          <Route path="certifications" element={<CertificationsPage />} />
           <Route path="experiences/:slug" element={<Experience />} />
           <Route path="projects" element={<ProjectsPage />} />
           <Route path="projects/:slug" element={<Project />} />

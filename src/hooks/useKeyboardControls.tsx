@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-const keyCodeMapping = {
+const keyCodeMapping: Record<string, string> = {
   KeyW: 'forward',
   KeyS: 'backward',
   KeyA: 'left',
@@ -13,7 +13,7 @@ const keyCodeMapping = {
   ShiftLeft: 'shift',
 };
 
-function moveFieldByKey(key) {
+function moveFieldByKey(key: string) {
   return keyCodeMapping[key];
 }
 
@@ -33,7 +33,7 @@ export default function usePlayerControls() {
 
   const [action, setAction] = useState('Idle');
 
-  function calculateDirection(event) {
+  function calculateDirection(event: TouchEvent) {
     event.preventDefault();
     let x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
     let y = event.touches[0].clientY / window.innerHeight - 1;
@@ -42,7 +42,7 @@ export default function usePlayerControls() {
     setAction('Idle');
   }
 
-  function handleKeyDown(keyCode) {
+  function handleKeyDown(keyCode: string) {
     if (
       keyCode === 'KeyW' ||
       keyCode === 'KeyA' ||
@@ -58,7 +58,7 @@ export default function usePlayerControls() {
     }
   }
 
-  function handleKeyUp(keyCode) {
+  function handleKeyUp(keyCode: string) {
     if (
       keyCode === 'KeyW' ||
       keyCode === 'KeyA' ||

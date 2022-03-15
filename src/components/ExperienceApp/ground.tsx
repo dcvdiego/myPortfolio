@@ -1,9 +1,9 @@
 import { usePlane } from '@react-three/cannon';
-import { useRef } from 'react';
+
 import { RepeatWrapping, TextureLoader } from 'three';
 import placeholder from '../../assets/placeholder.png';
 
-function Ground(props) {
+function Ground(props: any) {
   const [ref] = usePlane(() => ({
     material: 'ground',
     type: 'Static',

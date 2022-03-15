@@ -11,23 +11,28 @@ let moveZ;
 let rotateAngleTouch;
 let rotateAngle;
 let moveDistance;
-
+// do a little if there was an uploaded avatar, use it
+let name = 'modelwanim';
 export default function PlayerMovement() {
-  const model = useRef();
+  const model = useRef<THREE.Mesh>();
+
   const { camera } = useThree();
 
-  const [mousePosition, action, { forward, backward, left, right, shift }] =
-    usePlayerControls();
+  const [
+    mousePosition,
+    action,
+    { forward, backward, left, right, shift },
+  ]: any = usePlayerControls();
   let relativeCameraOffset = new Vector3();
   let cameraOffset;
 
   useEffect(() => {
-    const { x, y, z } = model.current.position;
+    const { x, y, z } = model.current!.position;
     camera.lookAt(x, y + 3.5, z);
     camera.position.set(x + 0, y + 4, z + 8);
   }, []);
 
-  useFrame((state, delta) => {
+  useFrame((_state, delta) => {
     moveDistance = delta * 12;
     moveZ = delta * 40 * mousePosition.y;
     moveX = delta * 20 * mousePosition.x;
@@ -35,40 +40,49 @@ export default function PlayerMovement() {
     rotateAngle = (Math.PI / 2) * delta * 1.5;
 
     if (isMobile) {
-      model.current.translateZ(moveZ);
-      model.current.translateX(moveX);
-      model.current.rotateOnAxis(rotateVector, -rotateAngleTouch);
+      model.current!.translateZ(moveZ);
+      model.current!.translateX(moveX);
+      model.current!.rotateOnAxis(rotateVector, -rotateAngleTouch);
     } else {
       if (forward) {
         if (!shift) {
-          model.current.translateZ(-moveDistance / 2);
+          model.current!.translateZ(-moveDistance / 2);
         } else {
-          model.current.translateZ(-moveDistance);
+          model.current!.translateZ(-moveDistance);
         }
       }
       if (backward) {
-        model.current.translateZ(moveDistance);
+        model.current!.translateZ(moveDistance);
       }
       if (left) {
-        model.current.rotateOnAxis(rotateVector, rotateAngle);
+        model.current!.rotateOnAxis(rotateVector, rotateAngle);
       }
       if (right) {
-        model.current.rotateOnAxis(rotateVector, -rotateAngle);
+        model.current!.rotateOnAxis(rotateVector, -rotateAngle);
       }
     }
 
     relativeCameraOffset.set(0, 2.5, 3);
-    cameraOffset = relativeCameraOffset.applyMatrix4(model.current.matrixWorld);
+    cameraOffset = relativeCameraOffset.applyMatrix4(
+      model.current!.matrixWorld
+    );
     camera.position.lerp(cameraOffset, 0.05);
 
     camera.lookAt(
-      model.current.position.x + 0,
-      model.current.position.y + 3.5,
-      model.current.position.z + 0
+      model.current!.position.x + 0,
+      model.current!.position.y + 3.5,
+      model.current!.position.z + 0
     );
   });
 
   return (
-    <Player position={[-11, 1, -62]} scale={2} ref={model} action={action} />
+    <Player
+      // @ts-ignore
+      position={[-11, 1, -62]}
+      scale={2}
+      ref={model}
+      action={action}
+      name={name}
+    />
   );
 }

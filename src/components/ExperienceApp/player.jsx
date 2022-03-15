@@ -2,17 +2,19 @@ import { forwardRef, useLayoutEffect, useMemo } from 'react';
 import { useGLTF, useAnimations } from '@react-three/drei';
 import { useGraph } from '@react-three/fiber';
 import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
+import { useSnapshot } from 'valtio';
+import state from '../../utils/store';
+import { BufferGeometry } from 'three';
 
 export const Player = forwardRef((props, ref) => {
-  const { action } = props;
-  const { scene, materials, animations } = useGLTF(
-    'http://localhost:3000/glb/modelwanim.glb'
-  );
+  const { action, name } = props;
+  const snap = useSnapshot(state);
+  const { animations } = useGLTF('http://localhost:3000/glb/modelwanim.glb');
+  const { scene, materials } = useGLTF(`http://localhost:3000/glb/${name}.glb`);
 
   const playerClone = useMemo(() => clone(scene), [scene]);
   const { nodes } = useGraph(playerClone);
   const { actions } = useAnimations(animations, ref);
-  console.log(nodes);
 
   useLayoutEffect(() => {
     actions[action].reset().fadeIn(0.5).play();
@@ -40,18 +42,21 @@ export const Player = forwardRef((props, ref) => {
           name="Wolf3D_Outfit_Bottom"
           geometry={nodes.Wolf3D_Outfit_Bottom.geometry}
           material={materials.Wolf3D_Outfit_Bottom}
+          material-color={snap.items.Bottom}
           skeleton={nodes.Wolf3D_Outfit_Bottom.skeleton}
         />
         <skinnedMesh
           name="Wolf3D_Outfit_Footwear"
           geometry={nodes.Wolf3D_Outfit_Footwear.geometry}
           material={materials.Wolf3D_Outfit_Footwear}
+          material-color={snap.items.Footwear}
           skeleton={nodes.Wolf3D_Outfit_Footwear.skeleton}
         />
         <skinnedMesh
           name="Wolf3D_Outfit_Top"
           geometry={nodes.Wolf3D_Outfit_Top.geometry}
           material={materials.Wolf3D_Outfit_Top}
+          material-color={snap.items.Top}
           skeleton={nodes.Wolf3D_Outfit_Top.skeleton}
         />
         <skinnedMesh
@@ -91,6 +96,6 @@ export const Player = forwardRef((props, ref) => {
   );
 });
 
-useGLTF.preload('http://localhost:3000/glb/modelwanim.glb');
+useGLTF.preload('http://localhost:3000/glb/TJModel.glb');
 
 export default Player;
