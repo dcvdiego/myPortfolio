@@ -79,7 +79,9 @@ function Picker() {
     <div style={{ display: snap.current ? 'flex' : 'none' }}>
       <ColorPicker
         className="picker"
+        // @ts-ignore
         color={snap.items[snap.current]}
+        // @ts-ignore
         onChange={(color) => (state.items[snap.current] = color)}
       />
       <h1 style={{ color: 'white' }}>{snap.current}</h1>
@@ -109,7 +111,12 @@ function Home() {
             </Bubble>
           </Title>
 
-          <MeModel action={action} state={state} mouse={mouse} />
+          <MeModel
+            ref={useRef(false)}
+            action={action}
+            state={state}
+            mouse={mouse}
+          />
           <Picker />
         </ModelContainer>
 
