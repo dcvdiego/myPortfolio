@@ -7,9 +7,7 @@ import { Text } from '@react-three/drei';
 interface IWordProps {
   wordChildren: String | THREE.Vector3;
   position: any;
-  onTextClick:
-    | React.Dispatch<React.SetStateAction<String | THREE.Vector3>>
-    | any;
+  onTextClick: React.Dispatch<React.SetStateAction<String | THREE.Vector3>>;
 }
 
 const Word: FC<IWordProps> = ({
@@ -25,7 +23,8 @@ const Word: FC<IWordProps> = ({
     lineHeight: 1,
     'material-toneMapped': false,
   };
-  const ref = useRef<Camera | any>();
+  // what type is Text? does drei have typing?
+  const ref = useRef<Camera & any>();
   const [hovered, setHovered] = useState(false);
   const over = (e: ThreeEvent<PointerEvent>) => {
     return e.stopPropagation(), setHovered(true);

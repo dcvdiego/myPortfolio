@@ -23,6 +23,7 @@ import {
   SectionContainer,
   SmallText,
 } from './footer.styles';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 // import { Logo } from '../logo';
 
@@ -68,7 +69,7 @@ const Footer = () => {
                   rel="noreferrer"
                 >
                   <ColoredIcon color="blue">
-                    <FontAwesomeIcon icon={faUserGroup} />
+                    <FontAwesomeIcon icon={faUserGroup as IconProp} />
                   </ColoredIcon>
                   <SmallText>LinkedIn</SmallText>
                 </HorizontalTag>
@@ -82,7 +83,7 @@ const Footer = () => {
                   rel="noreferrer"
                 >
                   <ColoredIcon color="orange">
-                    <FontAwesomeIcon icon={faCodeBranch} />
+                    <FontAwesomeIcon icon={faCodeBranch as IconProp} />
                   </ColoredIcon>
                   <SmallText>GitHub</SmallText>
                 </HorizontalTag>
@@ -94,7 +95,7 @@ const Footer = () => {
           <HeaderTitle>Find me on WhatsApp!</HeaderTitle>
           <HorizontalContainer>
             <ColoredIcon color="green">
-              <FontAwesomeIcon icon={faPhoneAlt} />
+              <FontAwesomeIcon icon={faPhoneAlt as IconProp} />
             </ColoredIcon>
             <SmallText>+4407832646484</SmallText>
           </HorizontalContainer>
@@ -103,7 +104,7 @@ const Footer = () => {
           <HeaderTitle>Email me!</HeaderTitle>
           <HorizontalContainer>
             <ColoredIcon color="red">
-              <FontAwesomeIcon icon={faEnvelope} />
+              <FontAwesomeIcon icon={faEnvelope as IconProp} />
             </ColoredIcon>
             <SmallText>diegochuman@gmail.com</SmallText>
           </HorizontalContainer>

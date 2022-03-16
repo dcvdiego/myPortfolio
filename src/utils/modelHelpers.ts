@@ -43,6 +43,8 @@ interface IMouse {
   x: number;
   y: number;
 }
+
+// three bone can't use rotation? weird
 export function moveJoint(mouse: IMouse, joint: any, degreeLimit = 40) {
   let degrees = getMouseDegrees(mouse.x, mouse.y, degreeLimit);
   joint.rotation.xD = THREE.MathUtils.lerp(

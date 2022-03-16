@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import { motion } from 'framer-motion-3d';
 import { degreesToRadians } from 'popmotion';
+import { GLTF } from 'three-stdlib';
 
+type GLTFResult = GLTF & {
+  nodes: {
+    Hexagon?: THREE.Mesh;
+    Plane?: THREE.Mesh;
+    Circle?: THREE.Mesh;
+  };
+  materials: {
+    Material: THREE.MeshStandardMaterial;
+  };
+};
 interface IIConProps {
   isSelected: boolean;
   isHover: boolean;
@@ -12,9 +23,10 @@ interface IIConProps {
 }
 
 export default function Icon({ isHover, isSelected, url, shape }: IIConProps) {
-  const { nodes, materials }: any = useGLTF(
+  const group = useRef<THREE.Group>();
+  const { nodes, materials } = useGLTF(
     `http://localhost:3000/glb/${url}.glb`
-  );
+  ) as unknown as GLTFResult;
   return (
     <Canvas
       style={{ position: 'absolute', width: '100%', height: '100%' }}
@@ -28,10 +40,10 @@ export default function Icon({ isHover, isSelected, url, shape }: IIConProps) {
           color="#fff"
         />
       ))}
-      <group dispose={null}>
+      <group ref={group} dispose={null}>
         <motion.mesh
           material={materials.Material}
-          geometry={nodes[shape].geometry}
+          geometry={nodes[shape]!.geometry}
           rotation={[
             Math.PI / 2,
             shape === 'Circle'

@@ -54,6 +54,7 @@ export const Player = forwardRef<THREE.Mesh | undefined, IModelProps>(
     const { materials, nodes } = useGLTF(
       `http://localhost:3000/glb/${snap.avatarName}.glb`
     ) as unknown as GLTFResult;
+    // weird not allowed to use forward ref typings, will Rosie help? xd
     // @ts-ignore
     const { actions } = useAnimations(animations, ref);
 

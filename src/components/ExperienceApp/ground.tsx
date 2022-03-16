@@ -1,9 +1,10 @@
-import { usePlane } from '@react-three/cannon';
+import { PlaneProps, usePlane } from '@react-three/cannon';
+import { MeshProps } from '@react-three/fiber';
 
 import { RepeatWrapping, TextureLoader } from 'three';
 import placeholder from '../../assets/placeholder.png';
 
-function Ground(props: any) {
+function Ground(props: PlaneProps & MeshProps) {
   const [ref] = usePlane(() => ({
     material: 'ground',
     type: 'Static',
