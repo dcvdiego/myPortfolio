@@ -1,6 +1,17 @@
 import { proxy } from 'valtio';
 
-const state = proxy({
+interface IState {
+  current: null | string;
+  items: {
+    [key: string]: string;
+    Top: string;
+    Bottom: string;
+    Footwear: string;
+  };
+  avatarName: string;
+}
+
+const state: IState = proxy({
   current: null,
   // has to be white, it is a bit weird
   items: {

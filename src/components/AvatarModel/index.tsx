@@ -2,11 +2,12 @@ import { Bounds, OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import React, { Suspense } from 'react';
 import MyModel from './model.jsx';
+
+type ActionName = 'Dance' | 'Idle' | 'Run' | 'Walk' | 'Wave';
 interface IAvatarModelProps {
-  action: string;
-  mouse: any;
+  action: ActionName;
 }
-const AvatarModel = ({ action, mouse }: IAvatarModelProps) => {
+const AvatarModel = ({ action }: IAvatarModelProps) => {
   return (
     <Canvas dpr={[1, 2]} camera={{ position: [0, 12.5, 10], fov: 90 }}>
       <ambientLight intensity={0.6} />
@@ -17,7 +18,7 @@ const AvatarModel = ({ action, mouse }: IAvatarModelProps) => {
       <OrbitControls makeDefault />
       <Suspense fallback={null}>
         <Bounds fit clip margin={0.9}>
-          <MyModel action={action} mouse={mouse} scale={[10.5, 10.5, 10.5]} />
+          <MyModel action={action} scale={[10.5, 10.5, 10.5]} />
         </Bounds>
       </Suspense>
     </Canvas>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 
 import Layout from '../components/Layout';
 import AvatarModel from '../components/AvatarModel';
@@ -71,10 +71,8 @@ function Picker() {
     <div style={{ display: snap.current ? 'flex' : 'none' }}>
       <ColorPicker
         className="picker"
-        // @ts-ignore
-        color={snap.items[snap.current]}
-        // @ts-ignore
-        onChange={(color) => (state.items[snap.current] = color)}
+        color={snap.items[String(snap.current)]}
+        onChange={(color) => (state.items[String(snap.current)] = color)}
       />
       <h1 style={{ color: 'white' }}>{snap.current}</h1>
     </div>
@@ -82,8 +80,9 @@ function Picker() {
 }
 
 function Home() {
-  const [action, setAction] = useState('Idle');
-  const mouse = useRef({ x: 0, y: 0 });
+  type ActionName = 'Dance' | 'Idle' | 'Run' | 'Walk' | 'Wave';
+  const [action, setAction] = useState<ActionName>('Idle');
+  // const mouse = useRef({ x: 0, y: 0 });
 
   return (
     <Layout title="Welcome">
@@ -104,7 +103,7 @@ function Home() {
             </Bubble>
           </Title>
 
-          <AvatarModel action={action} mouse={mouse} />
+          <AvatarModel action={action} />
           <Picker />
         </ModelContainer>
 

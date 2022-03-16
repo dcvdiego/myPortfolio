@@ -1,3 +1,4 @@
+import { Button } from '../../styles/global.styles';
 import { Physics } from '@react-three/cannon';
 import { Sky, PerspectiveCamera } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
@@ -34,9 +35,9 @@ export default function App() {
         </Physics>
       </Canvas>
       {autoWalk ? (
-        <button onClick={() => setAutoWalk(false)}>Stop</button>
+        <Button onClick={() => setAutoWalk(false)}>Stop</Button>
       ) : (
-        <button onClick={() => setAutoWalk(true)}>AutoWalk</button>
+        <Button onClick={() => setAutoWalk(true)}>AutoWalk</Button>
       )}
     </>
   );

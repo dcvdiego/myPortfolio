@@ -35,7 +35,6 @@ interface ITestimonialObject {
 }
 interface IData {
   data: ITestimonialObject;
-  // eslint-disable-next-line react/require-default-props
   word?: string;
 }
 const Testimonial = ({ data, word }: IData) => {
@@ -43,11 +42,15 @@ const Testimonial = ({ data, word }: IData) => {
     <TestimonialContainer>
       <TestimonialTitle>{data.from}</TestimonialTitle>
       <TestimonialSubtitle>{data.title}</TestimonialSubtitle>
-      <TestimonialContent
-        dangerouslySetInnerHTML={{
-          __html: data.content.replaceAll(word, `<b>${word}</b>`)
-        }}
-      />
+      {word ? (
+        <TestimonialContent
+          dangerouslySetInnerHTML={{
+            __html: data.content.replaceAll(word, `<b>${word}</b>`),
+          }}
+        />
+      ) : (
+        <TestimonialContent>data.content</TestimonialContent>
+      )}
     </TestimonialContainer>
   );
 };

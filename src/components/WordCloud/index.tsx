@@ -1,7 +1,7 @@
-import React, { useState, Suspense, useRef } from 'react';
+import React, { useState, Suspense } from 'react';
 
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, TrackballControls } from '@react-three/drei';
+import { TrackballControls } from '@react-three/drei';
 
 import Cloud from './model';
 import testimonials from '../../assets/data/testimonials.json';

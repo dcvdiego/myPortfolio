@@ -11,13 +11,12 @@ let moveZ;
 let rotateAngleTouch;
 let rotateAngle;
 let moveDistance;
-// do a little if there was an uploaded avatar, use it
 
 interface IPlayerMovementProps {
   AutoWalk: boolean;
 }
 export default function PlayerMovement({ AutoWalk }: IPlayerMovementProps) {
-  const model = useRef<THREE.Mesh>();
+  const model = useRef<THREE.Mesh | undefined>();
 
   const { camera } = useThree();
 
@@ -79,12 +78,6 @@ export default function PlayerMovement({ AutoWalk }: IPlayerMovementProps) {
   });
 
   return (
-    <Player
-      // @ts-ignore
-      position={[-11, 1, -62]}
-      scale={2}
-      ref={model}
-      action={action}
-    />
+    <Player position={[-11, 1, -62]} scale={2} ref={model} action={action} />
   );
 }

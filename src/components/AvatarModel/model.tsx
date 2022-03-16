@@ -27,6 +27,7 @@ type GLTFResult = GLTF & {
     Wolf3D_Head: THREE.SkinnedMesh;
     Wolf3D_Teeth: THREE.SkinnedMesh;
     Hips: THREE.Bone;
+    Neck: THREE.Bone;
   };
   materials: {
     Wolf3D_Body: THREE.MeshStandardMaterial;
@@ -43,12 +44,12 @@ type GLTFResult = GLTF & {
 
 interface IModelProps {
   action: ActionName;
-  mouse: any;
-  name: string;
 }
 
-export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
-  const { action, mouse }: IModelProps = props;
+export default function Model({
+  ...props
+}: JSX.IntrinsicElements['group'] & IModelProps) {
+  const { action } = props;
   const group = useRef<THREE.Group>();
   const snap = useSnapshot(state);
   const { animations } = useGLTF(
@@ -58,11 +59,11 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
     `http://localhost:3000/glb/${snap.avatarName}.glb`
   ) as GLTFResult;
   const { actions } = useAnimations(animations, group);
-  const previousAction = usePrevious(action);
+  const previousAction: ActionName = usePrevious(action);
   useEffect(() => {
     if (previousAction) {
-      actions[previousAction].fadeOut(0.8);
-      actions[previousAction].stop();
+      actions[previousAction]!.fadeOut(0.8);
+      actions[previousAction]!.stop();
       actions[action]!.setLoop(LoopOnce, 1);
     }
     actions[action]!.play();
@@ -71,7 +72,8 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
     actions[action]!.fadeOut(8);
     actions.Idle!.play();
   }, [actions, action, previousAction]);
-
+  // 1 argument but got 0, but it does not need an argument, ts error?
+  // @ts-ignore
   const [mixer] = useState(() => new THREE.AnimationMixer());
   useFrame((_fState, delta) => mixer.update(delta));
   const { size } = useThree();
@@ -81,10 +83,8 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
       y: size.height / 2 + (-fState.mouse.y * size.height) / 2,
     };
     mixer.update(delta);
+    // every joint to move you must specify the bone in the GLTF type
     moveJoint(mouse, nodes.Neck);
-    // moveJoint(mouse, nodes.LeftArm);
-    // moveJoint(mouse, nodes.LeftHand);
-    // moveJoint(mouse, nodes.LeftLeg);
   });
   return (
     <group
@@ -96,7 +96,7 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
         e.stopPropagation(),
         (state.current =
           // this is an error with ts, should be fixed soon I hope
-
+          // @ts-ignore
           e.object.material.name.replace('Wolf3D_Outfit_', '') === 'Top' ||
           // @ts-ignore
           e.object.material.name.replace('Wolf3D_Outfit_', '') === 'Bottom' ||
@@ -176,5 +176,5 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
     </group>
   );
 }
-// how do we define name outside without using context or redux
-// useGLTF.preload(`http://localhost:3000/glb/modelwanim.glb`);
+// how do we define name outside without using context or redux, for better perf (preload)
+useGLTF.preload(`http://localhost:3000/glb/${state.avatarName}.glb`);

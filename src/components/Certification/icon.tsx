@@ -3,7 +3,6 @@ import { Canvas } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import { motion } from 'framer-motion-3d';
 import { degreesToRadians } from 'popmotion';
-import { MotionCanvas } from 'framer-motion-3d';
 
 interface IIConProps {
   isSelected: boolean;

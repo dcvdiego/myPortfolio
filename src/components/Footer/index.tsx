@@ -42,31 +42,26 @@ const Footer = () => {
             <HeaderTitle>Get Started</HeaderTitle>
             <ListItem>
               <Link to="/">
-                {/* eslint-disable-next-line */}
                 <a>Home</a>
               </Link>
             </ListItem>
             <ListItem>
               <Link to="/certifications">
-                {/* eslint-disable-next-line */}
                 <a>Certifications</a>
               </Link>
             </ListItem>
             <ListItem>
               <Link to="/projects">
-                {/* eslint-disable-next-line */}
                 <a>Projects</a>
               </Link>
             </ListItem>
             <ListItem>
               <Link to="/experiences">
-                {/* eslint-disable-next-line */}
                 <a>Experiences</a>
               </Link>
             </ListItem>
             <ListItem>
               <Link to="/testimonials">
-                {/* eslint-disable-next-line */}
                 <a>Testimonials</a>
               </Link>
             </ListItem>
@@ -78,7 +73,7 @@ const Footer = () => {
             <ListItem>
               <HorizontalContainer>
                 <HorizontalTag
-                  to="https://www.linkedin.com/in/diegochuman/"
+                  href="https://www.linkedin.com/in/diegochuman/"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -92,7 +87,7 @@ const Footer = () => {
             <ListItem>
               <HorizontalContainer>
                 <HorizontalTag
-                  to="https://github.com/dcvdiego"
+                  href="https://github.com/dcvdiego"
                   target="_blank"
                   rel="noreferrer"
                 >
