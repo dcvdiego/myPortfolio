@@ -2,7 +2,7 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { useEffect, useRef } from 'react';
 import { Vector3 } from 'three';
 import usePlayerControls from '../../hooks/useKeyboardControls';
-import Player from './Player';
+import Player from './models/player';
 import { isMobile } from 'react-device-detect';
 
 let rotateVector = new Vector3(0, 1, 0);
@@ -12,8 +12,11 @@ let rotateAngleTouch;
 let rotateAngle;
 let moveDistance;
 // do a little if there was an uploaded avatar, use it
-let name = 'modelwanim';
-export default function PlayerMovement() {
+
+interface IPlayerMovementProps {
+  AutoWalk: boolean;
+}
+export default function PlayerMovement({ AutoWalk }: IPlayerMovementProps) {
   const model = useRef<THREE.Mesh>();
 
   const { camera } = useThree();
@@ -22,7 +25,7 @@ export default function PlayerMovement() {
     mousePosition,
     action,
     { forward, backward, left, right, shift },
-  ]: any = usePlayerControls();
+  ]: any = usePlayerControls(AutoWalk);
   let relativeCameraOffset = new Vector3();
   let cameraOffset;
 
@@ -82,7 +85,6 @@ export default function PlayerMovement() {
       scale={2}
       ref={model}
       action={action}
-      name={name}
     />
   );
 }

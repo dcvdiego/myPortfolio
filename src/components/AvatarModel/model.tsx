@@ -6,29 +6,74 @@ import { LoopOnce } from 'three';
 import { useSnapshot } from 'valtio';
 import { useFrame, useThree } from '@react-three/fiber';
 import { moveJoint } from '../../utils/modelHelpers';
+import { GLTF } from 'three-stdlib';
+import state from '../../utils/store';
 
-export default function Model({ action, state, mouse, name, ...props }) {
-  const group = useRef();
+type ActionName = 'Dance' | 'Idle' | 'Run' | 'Walk' | 'Wave';
+
+interface GLTFAction extends THREE.AnimationClip {
+  name: ActionName;
+}
+
+type GLTFResult = GLTF & {
+  nodes: {
+    Wolf3D_Body: THREE.SkinnedMesh;
+    Wolf3D_Hair: THREE.SkinnedMesh;
+    Wolf3D_Outfit_Bottom: THREE.SkinnedMesh;
+    Wolf3D_Outfit_Footwear: THREE.SkinnedMesh;
+    Wolf3D_Outfit_Top: THREE.SkinnedMesh;
+    EyeLeft: THREE.SkinnedMesh;
+    EyeRight: THREE.SkinnedMesh;
+    Wolf3D_Head: THREE.SkinnedMesh;
+    Wolf3D_Teeth: THREE.SkinnedMesh;
+    Hips: THREE.Bone;
+  };
+  materials: {
+    Wolf3D_Body: THREE.MeshStandardMaterial;
+    Wolf3D_Hair: THREE.MeshStandardMaterial;
+    Wolf3D_Outfit_Bottom: THREE.MeshStandardMaterial;
+    Wolf3D_Outfit_Footwear: THREE.MeshStandardMaterial;
+    Wolf3D_Outfit_Top: THREE.MeshStandardMaterial;
+    Wolf3D_Eye: THREE.MeshStandardMaterial;
+    Wolf3D_Skin: THREE.MeshStandardMaterial;
+    Wolf3D_Teeth: THREE.MeshStandardMaterial;
+  };
+  animations: GLTFAction[];
+};
+
+interface IModelProps {
+  action: ActionName;
+  mouse: any;
+  name: string;
+}
+
+export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
+  const { action, mouse }: IModelProps = props;
+  const group = useRef<THREE.Group>();
   const snap = useSnapshot(state);
-  let { nodes, materials } = useGLTF(`http://localhost:3000/glb/${name}.glb`);
-  let { animations } = useGLTF('http://localhost:3000/glb/modelwanim.glb');
-  let { actions } = useAnimations(animations, group);
+  const { animations } = useGLTF(
+    'http://localhost:3000/glb/modelwanim.glb'
+  ) as GLTFResult;
+  const { nodes, materials } = useGLTF(
+    `http://localhost:3000/glb/${snap.avatarName}.glb`
+  ) as GLTFResult;
+  const { actions } = useAnimations(animations, group);
   const previousAction = usePrevious(action);
   useEffect(() => {
     if (previousAction) {
       actions[previousAction].fadeOut(0.8);
       actions[previousAction].stop();
-      actions[action].setLoop(LoopOnce);
+      actions[action]!.setLoop(LoopOnce, 1);
     }
-    actions[action].play();
-    actions[action].fadeIn(0.8);
+    actions[action]!.play();
+    actions[action]!.fadeIn(0.8);
     // while (actions[action].isRunning()) {}
-    actions[action].fadeOut(8);
-    actions.Idle.play();
+    actions[action]!.fadeOut(8);
+    actions.Idle!.play();
   }, [actions, action, previousAction]);
 
   const [mixer] = useState(() => new THREE.AnimationMixer());
-  useFrame((fState, delta) => mixer.update(delta));
+  useFrame((_fState, delta) => mixer.update(delta));
   const { size } = useThree();
   useFrame((fState, delta) => {
     const mouse = {
@@ -50,10 +95,15 @@ export default function Model({ action, state, mouse, name, ...props }) {
       onClick={(e) => (
         e.stopPropagation(),
         (state.current =
+          // this is an error with ts, should be fixed soon I hope
+
           e.object.material.name.replace('Wolf3D_Outfit_', '') === 'Top' ||
+          // @ts-ignore
           e.object.material.name.replace('Wolf3D_Outfit_', '') === 'Bottom' ||
+          // @ts-ignore
           e.object.material.name.replace('Wolf3D_Outfit_', '') === 'Footwear'
-            ? e.object.material.name.replace('Wolf3D_Outfit_', '')
+            ? // @ts-ignore
+              e.object.material.name.replace('Wolf3D_Outfit_', '')
             : null)
       )}
     >
@@ -127,4 +177,4 @@ export default function Model({ action, state, mouse, name, ...props }) {
   );
 }
 // how do we define name outside without using context or redux
-// useGLTF.preload(`http://localhost:3000/glb/${name}.glb`);
+// useGLTF.preload(`http://localhost:3000/glb/modelwanim.glb`);

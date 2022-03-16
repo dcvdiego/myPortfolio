@@ -4,11 +4,9 @@ import React, { Suspense } from 'react';
 import MyModel from './model.jsx';
 interface IAvatarModelProps {
   action: string;
-  state: any;
   mouse: any;
-  name?: string;
 }
-const AvatarModel = ({ action, state, mouse, name }: IAvatarModelProps) => {
+const AvatarModel = ({ action, mouse }: IAvatarModelProps) => {
   return (
     <Canvas dpr={[1, 2]} camera={{ position: [0, 12.5, 10], fov: 90 }}>
       <ambientLight intensity={0.6} />
@@ -19,13 +17,7 @@ const AvatarModel = ({ action, state, mouse, name }: IAvatarModelProps) => {
       <OrbitControls makeDefault />
       <Suspense fallback={null}>
         <Bounds fit clip margin={0.9}>
-          <MyModel
-            action={action}
-            state={state}
-            mouse={mouse}
-            name={name}
-            scale={[10.5, 10.5, 10.5]}
-          />
+          <MyModel action={action} mouse={mouse} scale={[10.5, 10.5, 10.5]} />
         </Bounds>
       </Suspense>
     </Canvas>

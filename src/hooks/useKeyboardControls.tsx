@@ -11,13 +11,14 @@ const keyCodeMapping: Record<string, string> = {
   ArrowLeft: 'left',
   ArrowRight: 'right',
   ShiftLeft: 'shift',
+  AutoWalk: 'forward',
 };
 
 function moveFieldByKey(key: string) {
   return keyCodeMapping[key];
 }
 
-export default function usePlayerControls() {
+export default function usePlayerControls(AutoWalk: boolean) {
   const [movement, setMovement] = useState({
     forward: false,
     backward: false,
@@ -52,7 +53,8 @@ export default function usePlayerControls() {
       keyCode === 'ArrowDown' ||
       keyCode === 'ArrowLeft' ||
       keyCode === 'ArrowRight' ||
-      keyCode === 'ShiftLeft'
+      keyCode === 'ShiftLeft' ||
+      keyCode === 'AutoWalk'
     ) {
       setMovement((m) => ({ ...m, [moveFieldByKey(keyCode)]: true }));
     }
@@ -68,7 +70,8 @@ export default function usePlayerControls() {
       keyCode === 'ArrowDown' ||
       keyCode === 'ArrowLeft' ||
       keyCode === 'ArrowRight' ||
-      keyCode === 'ShiftLeft'
+      keyCode === 'ShiftLeft' ||
+      keyCode === 'AutoWalk'
     ) {
       setMovement((m) => ({ ...m, [moveFieldByKey(keyCode)]: false }));
     }
@@ -110,6 +113,12 @@ export default function usePlayerControls() {
       setAction('Idle');
     }
   }, [movement]);
-
+  useEffect(() => {
+    if (AutoWalk) {
+      handleKeyDown('AutoWalk');
+    } else {
+      handleKeyUp('AutoWalk');
+    }
+  }, [AutoWalk]);
   return [mousePosition, action, movement];
 }

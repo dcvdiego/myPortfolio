@@ -1,19 +1,18 @@
 import { forwardRef, useLayoutEffect, useMemo } from 'react';
 import { useGLTF, useAnimations } from '@react-three/drei';
 import { useGraph } from '@react-three/fiber';
-import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
+
 import { useSnapshot } from 'valtio';
-import state from '../../utils/store';
-import { BufferGeometry } from 'three';
+import state from '../../../utils/store';
 
 export const Player = forwardRef((props, ref) => {
-  const { action, name } = props;
+  const { action } = props;
   const snap = useSnapshot(state);
   const { animations } = useGLTF('http://localhost:3000/glb/modelwanim.glb');
-  const { scene, materials } = useGLTF(`http://localhost:3000/glb/${name}.glb`);
+  const { scene, materials, nodes } = useGLTF(
+    `http://localhost:3000/glb/${snap.avatarName}.glb`
+  );
 
-  const playerClone = useMemo(() => clone(scene), [scene]);
-  const { nodes } = useGraph(playerClone);
   const { actions } = useAnimations(animations, ref);
 
   useLayoutEffect(() => {
@@ -24,7 +23,7 @@ export const Player = forwardRef((props, ref) => {
 
   return (
     <group castShadow {...props} ref={ref} dispose={null}>
-      <group rotation={[0, -Math.PI, 0]} scale={1}>
+      <group rotation={[0, -Math.PI, 0]}>
         <primitive object={nodes.Hips} />
         <skinnedMesh
           name="Wolf3D_Body"
@@ -96,6 +95,6 @@ export const Player = forwardRef((props, ref) => {
   );
 });
 
-useGLTF.preload('http://localhost:3000/glb/TJModel.glb');
+// useGLTF.preload('http://localhost:3000/glb/modelwanim.glb');
 
 export default Player;

@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-export function getMouseDegrees(x, y, degreeLimit) {
+export function getMouseDegrees(x: number, y: number, degreeLimit: number) {
   let dx = 0,
     dy = 0,
     xdiff,
@@ -39,8 +39,11 @@ export function getMouseDegrees(x, y, degreeLimit) {
   }
   return { x: dx, y: dy };
 }
-
-export function moveJoint(mouse, joint, degreeLimit = 40) {
+interface IMouse {
+  x: number;
+  y: number;
+}
+export function moveJoint(mouse: IMouse, joint: any, degreeLimit = 40) {
   let degrees = getMouseDegrees(mouse.x, mouse.y, degreeLimit);
   joint.rotation.xD = THREE.MathUtils.lerp(
     joint.rotation.xD || 0,

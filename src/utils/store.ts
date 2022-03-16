@@ -8,6 +8,7 @@ const state = proxy({
     Bottom: '#ffffff',
     Footwear: '#ffffff',
   },
+  avatarName: 'modelwanim',
 });
 
 export default state;

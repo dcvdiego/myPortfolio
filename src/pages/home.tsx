@@ -83,8 +83,8 @@ function Picker() {
 
 function Home() {
   const [action, setAction] = useState('Idle');
-  const [avatarName, setAvatarName] = useState('modelwanim');
   const mouse = useRef({ x: 0, y: 0 });
+
   return (
     <Layout title="Welcome">
       <Container>
@@ -104,12 +104,7 @@ function Home() {
             </Bubble>
           </Title>
 
-          <AvatarModel
-            action={action}
-            state={state}
-            mouse={mouse}
-            name={avatarName}
-          />
+          <AvatarModel action={action} mouse={mouse} />
           <Picker />
         </ModelContainer>
 
@@ -117,8 +112,8 @@ function Home() {
         <Button type="button" onClick={() => setAction('Dance')}>
           Dance
         </Button>
-        <Button type="button" onClick={() => setAvatarName('TJModel')}>
-          Change Avatar
+        <Button type="button" onClick={() => (state.avatarName = 'TJModel')}>
+          Upload Avatar
         </Button>
       </Container>
     </Layout>
