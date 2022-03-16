@@ -54,10 +54,10 @@ export default function Model({
   const snap = useSnapshot(state);
   const { animations } = useGLTF(
     'http://localhost:3000/glb/modelwanim.glb'
-  ) as GLTFResult;
+  ) as unknown as GLTFResult;
   const { nodes, materials } = useGLTF(
     `http://localhost:3000/glb/${snap.avatarName}.glb`
-  ) as GLTFResult;
+  ) as unknown as GLTFResult;
   const { actions } = useAnimations(animations, group);
   const previousAction: ActionName = usePrevious(action);
   useEffect(() => {

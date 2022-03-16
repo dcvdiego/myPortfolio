@@ -47,29 +47,19 @@ const NavItems = () => {
       <Menu right styles={menuStyles}>
         <ListContainer>
           <NavItem menu>
-            <Link to="/">
-              <a>Home</a>
-            </Link>
+            <Link to="/">Home</Link>
           </NavItem>
           <NavItem menu>
-            <Link to="/certifications">
-              <a>Certifications</a>
-            </Link>
+            <Link to="/certifications">Certifications</Link>
           </NavItem>
           <NavItem menu>
-            <Link to="/experiences">
-              <a>Experiences</a>
-            </Link>
+            <Link to="/experiences">Experiences</Link>
           </NavItem>
           <NavItem menu>
-            <Link to="/projects">
-              <a>Projects</a>
-            </Link>
+            <Link to="/projects">Projects</Link>
           </NavItem>
           <NavItem menu>
-            <Link to="/testimonials">
-              <a>Testimonials</a>
-            </Link>
+            <Link to="/testimonials">Testimonials</Link>
           </NavItem>
         </ListContainer>
       </Menu>
@@ -78,29 +68,19 @@ const NavItems = () => {
   return (
     <ListContainer>
       <NavItem>
-        <Link to="/">
-          <a>Home</a>
-        </Link>
+        <Link to="/">Home</Link>
       </NavItem>
       <NavItem>
-        <Link to="/certifications">
-          <a>Certifications</a>
-        </Link>
+        <Link to="/certifications">Certifications</Link>
       </NavItem>
       <NavItem>
-        <Link to="/experiences">
-          <a>Experiences</a>
-        </Link>
+        <Link to="/experiences">Experiences</Link>
       </NavItem>
       <NavItem>
-        <Link to="/projects">
-          <a>Projects</a>
-        </Link>
+        <Link to="/projects">Projects</Link>
       </NavItem>
       <NavItem>
-        <Link to="/testimonials">
-          <a>Testimonials</a>
-        </Link>
+        <Link to="/testimonials">Testimonials</Link>
       </NavItem>
     </ListContainer>
   );

@@ -41,29 +41,19 @@ const Footer = () => {
           <LinksList>
             <HeaderTitle>Get Started</HeaderTitle>
             <ListItem>
-              <Link to="/">
-                <a>Home</a>
-              </Link>
+              <Link to="/">Home</Link>
             </ListItem>
             <ListItem>
-              <Link to="/certifications">
-                <a>Certifications</a>
-              </Link>
+              <Link to="/certifications">Certifications</Link>
             </ListItem>
             <ListItem>
-              <Link to="/projects">
-                <a>Projects</a>
-              </Link>
+              <Link to="/projects">Projects</Link>
             </ListItem>
             <ListItem>
-              <Link to="/experiences">
-                <a>Experiences</a>
-              </Link>
+              <Link to="/experiences">Experiences</Link>
             </ListItem>
             <ListItem>
-              <Link to="/testimonials">
-                <a>Testimonials</a>
-              </Link>
+              <Link to="/testimonials">Testimonials</Link>
             </ListItem>
           </LinksList>
         </SectionContainer>
@@ -73,7 +63,7 @@ const Footer = () => {
             <ListItem>
               <HorizontalContainer>
                 <HorizontalTag
-                  href="https://www.linkedin.com/in/diegochuman/"
+                  to="https://www.linkedin.com/in/diegochuman/"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -87,7 +77,7 @@ const Footer = () => {
             <ListItem>
               <HorizontalContainer>
                 <HorizontalTag
-                  href="https://github.com/dcvdiego"
+                  to="https://github.com/dcvdiego"
                   target="_blank"
                   rel="noreferrer"
                 >

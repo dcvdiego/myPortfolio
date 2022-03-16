@@ -50,10 +50,10 @@ export const Player = forwardRef<THREE.Mesh | undefined, IModelProps>(
     const snap = useSnapshot(state);
     const { animations } = useGLTF(
       'http://localhost:3000/glb/modelwanim.glb'
-    ) as GLTFResult;
+    ) as unknown as GLTFResult;
     const { materials, nodes } = useGLTF(
       `http://localhost:3000/glb/${snap.avatarName}.glb`
-    ) as GLTFResult;
+    ) as unknown as GLTFResult;
     // @ts-ignore
     const { actions } = useAnimations(animations, ref);
 
