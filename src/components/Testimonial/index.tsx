@@ -49,7 +49,7 @@ const Testimonial = ({ data, word }: IData) => {
           }}
         />
       ) : (
-        <TestimonialContent>data.content</TestimonialContent>
+        <TestimonialContent>{data.content}</TestimonialContent>
       )}
     </TestimonialContainer>
   );

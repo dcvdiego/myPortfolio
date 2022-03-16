@@ -24,7 +24,6 @@ const Project = () => {
           <Title>{project!.name}</Title>
           <TestimonialsContainer>
             <SubHeading>Testimonials from this project</SubHeading>
-            {/* eslint-disable-next-line array-callback-return */}
             {testimonials.map((testimonial) => {
               return testimonial.project.includes(project!.name) ? (
                 <Testimonial data={testimonial} />

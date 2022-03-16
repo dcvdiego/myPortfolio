@@ -47,7 +47,6 @@ const Project = ({ data }: IData) => {
     <ProjectContainer>
       <ProjectTitle>
         <Link to={`/projects/${data?.slug ? data.slug : data.name}`}>
-          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a>{data.name}</a>
         </Link>
       </ProjectTitle>
