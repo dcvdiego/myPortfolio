@@ -49,10 +49,10 @@ export const Player = forwardRef<THREE.Mesh | undefined, IModelProps>(
     const { action } = props;
     const snap = useSnapshot(state);
     const { animations } = useGLTF(
-      'http://localhost:3000/glb/modelwanim.glb'
+      ' /glb/modelwanim.glb'
     ) as unknown as GLTFResult;
     const { materials, nodes } = useGLTF(
-      `http://localhost:3000/glb/${snap.avatarName}.glb`
+      ` /glb/${snap.avatarName}.glb`
     ) as unknown as GLTFResult;
     // weird not allowed to use forward ref typings, will Rosie help? xd
     // @ts-ignore
@@ -142,6 +142,6 @@ export const Player = forwardRef<THREE.Mesh | undefined, IModelProps>(
   }
 );
 
-useGLTF.preload(`http://localhost:3000/glb/${state.avatarName}.glb`);
+useGLTF.preload(` /glb/${state.avatarName}.glb`);
 
 export default Player;

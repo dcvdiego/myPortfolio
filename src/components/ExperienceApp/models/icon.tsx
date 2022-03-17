@@ -16,7 +16,7 @@ type GLTFResult = GLTF & {
 
 function Icon() {
   const { nodes, materials } = useGLTF(
-    `http://localhost:3000/glb/AWSCP.glb`
+    ` /glb/AWSCP.glb`
   ) as unknown as GLTFResult;
   return (
     <group dispose={null} position={[-18, 5, -72]} scale={2}>

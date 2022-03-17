@@ -53,10 +53,10 @@ export default function Model({
   const group = useRef<THREE.Group>();
   const snap = useSnapshot(state);
   const { animations } = useGLTF(
-    'http://localhost:3000/glb/modelwanim.glb'
+    ' /glb/modelwanim.glb'
   ) as unknown as GLTFResult;
   const { nodes, materials } = useGLTF(
-    `http://localhost:3000/glb/${snap.avatarName}.glb`
+    ` /glb/${snap.avatarName}.glb`
   ) as unknown as GLTFResult;
   const { actions } = useAnimations(animations, group);
   const previousAction: ActionName = usePrevious(action);
@@ -177,4 +177,4 @@ export default function Model({
   );
 }
 // how do we define name outside without using context or redux, for better perf (preload)
-useGLTF.preload(`http://localhost:3000/glb/${state.avatarName}.glb`);
+useGLTF.preload(` /glb/${state.avatarName}.glb`);
