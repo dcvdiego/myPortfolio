@@ -25,7 +25,7 @@ interface IIConProps {
 export default function Icon({ isHover, isSelected, url, shape }: IIConProps) {
   const group = useRef<THREE.Group>();
   const { nodes, materials } = useGLTF(
-    `http://localhost:3000/glb/${url}.glb`
+    ` /glb/${url}.glb`
   ) as unknown as GLTFResult;
   return (
     <Canvas
