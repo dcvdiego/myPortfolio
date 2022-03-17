@@ -11,7 +11,7 @@ import StyledCertification, {
   DescriptionContent,
   DescriptionTitle,
   Label,
-  StyledIcon
+  StyledIcon,
 } from './certification.styles';
 
 export interface ICertificationObject {
@@ -37,7 +37,7 @@ export default function Certification({ data }: IData) {
         initial={false}
         animate={[
           isSelected ? 'selected' : 'unselected',
-          isHover ? 'hover' : 'rest'
+          isHover ? 'hover' : 'rest',
         ]}
         whileTap="press"
         variants={buttonVariants}
@@ -51,7 +51,7 @@ export default function Certification({ data }: IData) {
             selected: { opacity: 0, transition: iconFadeTransition },
             hover: isSelected
               ? { opacity: 0, transition: iconFadeTransition }
-              : { opacity: 1 }
+              : { opacity: 1 },
           }}
         >
           <Suspense fallback={null}>
@@ -97,47 +97,49 @@ const iconFadeTransition: Transition = { duration: 0.2, delay: 0.5 };
 
 const buttonVariants: Variants = {
   rest: {
+    // @ts-ignore
     '--button-cert-contrast': '100%',
-    transition: { duration: 0.7 }
+    transition: { duration: 0.7 },
   },
   hover: {
+    // @ts-ignore
     '--button-cert-contrast': '100%',
-    scale: 1.05
+    scale: 1.05,
   },
-  press: { scale: 0.95 }
+  press: { scale: 0.95 },
 };
 
 const labelTextVariantsUnselected: Variants = {
   unselected: { x: 20 },
   hover: { x: 30 },
-  selected: { x: -50 }
+  selected: { x: -50 },
 };
 const labelTextVariantsSelected: Variants = {
   unselected: { x: 20 },
-  selected: { x: -50 }
+  selected: { x: -50 },
 };
 
 const labelTitleVariants: Variants = {
   unselected: { opacity: 1 },
-  selected: { opacity: 0 }
+  selected: { opacity: 0 },
 };
 
 const descriptionTextVariants: Variants = {
   unselected: { opacity: 0, y: 0 },
-  selected: { opacity: 1, y: -20 }
+  selected: { opacity: 1, y: -20 },
 };
 
 const selectedTransition: Transition = {
   duration: 0.25,
-  delay: 0.5
+  delay: 0.5,
 };
 
 const ctaTextVariants: Variants = {
   unselected: { opacity: 1, y: 0, transition: { duration: 0.25 } },
-  selected: { opacity: 0, y: -40, transition: selectedTransition }
+  selected: { opacity: 0, y: -40, transition: selectedTransition },
 };
 
 const closeVariants: Variants = {
   unselected: { opacity: 0, y: 40, transition: { duration: 0.25 } },
-  selected: { opacity: 1, y: 20, transition: selectedTransition }
+  selected: { opacity: 1, y: 20, transition: selectedTransition },
 };

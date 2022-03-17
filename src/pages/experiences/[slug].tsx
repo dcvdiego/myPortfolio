@@ -1,12 +1,11 @@
 import React from 'react';
-import { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import Layout from '@/components/Layout';
-import { Container, Title } from '@/styles/global.styles';
 
-const Experience: NextPage = () => {
-  const router = useRouter();
-  const { slug } = router.query;
+import Layout from '../..//components/Layout';
+import { Container, Title } from '../../styles/global.styles';
+import { useParams } from 'react-router-dom';
+
+const Experience = () => {
+  let { slug } = useParams();
   return (
     <Layout title={slug as string}>
       <Container>

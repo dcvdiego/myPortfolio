@@ -2,14 +2,12 @@ import React, { useRef, useState, useMemo, useEffect, FC } from 'react';
 
 import * as THREE from 'three';
 import { Camera, ThreeEvent, useFrame } from '@react-three/fiber';
-import { OrbitControls, Text } from '@react-three/drei';
+import { Text } from '@react-three/drei';
 
 interface IWordProps {
   wordChildren: String | THREE.Vector3;
   position: any;
-  onTextClick:
-    | React.Dispatch<React.SetStateAction<String | THREE.Vector3>>
-    | any;
+  onTextClick: React.Dispatch<React.SetStateAction<String | THREE.Vector3>>;
 }
 
 const Word: FC<IWordProps> = ({
@@ -23,12 +21,12 @@ const Word: FC<IWordProps> = ({
     fontSize: 2.5,
     letterSpacing: -0.05,
     lineHeight: 1,
-    'material-toneMapped': false
+    'material-toneMapped': false,
   };
-  const ref = useRef<Camera | any>();
+  // what type is Text? does drei have typing?
+  const ref = useRef<Camera & any>();
   const [hovered, setHovered] = useState(false);
   const over = (e: ThreeEvent<PointerEvent>) => {
-    // eslint-disable-next-line no-sequences
     return e.stopPropagation(), setHovered(true);
   };
   const out = () => setHovered(false);
@@ -58,7 +56,6 @@ const Word: FC<IWordProps> = ({
       onClick={() => onTextClick(wordChildren)}
       {...props}
       {...fontProps}
-      // eslint-disable-next-line react/no-children-prop
       children={wordChildren}
     />
   );
@@ -75,7 +72,7 @@ export default function Cloud({
   dist = 5,
   radius = 20,
   data,
-  onTextClick
+  onTextClick,
 }: ICloudProps) {
   // Create a count x count random words with spherical distribution
   const words = useMemo(() => {
@@ -89,13 +86,12 @@ export default function Cloud({
         new THREE.Vector3().setFromSpherical(
           spherical.set(radius, phiSpan * j + 1, thetaSpan * j + 1)
         ),
-        data[j]
+        data[j],
       ]);
     return temp;
   }, [dist, radius, data]);
   return words.map(([pos, word], index) => (
     <Word
-      // eslint-disable-next-line react/no-array-index-key
       key={index}
       position={pos}
       wordChildren={word}

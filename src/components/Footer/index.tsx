@@ -3,10 +3,10 @@ import {
   faCodeBranch,
   faEnvelope,
   faPhoneAlt,
-  faUserGroup
+  faUserGroup,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import {
   AboutContainer,
   AboutText,
@@ -21,8 +21,9 @@ import {
   LinksList,
   ListItem,
   SectionContainer,
-  SmallText
+  SmallText,
 } from './footer.styles';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 // import { Logo } from '../logo';
 
@@ -41,34 +42,19 @@ const Footer = () => {
           <LinksList>
             <HeaderTitle>Get Started</HeaderTitle>
             <ListItem>
-              <Link href="/">
-                {/* eslint-disable-next-line */}
-                <a>Home</a>
-              </Link>
+              <Link to="/">Home</Link>
             </ListItem>
             <ListItem>
-              <Link href="/certifications">
-                {/* eslint-disable-next-line */}
-                <a>Certifications</a>
-              </Link>
+              <Link to="/certifications">Certifications</Link>
             </ListItem>
             <ListItem>
-              <Link href="/projects">
-                {/* eslint-disable-next-line */}
-                <a>Projects</a>
-              </Link>
+              <Link to="/projects">Projects</Link>
             </ListItem>
             <ListItem>
-              <Link href="/experiences">
-                {/* eslint-disable-next-line */}
-                <a>Experiences</a>
-              </Link>
+              <Link to="/experiences">Experiences</Link>
             </ListItem>
             <ListItem>
-              <Link href="/testimonials">
-                {/* eslint-disable-next-line */}
-                <a>Testimonials</a>
-              </Link>
+              <Link to="/testimonials">Testimonials</Link>
             </ListItem>
           </LinksList>
         </SectionContainer>
@@ -78,12 +64,12 @@ const Footer = () => {
             <ListItem>
               <HorizontalContainer>
                 <HorizontalTag
-                  href="https://www.linkedin.com/in/diegochuman/"
+                  to="https://www.linkedin.com/in/diegochuman/"
                   target="_blank"
                   rel="noreferrer"
                 >
                   <ColoredIcon color="blue">
-                    <FontAwesomeIcon icon={faUserGroup} />
+                    <FontAwesomeIcon icon={faUserGroup as IconProp} />
                   </ColoredIcon>
                   <SmallText>LinkedIn</SmallText>
                 </HorizontalTag>
@@ -92,12 +78,12 @@ const Footer = () => {
             <ListItem>
               <HorizontalContainer>
                 <HorizontalTag
-                  href="https://github.com/dcvdiego"
+                  to="https://github.com/dcvdiego"
                   target="_blank"
                   rel="noreferrer"
                 >
                   <ColoredIcon color="orange">
-                    <FontAwesomeIcon icon={faCodeBranch} />
+                    <FontAwesomeIcon icon={faCodeBranch as IconProp} />
                   </ColoredIcon>
                   <SmallText>GitHub</SmallText>
                 </HorizontalTag>
@@ -106,10 +92,10 @@ const Footer = () => {
           </LinksList>
         </SectionContainer>
         <SectionContainer>
-          <HeaderTitle>Text me!</HeaderTitle>
+          <HeaderTitle>Find me on WhatsApp!</HeaderTitle>
           <HorizontalContainer>
             <ColoredIcon color="green">
-              <FontAwesomeIcon icon={faPhoneAlt} />
+              <FontAwesomeIcon icon={faPhoneAlt as IconProp} />
             </ColoredIcon>
             <SmallText>+4407832646484</SmallText>
           </HorizontalContainer>
@@ -118,7 +104,7 @@ const Footer = () => {
           <HeaderTitle>Email me!</HeaderTitle>
           <HorizontalContainer>
             <ColoredIcon color="red">
-              <FontAwesomeIcon icon={faEnvelope} />
+              <FontAwesomeIcon icon={faEnvelope as IconProp} />
             </ColoredIcon>
             <SmallText>diegochuman@gmail.com</SmallText>
           </HorizontalContainer>

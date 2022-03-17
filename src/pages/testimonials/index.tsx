@@ -1,10 +1,9 @@
 import React from 'react';
-import { NextPage } from 'next';
-import Layout from '@/components/Layout';
-import { Container, SubHeading, Title } from '@/styles/global.styles';
-import WordCloud from '@/components/WordCloud';
+import Layout from '../../components/Layout';
+import { Container, SubHeading, Title } from '../../styles/global.styles';
+import WordCloud from '../../components/WordCloud';
 
-const TestimonialsPage: NextPage = () => {
+const TestimonialsPage = () => {
   return (
     <Layout title="Testimonials">
       <Container>

@@ -1,18 +1,14 @@
 import React from 'react';
-import { NextPage } from 'next';
-import Layout from '@/components/Layout';
-import { Container, Title } from '@/styles/global.styles';
-import Experience from '@/components/Experience';
-import experiences from '../../assets/data/experiences.json';
 
-const ExperiencesPage: NextPage = () => {
+import Layout from '../..//components/Layout';
+import { Container } from '../../styles/global.styles';
+import ExperienceApp from '../../components/ExperienceApp';
+
+const ExperiencesPage = () => {
   return (
     <Layout title="Experiences">
       <Container>
-        <Title>These are my Experiences</Title>
-        {experiences.map((experience) => (
-          <Experience data={experience} />
-        ))}
+        <ExperienceApp />
       </Container>
     </Layout>
   );

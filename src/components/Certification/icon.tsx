@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
-import dynamic from 'next/dynamic';
-import { MotionCanvas } from 'framer-motion-3d';
+import { useGLTF } from '@react-three/drei';
+import { motion } from 'framer-motion-3d';
+import { degreesToRadians } from 'popmotion';
+import { GLTF } from 'three-stdlib';
 
+type GLTFResult = GLTF & {
+  nodes: {
+    Hexagon?: THREE.Mesh;
+    Plane?: THREE.Mesh;
+    Circle?: THREE.Mesh;
+  };
+  materials: {
+    Material: THREE.MeshStandardMaterial;
+  };
+};
 interface IIConProps {
   isSelected: boolean;
   isHover: boolean;
@@ -10,11 +22,11 @@ interface IIConProps {
   shape: 'Circle' | 'Plane' | 'Hexagon';
 }
 
-const ModelComponent = dynamic(() => import('./model'), {
-  ssr: false
-});
-
 export default function Icon({ isHover, isSelected, url, shape }: IIConProps) {
+  const group = useRef<THREE.Group>();
+  const { nodes, materials } = useGLTF(
+    `http://localhost:3000/glb/${url}.glb`
+  ) as unknown as GLTFResult;
   return (
     <Canvas
       style={{ position: 'absolute', width: '100%', height: '100%' }}
@@ -28,12 +40,48 @@ export default function Icon({ isHover, isSelected, url, shape }: IIConProps) {
           color="#fff"
         />
       ))}
-      <group dispose={null}>
-        <ModelComponent
-          isHover={isHover}
-          isSelected={isSelected}
-          url={url}
-          shape={shape}
+      <group ref={group} dispose={null}>
+        <motion.mesh
+          material={materials.Material}
+          geometry={nodes[shape]!.geometry}
+          rotation={[
+            Math.PI / 2,
+            shape === 'Circle'
+              ? degreesToRadians(298)
+              : shape === 'Hexagon'
+              ? degreesToRadians(120)
+              : degreesToRadians(180),
+            degreesToRadians(360),
+          ]}
+          scale={1}
+          animate={[
+            isSelected ? 'selected' : 'unselected',
+            isHover ? 'hover' : '',
+          ]}
+          variants={{
+            unselected: {
+              x: [0, 0],
+              y: [0, 0],
+              scale: 1,
+            },
+            selected: {
+              x: 4,
+              y: [0, -1.5, 2],
+              scale: 1,
+              transition: { duration: 0.7 },
+            },
+            hover: {
+              rotateZ: 0,
+              scale: 1.4,
+              transition: {
+                rotateZ: {
+                  duration: 1.5,
+                  ease: 'linear',
+                  repeat: Infinity,
+                },
+              },
+            },
+          }}
         />
       </group>
     </Canvas>
@@ -45,5 +93,5 @@ const lights = [
   [0, 2, 0, 0.3],
   [5, 0, 1, 0.2],
   [-5, 0, 1, 0.2],
-  [3, 0, 5, 0.6]
+  [3, 0, 5, 0.6],
 ];

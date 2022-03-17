@@ -1,15 +1,11 @@
-import React, { useState, Suspense, useRef } from 'react';
+import React, { useState, Suspense } from 'react';
 
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, TrackballControls } from '@react-three/drei';
+import { TrackballControls } from '@react-three/drei';
 
-import dynamic from 'next/dynamic';
+import Cloud from './model';
 import testimonials from '../../assets/data/testimonials.json';
 import Testimonial from '../Testimonial';
-
-const Cloud = dynamic(() => import('./model') as any, {
-  ssr: false
-});
 
 const WordCloud = () => {
   const [activeWord, setActiveWord] = useState<string>('');
@@ -27,7 +23,7 @@ const WordCloud = () => {
     'dedication',
     'commitment',
     'pragmatic',
-    'leadership'
+    'leadership',
   ];
   testimonials.map((testimonial) => {
     linkArray.forEach((word) => {
@@ -49,11 +45,11 @@ const WordCloud = () => {
           {/* <OrbitControls enableZoom={false} /> */}
           <fog attach="fog" args={['#202025', 0, 80]} />
           <group dispose={null}>
+            {/* @ts-ignore */}
             <Cloud
               dist={linkArray.length}
               radius={20}
               data={linkArray}
-              finalTestimonials={finalTestimonials}
               onTextClick={setActiveWord}
             />
             {/* <OrbitControls enableZoom={false} /> */}

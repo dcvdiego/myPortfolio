@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import tw, { TwStyle } from 'twin.macro';
 
@@ -124,7 +125,7 @@ export const HorizontalContainer = styled.div`
     items-center 
     `};
 `;
-export const HorizontalTag = styled.a`
+export const HorizontalTag = styled(Link)`
   ${tw`
   flex
   `}
@@ -145,7 +146,7 @@ hover:bg-green-400
   red: tw`
 bg-red-700
 hover:bg-red-800
-`
+`,
 };
 
 export const ColoredIcon = styled.span(({ color }) => [
@@ -160,7 +161,7 @@ export const ColoredIcon = styled.span(({ color }) => [
     text-base
     mr-2
     `,
-  color && iconStyles[color]
+  color && iconStyles[color],
 ]);
 export const SmallText = styled.h6`
   ${tw`

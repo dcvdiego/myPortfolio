@@ -1,16 +1,16 @@
 import React from 'react';
-import { styled } from 'twin.macro';
-import { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import Layout from '@/components/Layout';
-import { Container, Title, SubHeading } from '@/styles/global.styles';
-import Testimonial from '@/components/Testimonial';
+import styled from 'twin.macro';
+
+import Layout from '../../components/Layout';
+import { Container, Title, SubHeading } from '../../styles/global.styles';
+import Testimonial from '../../components/Testimonial';
 import projects from '../../assets/data/projects.json';
 import testimonials from '../../assets/data/testimonials.json';
+import { useParams } from 'react-router-dom';
+import Custom404 from '../404';
 
-const Project: NextPage = () => {
-  const router = useRouter();
-  const { slug } = router.query;
+const Project = () => {
+  let { slug } = useParams();
   // replace with GraphQL query on a NoSQL database?
   const project = projects.find(
     (projectData) => projectData.slug === slug || projectData.name === slug
@@ -18,19 +18,22 @@ const Project: NextPage = () => {
   const TestimonialsContainer = styled.div``;
 
   return (
-    <Layout title={project!.name as string}>
-      <Container>
-        <Title>{project!.name}</Title>
-        <TestimonialsContainer>
-          <SubHeading>Testimonials from this project</SubHeading>
-          {/* eslint-disable-next-line array-callback-return */}
-          {testimonials.map((testimonial) => {
-            return testimonial.project.includes(project!.name) ? (
-              <Testimonial data={testimonial} />
-            ) : null;
-          })}
-        </TestimonialsContainer>
-      </Container>
+    <Layout title={project?.name as string}>
+      {project ? (
+        <Container>
+          <Title>{project!.name}</Title>
+          <TestimonialsContainer>
+            <SubHeading>Testimonials from this project</SubHeading>
+            {testimonials.map((testimonial) => {
+              return testimonial.project.includes(project!.name) ? (
+                <Testimonial data={testimonial} />
+              ) : null;
+            })}
+          </TestimonialsContainer>
+        </Container>
+      ) : (
+        <Custom404 />
+      )}
     </Layout>
   );
 };

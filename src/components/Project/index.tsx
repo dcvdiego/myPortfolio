@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 
 const ProjectContainer = styled.div`
   ${tw`
@@ -46,8 +46,7 @@ const Project = ({ data }: IData) => {
   return (
     <ProjectContainer>
       <ProjectTitle>
-        <Link href={`/projects/${data?.slug ? data.slug : data.name}`}>
-          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+        <Link to={`/projects/${data?.slug ? data.slug : data.name}`}>
           <a>{data.name}</a>
         </Link>
       </ProjectTitle>
