@@ -22,4 +22,16 @@ const state: IState = proxy({
   avatarName: 'modelwanim',
 });
 
+interface IAppState {
+  verse: null | string;
+  gameStarted: boolean;
+  hasInteracted: boolean;
+}
+
+export const appState: IAppState = proxy({
+  verse: null,
+  gameStarted: false,
+  hasInteracted: false,
+});
+
 export default state;
