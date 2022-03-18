@@ -81,7 +81,7 @@ export default function usePlayerControls(AutoWalk: boolean) {
     if (isMobile) {
       document.addEventListener('touchmove', calculateDirection);
       document.addEventListener('touchend', () => {
-        setAction('Run');
+        setAction('Idle');
         setMousePosition({ x: 0, y: 0 });
       });
     } else {
@@ -92,7 +92,7 @@ export default function usePlayerControls(AutoWalk: boolean) {
     return () => {
       document.removeEventListener('touchmove', calculateDirection);
       document.removeEventListener('touchend', () => {
-        setAction('Idle');
+        setAction('Run');
         setMousePosition({ x: 0, y: 0 });
       });
     };
