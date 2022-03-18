@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import tw from 'twin.macro';
 import { slide as Menu } from 'react-burger-menu';
-import { useMediaQuery } from 'react-responsive';
-import { SCREENS } from '../responsive';
 import menuStyles from './menuStyles';
+import { isMobile } from 'react-device-detect';
 
 const ListContainer = styled.ul`
   ${tw`
@@ -40,7 +39,7 @@ const NavItem = styled.li<{ menu?: any }>`
 `;
 
 const NavItems = () => {
-  const isMobile = useMediaQuery({ maxWidth: SCREENS.sm });
+  // const isMobile = useMediaQuery({ maxWidth: SCREENS.sm });
 
   if (isMobile)
     return (

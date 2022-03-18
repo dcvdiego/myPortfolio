@@ -81,7 +81,7 @@ export default function usePlayerControls(AutoWalk: boolean) {
     if (isMobile) {
       document.addEventListener('touchmove', calculateDirection);
       document.addEventListener('touchend', () => {
-        setAction('Idle');
+        setAction('Run');
         setMousePosition({ x: 0, y: 0 });
       });
     } else {
