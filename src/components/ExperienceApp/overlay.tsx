@@ -82,15 +82,15 @@ const Overlay = () => {
   const [hasLoaded, setHasLoaded] = useState(false);
   const { active, progress } = useProgress();
   const snap = useSnapshot(appState);
-  const gameStarted = snap.gameStarted;
+  const appStarted = snap.appStarted;
 
   useEffect(() => {
-    if (gameStarted) {
+    if (appStarted) {
       setShown(false);
-    } else if (!gameStarted) {
+    } else if (!appStarted) {
       setShown(true);
     }
-  }, [gameStarted, active]);
+  }, [appStarted, active]);
 
   useEffect(() => {
     let t: number;
@@ -106,7 +106,7 @@ const Overlay = () => {
 
   const handleStart = (verse: string) => {
     appState.verse = verse;
-    appState.gameStarted = true;
+    appState.appStarted = true;
   };
 
   return shown ? (

@@ -95,19 +95,17 @@ export default function Certification({ data }: IData) {
 
 const iconFadeTransition: Transition = { duration: 0.2, delay: 0.5 };
 
-const buttonVariants: Variants = {
+const buttonVariants = {
   rest: {
-    // @ts-ignore
     '--button-cert-contrast': '100%',
     transition: { duration: 0.7 },
   },
   hover: {
-    // @ts-ignore
     '--button-cert-contrast': '100%',
     scale: 1.05,
   },
   press: { scale: 0.95 },
-};
+} as Variants;
 
 const labelTextVariantsUnselected: Variants = {
   unselected: { x: 20 },

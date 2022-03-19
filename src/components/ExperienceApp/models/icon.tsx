@@ -1,6 +1,7 @@
 import { useGLTF } from '@react-three/drei';
+import { Camera, useFrame } from '@react-three/fiber';
 import { degreesToRadians } from 'popmotion';
-import React from 'react';
+import React, { useRef } from 'react';
 import { GLTF } from 'three-stdlib';
 
 type GLTFResult = GLTF & {
@@ -18,8 +19,14 @@ function Icon() {
   const { nodes, materials } = useGLTF(
     ` /glb/AWSCP.glb`
   ) as unknown as GLTFResult;
+  const ref = useRef<Camera>();
+  useFrame(({ camera }) => {
+    // Make text face the camera
+    ref!.current!.quaternion.copy(camera!.quaternion);
+  });
+
   return (
-    <group dispose={null} position={[-18, 5, -72]} scale={2}>
+    <group ref={ref} dispose={null} position={[-16, 5, -72]} scale={1}>
       <mesh
         material={materials.Material}
         geometry={nodes['Hexagon']!.geometry}

@@ -19,19 +19,26 @@ const state: IState = proxy({
     Bottom: '#ffffff',
     Footwear: '#ffffff',
   },
-  avatarName: 'modelwanim',
+  avatarName:
+    'https://d1a370nemizbjq.cloudfront.net/6b2de664-48c2-4c36-8b84-85fd92689994.glb',
 });
 
 interface IAppState {
   verse: null | string;
-  gameStarted: boolean;
+  appStarted: boolean;
   hasInteracted: boolean;
 }
 
 export const appState: IAppState = proxy({
   verse: null,
-  gameStarted: false,
+  appStarted: false,
   hasInteracted: false,
+});
+
+export const tempState = proxy({
+  consent: false,
+  hasInteracted: false,
+  siteStarted: false,
 });
 
 export default state;

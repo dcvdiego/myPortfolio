@@ -1,10 +1,11 @@
 import { useFrame, useThree } from '@react-three/fiber';
-import { useEffect, useRef } from 'react';
+import { Ref, useEffect, useRef } from 'react';
 import { Vector3 } from 'three';
 import usePlayerControls from '../../hooks/useKeyboardControls';
-import Player from './models/player';
+import AvatarModel from '../AvatarModel/model';
 import { isMobile } from 'react-device-detect';
-
+import { ActionName, LocationName } from '../AvatarModel/types';
+import * as THREE from 'three';
 let rotateVector = new Vector3(0, 1, 0);
 let moveX;
 let moveZ;
@@ -14,17 +15,28 @@ let moveDistance;
 
 interface IPlayerMovementProps {
   AutoWalk: boolean;
+  location: LocationName;
 }
-export default function PlayerMovement({ AutoWalk }: IPlayerMovementProps) {
+export default function PlayerMovement({
+  AutoWalk,
+  location,
+}: IPlayerMovementProps) {
   const model = useRef<THREE.Mesh | undefined>();
 
   const { camera } = useThree();
 
-  const [
-    mousePosition,
-    action,
-    { forward, backward, left, right, shift },
-  ]: any = usePlayerControls(AutoWalk);
+  const [mousePosition, action, movement] = usePlayerControls(AutoWalk) as [
+    { x: number; y: number },
+    ActionName,
+    {
+      forward: boolean;
+      backward: boolean;
+      left: boolean;
+      right: boolean;
+      shift: boolean;
+    }
+  ];
+  const { forward, backward, left, right, shift } = movement;
   let relativeCameraOffset = new Vector3();
   let cameraOffset;
 
@@ -78,6 +90,13 @@ export default function PlayerMovement({ AutoWalk }: IPlayerMovementProps) {
   });
 
   return (
-    <Player position={[-11, 1, -62]} scale={2} ref={model} action={action} />
+    <AvatarModel
+      position={[-11, 1, -62]}
+      scale={2}
+      ref={model as unknown as Ref<THREE.Group>}
+      action={action}
+      location={location}
+      castShadow
+    />
   );
 }

@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Layout from '../components/Layout';
-import AvatarModel from '../components/AvatarModel';
+import AvatarCanvas from '../components/AvatarModel';
 import { Marginer } from '../components/Marginer';
 import { motion, Variants } from 'framer-motion';
 import styled from 'styled-components';
-import { Button, Container, Title } from '../styles/global.styles';
+import { Button, Container, SubHeading, Title } from '../styles/global.styles';
 import { HexColorPicker } from 'react-colorful';
 import { useSnapshot } from 'valtio';
 import quote from '../assets/data/quote.json';
 import state from '../utils/store';
+import { isValidHttpUrl } from '../utils/generalHelpers';
+import { ActionName } from '../components/AvatarModel/types';
 const Bubble = styled(motion.span)`
   display: inline-block;
   vertical-align: middle;
@@ -80,9 +82,16 @@ function Picker() {
 }
 
 function Home() {
-  type ActionName = 'Dance' | 'Idle' | 'Run' | 'Walk' | 'Wave';
   const [action, setAction] = useState<ActionName>('Idle');
   // const mouse = useRef({ x: 0, y: 0 });
+  const [input, setInput] = useState('');
+  useEffect(() => {
+    if (!isValidHttpUrl(input) || !input.endsWith('.glb')) {
+      setInput('invalid');
+      return;
+    }
+    state.avatarName = input;
+  }, [input]);
 
   return (
     <Layout title="Welcome">
@@ -103,7 +112,7 @@ function Home() {
             </Bubble>
           </Title>
 
-          <AvatarModel action={action} />
+          <AvatarCanvas action={action} location="AvatarConfigurator" />
           <Picker />
         </ModelContainer>
 
@@ -111,9 +120,13 @@ function Home() {
         <Button type="button" onClick={() => setAction('Dance')}>
           Dance
         </Button>
-        <Button type="button" onClick={() => (state.avatarName = 'TJModel')}>
-          Upload Avatar
-        </Button>
+        {input === 'invalid' && (
+          <SubHeading>Please upload a valid url</SubHeading>
+        )}
+        <input
+          style={{ color: 'black' }}
+          onInput={(e) => setInput((e.target as HTMLInputElement).value)}
+        />
       </Container>
     </Layout>
   );

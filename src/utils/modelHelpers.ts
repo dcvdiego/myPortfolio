@@ -44,7 +44,7 @@ interface IMouse {
   y: number;
 }
 
-// three bone can't use rotation? weird
+// for correction purposes, you must use any as we are adding xD and yD to Euler
 export function moveJoint(mouse: IMouse, joint: any, degreeLimit = 40) {
   let degrees = getMouseDegrees(mouse.x, mouse.y, degreeLimit);
   joint.rotation.xD = THREE.MathUtils.lerp(
@@ -57,6 +57,6 @@ export function moveJoint(mouse: IMouse, joint: any, degreeLimit = 40) {
     degrees.x,
     0.1
   );
-  joint.rotation.x = THREE.MathUtils.degToRad(joint.rotation.xD);
-  joint.rotation.y = THREE.MathUtils.degToRad(joint.rotation.yD);
+  joint.rotation.x = THREE.MathUtils.degToRad(degrees.x);
+  joint.rotation.y = THREE.MathUtils.degToRad(degrees.y);
 }

@@ -3,11 +3,12 @@ import React, { useRef, useState, useMemo, useEffect, FC } from 'react';
 import * as THREE from 'three';
 import { Camera, ThreeEvent, useFrame } from '@react-three/fiber';
 import { Text } from '@react-three/drei';
+import { MeshBasicMaterial } from 'three';
 
 interface IWordProps {
-  wordChildren: String | THREE.Vector3;
-  position: any;
-  onTextClick: React.Dispatch<React.SetStateAction<String | THREE.Vector3>>;
+  wordChildren: string;
+  position: THREE.Vector3;
+  onTextClick: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const Word: FC<IWordProps> = ({
@@ -17,14 +18,13 @@ const Word: FC<IWordProps> = ({
 }: IWordProps) => {
   const color = new THREE.Color();
   const fontProps = {
-    font: '/Inter-Bold.woff',
     fontSize: 2.5,
     letterSpacing: -0.05,
     lineHeight: 1,
     'material-toneMapped': false,
   };
-  // what type is Text? does drei have typing?
-  const ref = useRef<Camera & any>();
+
+  const ref = useRef<Camera & THREE.Mesh>();
   const [hovered, setHovered] = useState(false);
   const over = (e: ThreeEvent<PointerEvent>) => {
     return e.stopPropagation(), setHovered(true);
@@ -43,7 +43,7 @@ const Word: FC<IWordProps> = ({
     // Make text face the camera
     ref!.current!.quaternion.copy(camera!.quaternion);
     // Animate font color
-    ref!.current!.material.color.lerp(
+    (ref.current!.material as MeshBasicMaterial).color.lerp(
       color.set(hovered ? '#5e2dff' : 'gray'),
       0.1
     );
@@ -64,15 +64,16 @@ interface ICloudProps {
   dist: number;
   radius: number;
   data: Array<String>;
-  onTextClick:
-    | React.Dispatch<React.SetStateAction<String | THREE.Vector3>>
-    | any;
+  onTextClick: React.Dispatch<React.SetStateAction<string>>;
+
+  origin: string;
 }
 export default function Cloud({
   dist = 5,
   radius = 20,
   data,
   onTextClick,
+  origin,
 }: ICloudProps) {
   // Create a count x count random words with spherical distribution
   const words = useMemo(() => {
@@ -90,12 +91,28 @@ export default function Cloud({
       ]);
     return temp;
   }, [dist, radius, data]);
-  return words.map(([pos, word], index) => (
-    <Word
-      key={index}
-      position={pos}
-      wordChildren={word}
-      onTextClick={onTextClick}
-    />
-  ));
+
+  return origin === 'app' ? (
+    <group dispose={null} position={[-18, 5, -72]} scale={0.06}>
+      {words.map(([pos, word], index) => (
+        <Word
+          key={index}
+          position={pos as THREE.Vector3}
+          wordChildren={word as string}
+          onTextClick={onTextClick}
+        />
+      ))}
+    </group>
+  ) : (
+    <>
+      {words.map(([pos, word], index) => (
+        <Word
+          key={index}
+          position={pos as THREE.Vector3}
+          wordChildren={word as string}
+          onTextClick={onTextClick}
+        />
+      ))}
+    </>
+  );
 }

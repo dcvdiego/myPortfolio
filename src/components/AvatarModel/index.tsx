@@ -1,13 +1,14 @@
 import { Bounds, OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import React, { Suspense } from 'react';
-import MyModel from './model.jsx';
+import AvatarModel from './model.jsx';
+import { ActionName, LocationName } from './types.js';
 
-type ActionName = 'Dance' | 'Idle' | 'Run' | 'Walk' | 'Wave';
-interface IAvatarModelProps {
+interface IAvatarCanvasProps {
   action: ActionName;
+  location: LocationName;
 }
-const AvatarModel = ({ action }: IAvatarModelProps) => {
+const AvatarCanvas = ({ action, location }: IAvatarCanvasProps) => {
   return (
     <Canvas dpr={[1, 2]} camera={{ position: [0, 12.5, 10], fov: 90 }}>
       <ambientLight intensity={0.6} />
@@ -18,7 +19,7 @@ const AvatarModel = ({ action }: IAvatarModelProps) => {
       <OrbitControls makeDefault />
       <Suspense fallback={null}>
         <Bounds fit clip margin={0.9}>
-          <MyModel action={action} scale={[10.5, 10.5, 10.5]} />
+          <AvatarModel action={action} scale={10.5} location={location} />
         </Bounds>
       </Suspense>
     </Canvas>
@@ -31,4 +32,4 @@ const AvatarModel = ({ action }: IAvatarModelProps) => {
 //   [-5, 0, -21, 0.4],
 //   [3, 0, 25, 0.7],
 // ];
-export default AvatarModel;
+export default AvatarCanvas;

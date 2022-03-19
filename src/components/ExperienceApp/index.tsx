@@ -9,15 +9,31 @@ import PlayerMovement from './playerMovement';
 import Overlay from './overlay';
 import { appState } from '../../utils/store';
 import { useSnapshot } from 'valtio';
+import Cloud from '../WordCloud/model';
+import Corridor from './models/corridor';
+import { useEffect } from 'react';
+
 export default function App() {
   const [autoWalk, setAutoWalk] = useState(false);
-  // state when you are in a verse
-  // state for which verse you are in
+  const [activeWord, setActiveWord] = useState<string>('');
   const snap = useSnapshot(appState);
   const handleBack = () => {
     appState.verse = null;
-    appState.gameStarted = false;
+    appState.appStarted = false;
   };
+  useEffect(() => {
+    if (activeWord !== '') {
+      console.log(activeWord);
+    }
+  }, [activeWord]);
+  const linkArray = [
+    'hard work',
+    'enthusiasm',
+    'dedication',
+    'commitment',
+    'pragmatic',
+    'leadership',
+  ];
   return (
     <>
       <Canvas
@@ -26,8 +42,8 @@ export default function App() {
         camera={{ fov: 75, near: 0.1, far: 1000, position: [-11, 1, -62] }}
       >
         <PerspectiveCamera makeDefault />
-        <ambientLight intensity={0.5} />
-        <directionalLight intensity={0.5} position={[0, 1, 1]} />
+        {/* <ambientLight intensity={0.5} /> */}
+        {/* <directionalLight intensity={0.5} position={[0, 1, 1]} /> */}
 
         <Sky
           distance={4500}
@@ -37,11 +53,23 @@ export default function App() {
         />
         <Physics>
           <Suspense fallback={null}>
+            <Corridor scale={3} position={[-11, 3.5, -62]} />
             <Ground rotation={[-Math.PI / 2, 0, 0]} />
             {/* maybe also add UI? for back button and other stuff */}
-            {snap.verse && <PlayerMovement AutoWalk={autoWalk} />}
+            {snap.verse && (
+              <PlayerMovement AutoWalk={autoWalk} location="App" />
+            )}
             {/* not necessarily just Icon, can be a lot of other things too, maybe a jsx component with all the meshes */}
             {snap.verse === 'IBM' && <Icon />}
+            {snap.verse === 'PP' && (
+              <Cloud
+                dist={linkArray.length}
+                radius={20}
+                data={linkArray}
+                origin="app"
+                onTextClick={setActiveWord}
+              />
+            )}
           </Suspense>
         </Physics>
       </Canvas>

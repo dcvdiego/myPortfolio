@@ -45,12 +45,12 @@ const WordCloud = () => {
           {/* <OrbitControls enableZoom={false} /> */}
           <fog attach="fog" args={['#202025', 0, 80]} />
           <group dispose={null}>
-            {/* @ts-ignore */}
             <Cloud
               dist={linkArray.length}
               radius={20}
               data={linkArray}
               onTextClick={setActiveWord}
+              origin="testimonial"
             />
             {/* <OrbitControls enableZoom={false} /> */}
             <TrackballControls />
