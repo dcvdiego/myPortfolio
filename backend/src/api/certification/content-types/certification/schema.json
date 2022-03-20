@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "certifications",
+  "info": {
+    "singularName": "certification",
+    "pluralName": "certifications",
+    "displayName": "Certification"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Certification": {
+      "type": "component",
+      "repeatable": true,
+      "component": "data.certifications"
+    }
+  }
+}

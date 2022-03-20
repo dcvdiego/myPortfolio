@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "data_components",
+  "info": {
+    "singularName": "data-component",
+    "pluralName": "data-components",
+    "displayName": "Data Component",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Testimonial": {
+      "type": "component",
+      "repeatable": true,
+      "component": "data.testimonial"
+    },
+    "Project": {
+      "type": "component",
+      "repeatable": true,
+      "component": "data.project"
+    },
+    "ExperienceName": {
+      "type": "string"
+    }
+  }
+}
