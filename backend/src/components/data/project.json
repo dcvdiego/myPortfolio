@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_data_projects",
+  "info": {
+    "displayName": "Project",
+    "icon": "campground",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "infrastructure": {
+      "type": "json"
+    },
+    "clientSize": {
+      "type": "integer"
+    },
+    "projectSize": {
+      "type": "integer"
+    },
+    "startDate": {
+      "type": "date"
+    },
+    "endDate": {
+      "type": "date"
+    },
+    "link": {
+      "type": "string"
+    },
+    "repo": {
+      "type": "string"
+    },
+    "clientName": {
+      "type": "string"
+    }
+  }
+}

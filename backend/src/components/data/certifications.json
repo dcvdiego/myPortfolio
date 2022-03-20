@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_data_certifications",
+  "info": {
+    "displayName": "Certification",
+    "icon": "award",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "threedid": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "awardingBody": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "date": {
+      "type": "date"
+    },
+    "shape": {
+      "type": "enumeration",
+      "enum": [
+        "Hexagon",
+        "Circle",
+        "Plane"
+      ]
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Consulting",
+        "Technical"
+      ]
+    }
+  }
+}

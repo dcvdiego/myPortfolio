@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_testimonial_testimonials",
+  "info": {
+    "displayName": "Testimonial",
+    "icon": "check",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "From": {
+      "type": "string"
+    },
+    "Title": {
+      "type": "text"
+    },
+    "Project": {
+      "type": "string"
+    },
+    "Content": {
+      "type": "text"
+    }
+  }
+}
