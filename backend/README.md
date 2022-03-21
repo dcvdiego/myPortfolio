@@ -36,7 +36,9 @@ yarn build
 
 Strapi gives you many possible deployment options for your project. Find the one that suits you on the [deployment section of the documentation](https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/deployment.html).
 
+Dev notes:
 Always do git push heroku HEAD:main to deploy to heroku!
+Architecture idea, change so that Certification Collection Type contains the Technical/Consulting bit
 
 ## 📚 Learn more
 

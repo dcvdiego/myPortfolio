@@ -4,11 +4,18 @@ import * as THREE from 'three';
 import { Camera, ThreeEvent, useFrame } from '@react-three/fiber';
 import { Text } from '@react-three/drei';
 import { MeshBasicMaterial } from 'three';
+import {
+  LazyQueryResult,
+  OperationVariables,
+  QueryLazyOptions,
+} from '@apollo/client';
 
 interface IWordProps {
   wordChildren: string;
   position: THREE.Vector3;
-  onTextClick: React.Dispatch<React.SetStateAction<string>>;
+  onTextClick?: (
+    options?: QueryLazyOptions<OperationVariables> | undefined
+  ) => Promise<LazyQueryResult<any, OperationVariables>>;
   origin: string;
 }
 
@@ -50,12 +57,22 @@ const Word: FC<IWordProps> = ({
       0.1
     );
   });
-  return (
+  return origin === 'testimonial' && onTextClick ? (
     <Text
       ref={ref}
       onPointerOver={over}
       onPointerOut={out}
-      onClick={() => onTextClick(wordChildren)}
+      onClick={() => onTextClick({ variables: { word: wordChildren } })}
+      {...props}
+      {...fontProps}
+      children={wordChildren}
+    />
+  ) : (
+    <Text
+      ref={ref}
+      onPointerOver={over}
+      onPointerOut={out}
+      // onClick={do something cool?}
       {...props}
       {...fontProps}
       children={wordChildren}
@@ -66,7 +83,9 @@ interface ICloudProps {
   dist: number;
   radius: number;
   data: Array<String>;
-  onTextClick: React.Dispatch<React.SetStateAction<string>>;
+  getTestimonial?: (
+    options?: QueryLazyOptions<OperationVariables> | undefined
+  ) => Promise<LazyQueryResult<any, OperationVariables>>;
 
   origin: string;
 }
@@ -74,7 +93,7 @@ export default function Cloud({
   dist = 5,
   radius = 20,
   data,
-  onTextClick,
+  getTestimonial,
   origin,
 }: ICloudProps) {
   // Create a count x count random words with spherical distribution
@@ -101,7 +120,7 @@ export default function Cloud({
           key={index}
           position={pos as THREE.Vector3}
           wordChildren={word as string}
-          onTextClick={onTextClick}
+          // onTextClick={do something cool!}
           origin={origin}
         />
       ))}
@@ -113,7 +132,7 @@ export default function Cloud({
           key={index}
           position={pos as THREE.Vector3}
           wordChildren={word as string}
-          onTextClick={onTextClick}
+          onTextClick={getTestimonial}
           origin={origin}
         />
       ))}

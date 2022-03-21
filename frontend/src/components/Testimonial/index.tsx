@@ -28,28 +28,28 @@ const TestimonialContent = styled.p`
 `}
 `;
 interface ITestimonialObject {
-  from: string;
-  project: string;
-  title: string;
-  content: string;
+  From: string;
+  Project: string;
+  Title: string;
+  Content: string;
 }
 interface IData {
   data: ITestimonialObject;
-  word?: string;
+  word?: string | null;
 }
 const Testimonial = ({ data, word }: IData) => {
   return (
     <TestimonialContainer>
-      <TestimonialTitle>{data.from}</TestimonialTitle>
-      <TestimonialSubtitle>{data.title}</TestimonialSubtitle>
+      <TestimonialTitle>{data.From}</TestimonialTitle>
+      <TestimonialSubtitle>{data.Title}</TestimonialSubtitle>
       {word ? (
         <TestimonialContent
           dangerouslySetInnerHTML={{
-            __html: data.content.replaceAll(word, `<b>${word}</b>`),
+            __html: data.Content.replaceAll(word, `<b>${word}</b>`),
           }}
         />
       ) : (
-        <TestimonialContent>{data.content}</TestimonialContent>
+        <TestimonialContent>{data.Content}</TestimonialContent>
       )}
     </TestimonialContainer>
   );

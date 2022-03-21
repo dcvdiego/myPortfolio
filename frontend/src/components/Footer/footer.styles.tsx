@@ -130,6 +130,12 @@ export const HorizontalTag = styled(Link)`
   flex
   `}
 `;
+
+export const HorizontalExternalTag = styled.a`
+  ${tw`
+  flex
+  `}
+`;
 export const iconStyles: Record<string, TwStyle> = {
   blue: tw`
   bg-blue-700

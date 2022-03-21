@@ -16,7 +16,7 @@ import {
   FooterContainer,
   HeaderTitle,
   HorizontalContainer,
-  HorizontalTag,
+  HorizontalExternalTag,
   InnerContainer,
   LinksList,
   ListItem,
@@ -63,8 +63,8 @@ const Footer = () => {
             <HeaderTitle>More Links</HeaderTitle>
             <ListItem>
               <HorizontalContainer>
-                <HorizontalTag
-                  to="https://www.linkedin.com/in/diegochuman/"
+                <HorizontalExternalTag
+                  href="https://www.linkedin.com/in/diegochuman/"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -72,13 +72,13 @@ const Footer = () => {
                     <FontAwesomeIcon icon={faUserGroup as IconProp} />
                   </ColoredIcon>
                   <SmallText>LinkedIn</SmallText>
-                </HorizontalTag>
+                </HorizontalExternalTag>
               </HorizontalContainer>
             </ListItem>
             <ListItem>
               <HorizontalContainer>
-                <HorizontalTag
-                  to="https://github.com/dcvdiego"
+                <HorizontalExternalTag
+                  href="https://github.com/dcvdiego"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -86,7 +86,7 @@ const Footer = () => {
                     <FontAwesomeIcon icon={faCodeBranch as IconProp} />
                   </ColoredIcon>
                   <SmallText>GitHub</SmallText>
-                </HorizontalTag>
+                </HorizontalExternalTag>
               </HorizontalContainer>
             </ListItem>
           </LinksList>
