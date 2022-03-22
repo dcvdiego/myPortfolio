@@ -1,10 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { useGLTF } from '@react-three/drei';
+import { OrbitControls, OrbitControlsProps, useGLTF } from '@react-three/drei';
 import { motion } from 'framer-motion-3d';
 import { degreesToRadians } from 'popmotion';
-import { GLTF } from 'three-stdlib';
-
+import { GLTF, OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 type GLTFResult = GLTF & {
   nodes: {
     Hexagon?: THREE.Mesh;
@@ -27,19 +26,24 @@ export default function Icon({ isHover, isSelected, url, shape }: IIConProps) {
   const { nodes, materials } = useGLTF(
     ` /glb/${url}.glb`
   ) as unknown as GLTFResult;
+  const ocRef = useRef<OrbitControlsImpl>(null);
+  useEffect(() => {
+    if (!isHover && ocRef) ocRef.current?.reset();
+  }, [isHover]);
   return (
     <Canvas
       style={{ position: 'absolute', width: '100%', height: '100%' }}
       dpr={[1, 2]}
       camera={{ position: [0, 0, 5.5], fov: 45 }}
     >
-      {lights.map(([x, y, z, intensity]) => (
+      {/* {lights.map(([x, y, z, intensity]) => (
         <pointLight
           intensity={intensity}
           position={[x / 8, y / 8, z / 4]}
           color="#fff"
         />
-      ))}
+      ))} */}
+      <ambientLight />
       <group ref={group} dispose={null}>
         <motion.mesh
           material={materials.Material}
@@ -71,19 +75,20 @@ export default function Icon({ isHover, isSelected, url, shape }: IIConProps) {
               transition: { duration: 0.7 },
             },
             hover: {
-              rotateZ: 0,
+              // rotateZ: 0,
               scale: 1.4,
-              transition: {
-                rotateZ: {
-                  duration: 1.5,
-                  ease: 'linear',
-                  repeat: Infinity,
-                },
-              },
+              // transition: {
+              //   rotateZ: {
+              //     duration: 1.5,
+              //     ease: 'linear',
+              //     repeat: Infinity,
+              //   },
+              // },
             },
           }}
         />
       </group>
+      {isHover && <OrbitControls ref={ocRef} autoRotate autoRotateSpeed={10} />}
     </Canvas>
   );
 }
