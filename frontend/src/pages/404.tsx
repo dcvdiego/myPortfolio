@@ -7,7 +7,7 @@ const Custom404 = () => {
       <Title>404 - Page Not Found</Title>
       <SubHeading>
         Seems like you were wondering off! Please only navigate this site
-        through the navbar and its contents :D
+        through the navbar/footer and its contents :D
       </SubHeading>
     </Container>
   );

@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "creds",
+  "info": {
+    "singularName": "cred",
+    "pluralName": "creds",
+    "displayName": "Cred",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Cred": {
+      "type": "component",
+      "repeatable": true,
+      "component": "data.cred"
+    },
+    "Origin": {
+      "type": "enumeration",
+      "enum": [
+        "Internet",
+        "Colleague",
+        "Friend"
+      ]
+    }
+  }
+}

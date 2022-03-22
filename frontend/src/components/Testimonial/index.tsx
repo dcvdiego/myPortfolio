@@ -1,38 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
-import tw from 'twin.macro';
+import {
+  TestimonialContainer,
+  TestimonialContent,
+  TestimonialSubtitle,
+  TestimonialTitle,
+} from './testimonial.styles';
+import { ITestimonialObject } from './testimonial.types';
 
-const TestimonialContainer = styled.div`
-  ${tw`
-w-full
-max-w-screen-2xl
-flex
-flex-col
-items-center
-justify-between
-`}
-`;
-const TestimonialTitle = styled.h2`
-  ${tw`
-    text-lg
-`};
-`;
-const TestimonialSubtitle = styled.h3`
-  ${tw`
-    text-sm
-`}
-`;
-const TestimonialContent = styled.p`
-  ${tw`
-    text-xs
-`}
-`;
-interface ITestimonialObject {
-  From: string;
-  Project: string;
-  Title: string;
-  Content: string;
-}
 interface IData {
   data: ITestimonialObject;
   word?: string | null;

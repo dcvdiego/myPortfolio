@@ -9,7 +9,7 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { moveJoint } from '../../utils/modelHelpers';
 import { GLTF } from 'three-stdlib';
 import state from '../../utils/store';
-import { ActionName, LocationName } from './types';
+import { ActionName, LocationName } from './avatarModel.types';
 
 interface GLTFAction extends THREE.AnimationClip {
   name: ActionName;

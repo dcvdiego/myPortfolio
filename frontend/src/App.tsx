@@ -9,6 +9,8 @@ import TestimonialsPage from './pages/testimonials/index';
 import Project from './pages/projects/[slug]';
 import Experience from './pages/experiences/[slug]';
 import Custom404 from './pages/404';
+import AboutPage from './pages/about';
+import CredsPage from './pages/creds';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="experiences" element={<ExperiencesPage />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="creds" element={<CredsPage />} />
 
           <Route path="certifications" element={<CertificationsPage />} />
           <Route path="experiences/:slug" element={<Experience />} />

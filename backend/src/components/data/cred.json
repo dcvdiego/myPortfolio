@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_data_creds",
+  "info": {
+    "displayName": "Cred",
+    "icon": "code"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "contribution": {
+      "type": "text"
+    },
+    "link": {
+      "type": "string"
+    }
+  }
+}

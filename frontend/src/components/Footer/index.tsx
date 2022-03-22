@@ -45,16 +45,16 @@ const Footer = () => {
               <Link to="/">Home</Link>
             </ListItem>
             <ListItem>
-              <Link to="/certifications">Certifications</Link>
+              <Link to="/about">About Me</Link>
             </ListItem>
             <ListItem>
               <Link to="/projects">Projects</Link>
             </ListItem>
             <ListItem>
-              <Link to="/experiences">Experiences</Link>
+              <Link to="/experiences">ExperienceApp</Link>
             </ListItem>
             <ListItem>
-              <Link to="/testimonials">Testimonials</Link>
+              <Link to="/creds">Creds</Link>
             </ListItem>
           </LinksList>
         </SectionContainer>

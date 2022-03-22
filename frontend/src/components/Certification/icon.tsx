@@ -4,6 +4,7 @@ import { OrbitControls, useGLTF } from '@react-three/drei';
 import { motion } from 'framer-motion-3d';
 import { degreesToRadians } from 'popmotion';
 import { GLTF, OrbitControls as OrbitControlsImpl } from 'three-stdlib';
+import { shapeName } from './certification.types';
 type GLTFResult = GLTF & {
   nodes: {
     Hexagon?: THREE.Mesh;
@@ -18,7 +19,7 @@ interface IIConProps {
   isSelected: boolean;
   isHover: boolean;
   url: string;
-  shape: 'Circle' | 'Plane' | 'Hexagon';
+  shape: shapeName;
 }
 
 export default function Icon({ isHover, isSelected, url, shape }: IIConProps) {

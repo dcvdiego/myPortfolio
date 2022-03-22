@@ -11,7 +11,7 @@ import { useSnapshot } from 'valtio';
 import quote from '../assets/data/quote.json';
 import state from '../utils/store';
 import { isValidHttpUrl } from '../utils/generalHelpers';
-import { ActionName } from '../components/AvatarModel/types';
+import { ActionName } from '../components/AvatarModel/avatarModel.types';
 const Bubble = styled(motion.span)`
   display: inline-block;
   vertical-align: middle;

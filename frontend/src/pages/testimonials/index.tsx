@@ -5,8 +5,9 @@ import WordCloud from '../../components/WordCloud';
 import { useLazyQuery } from '@apollo/client';
 import TESTIMONIAL_WORD_QUERY from '../../graphql/Testimonials/testimonialWord';
 import Testimonial from '../../components/Testimonial';
+import { ITestimonialObject } from '../../components/Testimonial/testimonial.types';
 
-const TestimonialsPage: React.FC = () => {
+const TestimonialsPage = () => {
   const [getTestimonial, { loading, error, data, variables }] = useLazyQuery(
     TESTIMONIAL_WORD_QUERY
   );
@@ -24,7 +25,7 @@ const TestimonialsPage: React.FC = () => {
           <p>Error, please contact me!</p>
         ) : (
           data?.dataComponents?.data[0].attributes.Testimonial.map(
-            (testimonial: any) => {
+            (testimonial: ITestimonialObject) => {
               return <Testimonial data={testimonial} word={variables!.word} />;
             }
           )
