@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, OrbitControlsProps, useGLTF } from '@react-three/drei';
+import { OrbitControls, useGLTF } from '@react-three/drei';
 import { motion } from 'framer-motion-3d';
 import { degreesToRadians } from 'popmotion';
 import { GLTF, OrbitControls as OrbitControlsImpl } from 'three-stdlib';
@@ -93,10 +93,10 @@ export default function Icon({ isHover, isSelected, url, shape }: IIConProps) {
   );
 }
 
-const lights = [
-  [0, 1, 5, 0.1],
-  [0, 2, 0, 0.3],
-  [5, 0, 1, 0.2],
-  [-5, 0, 1, 0.2],
-  [3, 0, 5, 0.6],
-];
+// const lights = [
+//   [0, 1, 5, 0.1],
+//   [0, 2, 0, 0.3],
+//   [5, 0, 1, 0.2],
+//   [-5, 0, 1, 0.2],
+//   [3, 0, 5, 0.6],
+// ];
