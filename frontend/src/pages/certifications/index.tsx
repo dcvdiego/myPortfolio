@@ -8,7 +8,7 @@ import CERTIFICATIONS_QUERY from '../../graphql/Certification/certifications';
 import Certification from '../../components/Certification';
 import { useQuery } from '@apollo/client';
 import CERTIFICATIONS_TYPE_QUERY from '../../graphql/Certification/certificationType';
-import { TypeName } from './types';
+import { TypeName } from '../../components/Certification/certification.types';
 
 const CategoryContainer = styled.div`
   ${tw`
@@ -25,11 +25,6 @@ const CertificationsContainer = styled.div`
     w-9/12
   `}
 `;
-// interface ICertificationsObject {
-//   [key: string]: Array<any>;
-// }
-// const typedCertifications: ICertificationsObject = certifications;
-
 interface ICTypeProps {
   type: TypeName;
 }

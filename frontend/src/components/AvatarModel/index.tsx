@@ -2,7 +2,7 @@ import { Bounds, OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import React, { Suspense } from 'react';
 import AvatarModel from './model.jsx';
-import { ActionName, LocationName } from './types.js';
+import { ActionName, LocationName } from './avatarModel.types.js';
 
 interface IAvatarCanvasProps {
   action: ActionName;

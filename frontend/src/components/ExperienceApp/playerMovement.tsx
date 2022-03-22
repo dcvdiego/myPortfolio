@@ -4,7 +4,7 @@ import { Vector3 } from 'three';
 import usePlayerControls from '../../hooks/useKeyboardControls';
 import AvatarModel from '../AvatarModel/model';
 import { isMobile } from 'react-device-detect';
-import { ActionName, LocationName } from '../AvatarModel/types';
+import { ActionName, LocationName } from '../AvatarModel/avatarModel.types';
 import * as THREE from 'three';
 let rotateVector = new Vector3(0, 1, 0);
 let moveX;

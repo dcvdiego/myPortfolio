@@ -8,16 +8,21 @@
   "options": {},
   "attributes": {
     "threedid": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": true
     },
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "awardingBody": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "date": {
       "type": "date"
@@ -28,14 +33,16 @@
         "Hexagon",
         "Circle",
         "Plane"
-      ]
+      ],
+      "required": true
     },
     "type": {
       "type": "enumeration",
       "enum": [
         "Consulting",
         "Technical"
-      ]
+      ],
+      "required": true
     }
   }
 }

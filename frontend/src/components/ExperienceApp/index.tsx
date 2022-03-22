@@ -11,21 +11,14 @@ import { appState } from '../../utils/store';
 import { useSnapshot } from 'valtio';
 import Cloud from '../WordCloud/model';
 import Corridor from './models/corridor';
-import { useEffect } from 'react';
 
 export default function App() {
   const [autoWalk, setAutoWalk] = useState(false);
-  const [activeWord, setActiveWord] = useState<string>('');
   const snap = useSnapshot(appState);
   const handleBack = () => {
     appState.verse = null;
     appState.appStarted = false;
   };
-  useEffect(() => {
-    if (activeWord !== '') {
-      console.log(activeWord);
-    }
-  }, [activeWord]);
   const linkArray = [
     'hard work',
     'enthusiasm',
@@ -67,7 +60,6 @@ export default function App() {
                 radius={20}
                 data={linkArray}
                 origin="app"
-                onTextClick={setActiveWord}
               />
             )}
           </Suspense>

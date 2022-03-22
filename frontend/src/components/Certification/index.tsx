@@ -13,17 +13,8 @@ import StyledCertification, {
   Label,
   StyledIcon,
 } from './certification.styles';
-import { TypeName } from '../../pages/certifications/types';
+import { ICertificationObject } from './certification.types';
 
-export interface ICertificationObject {
-  threedid: string;
-  name: string;
-  awardingBody: string;
-  description: string;
-  date: string;
-  type: TypeName;
-  shape: 'Circle' | 'Plane' | 'Hexagon';
-}
 interface IData {
   data: ICertificationObject;
 }
