@@ -1,10 +1,13 @@
+import { Container } from '../styles/global.styles';
 import React from 'react';
 import Layout from '../components/Layout';
 
 function CredsPage() {
   return (
     <Layout title="creds">
-      <div>Creds</div>
+      <Container>
+        <div>Creds</div>
+      </Container>
     </Layout>
   );
 }

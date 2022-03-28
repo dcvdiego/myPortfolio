@@ -1,8 +1,7 @@
 import * as THREE from 'three';
 import React, { useRef } from 'react';
-import { useGLTF, useHelper } from '@react-three/drei';
+import { useGLTF } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
-import { PointLightHelper } from 'three';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -21,8 +20,6 @@ export default function Corridor({ ...props }: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF(
     '/glb/corridor.glb'
   ) as unknown as GLTFResult;
-  const light = useRef();
-  useHelper(light, PointLightHelper, 0.5, 'hotpink');
   return (
     <group ref={group} {...props} dispose={null}>
       <group
@@ -34,60 +31,51 @@ export default function Corridor({ ...props }: JSX.IntrinsicElements['group']) {
           <group position={[0, 1570, 0]}>
             <pointLight
               castShadow
-              ref={light}
               intensity={0.5}
               decay={2}
-              color="#cdacb5"
+              // color="#cdacb5"
               rotation={[-Math.PI / 2, 0, 0]}
             />
           </group>
           <group position={[0, 942, 0]}>
             <pointLight
-              castShadow
-              ref={light}
               intensity={0.5}
               decay={2}
-              color="#ccb9d4"
+              // color="#ccb9d4"
               rotation={[-Math.PI / 2, 0, 0]}
             />
           </group>
           <group position={[0, 314, 0]}>
             <pointLight
               castShadow
-              ref={light}
               intensity={0.5}
               decay={2}
-              color="#a5b2c1"
+              // color="#a5b2c1"
               rotation={[-Math.PI / 2, 0, 0]}
             />
           </group>
           <group position={[0, -314, 0]}>
             <pointLight
-              castShadow
-              ref={light}
               intensity={0.5}
               decay={2}
-              color="#93b995"
+              // color="#93b995"
               rotation={[-Math.PI / 2, 0, 0]}
             />
           </group>
           <group position={[0, -942, 0]}>
             <pointLight
               castShadow
-              ref={light}
               intensity={0.5}
               decay={2}
-              color="#92afbb"
+              // color="#92afbb"
               rotation={[-Math.PI / 2, 0, 0]}
             />
           </group>
           <group position={[0, -1570, 0]}>
             <pointLight
-              castShadow
-              ref={light}
               intensity={0.5}
               decay={2}
-              color="#9a97c3"
+              // color="#9a97c3"
               rotation={[-Math.PI / 2, 0, 0]}
             />
           </group>

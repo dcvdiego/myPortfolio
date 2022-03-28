@@ -7,7 +7,7 @@ export function getMouseDegrees(x: number, y: number, degreeLimit: number) {
     ydiff,
     yPercentage;
   // window is wrong, should be width and height of canvas
-  let w = { x: 665, y: 288 };
+  let w = { x: 768, y: 381 };
 
   if (x <= w.x / 2) {
     xdiff = w.x / 2 - x;

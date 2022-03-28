@@ -37,7 +37,5 @@ yarn export # npm run export
 
 ### CURRENT BUGS
 
-- rotateX repeat does not work in `src/components/Certification/model.tsx` have tried using MotionCanvas (giving another error) and taking out rotateX from transition object
-- WordCloud does not load immediately (WebGL context loss), only after navigating from Certifications to Testimonials (hacky fix imminent :) ) This started happening from upgrading to React 18, half fixed it by doing dynamic imports but typescript does not like it (even though it is the same as the model.tsx for certifications)
-- fix all any so that we do not generalize
+- In ExperienceApp, there is a bug in that the character/camera can go through the tunnel, need to add boxes to limit movement
 - Figure out how to do something when first loop ends so it goes back to being Idle!

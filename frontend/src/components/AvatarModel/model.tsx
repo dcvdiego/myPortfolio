@@ -93,7 +93,7 @@ const AvatarModel = forwardRef<
       };
       // every joint to move you must specify the bone in the GLTF type
 
-      moveJoint(mouse, nodes.Neck);
+      moveJoint(mouse, nodes.Neck, 20);
     });
   } else if (location === 'App') {
     const { actions } = useAnimations(
@@ -145,7 +145,6 @@ const AvatarModel = forwardRef<
         ) : null}
         {nodes?.Wolf3D_Facewear ? (
           <skinnedMesh
-            castShadow
             geometry={nodes.Wolf3D_Facewear.geometry}
             material={materials.Wolf3D_Facewear}
             skeleton={nodes.Wolf3D_Facewear.skeleton}
@@ -153,7 +152,6 @@ const AvatarModel = forwardRef<
         ) : null}
         {nodes?.Wolf3D_Glasses ? (
           <skinnedMesh
-            castShadow
             geometry={nodes.Wolf3D_Glasses.geometry}
             material={materials.Wolf3D_Glasses}
             skeleton={nodes.Wolf3D_Glasses.skeleton}
@@ -201,7 +199,6 @@ const AvatarModel = forwardRef<
           skeleton={nodes.Wolf3D_Outfit_Top.skeleton}
         />
         <skinnedMesh
-          castShadow
           name="EyeLeft"
           geometry={nodes.EyeLeft.geometry}
           material={nodes.EyeLeft.material}
@@ -210,7 +207,6 @@ const AvatarModel = forwardRef<
           morphTargetInfluences={nodes.EyeLeft.morphTargetInfluences}
         />
         <skinnedMesh
-          castShadow
           name="EyeRight"
           geometry={nodes.EyeRight.geometry}
           material={nodes.EyeRight.material}
@@ -228,7 +224,6 @@ const AvatarModel = forwardRef<
           morphTargetInfluences={nodes.Wolf3D_Head.morphTargetInfluences}
         />
         <skinnedMesh
-          castShadow
           name="Wolf3D_Teeth"
           geometry={nodes.Wolf3D_Teeth.geometry}
           material={materials.Wolf3D_Teeth}
