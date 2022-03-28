@@ -21,7 +21,7 @@ function Icon() {
   ) as unknown as GLTFResult;
   const ref = useRef<Camera>();
   useFrame(({ camera }) => {
-    // Make text face the camera
+    // face the camera
     ref!.current!.quaternion.copy(camera!.quaternion);
   });
 

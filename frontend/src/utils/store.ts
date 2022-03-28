@@ -41,4 +41,11 @@ export const tempState = proxy({
   siteStarted: false,
 });
 
+//I might cache this / cookie it since it is not dependant on every refresh
+export const browserState = proxy({
+  canRun: true,
+  readerMode: false,
+  bannerConsent: false,
+});
+
 export default state;

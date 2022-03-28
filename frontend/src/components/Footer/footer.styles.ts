@@ -39,7 +39,7 @@ export const BottomContainer = styled.div`
     `};
 `;
 
-export const CopyrightText = styled.span`
+export const OSText = styled.span`
   font-size: 12px;
   ${tw`
     text-gray-300

@@ -30,7 +30,7 @@ export default function App() {
   return (
     <>
       <Canvas
-        // mode="concurrent"
+        mode="concurrent"
         shadows
         camera={{ fov: 75, near: 0.1, far: 1000, position: [-11, 1, -62] }}
       >

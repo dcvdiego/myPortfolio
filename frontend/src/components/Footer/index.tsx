@@ -12,7 +12,7 @@ import {
   AboutText,
   BottomContainer,
   ColoredIcon,
-  CopyrightText,
+  OSText,
   FooterContainer,
   HeaderTitle,
   HorizontalContainer,
@@ -111,10 +111,10 @@ const Footer = () => {
         </SectionContainer>
       </InnerContainer>
       <BottomContainer>
-        <CopyrightText>
-          Copyright &copy; {new Date().getFullYear()} Diego Chuman. All rights
-          reserved.
-        </CopyrightText>
+        <OSText>
+          Open Source project made by Diego Chuman and everyone in creds. Check
+          out the GitHub repo!
+        </OSText>
       </BottomContainer>
     </FooterContainer>
   );

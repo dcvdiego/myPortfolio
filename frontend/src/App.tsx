@@ -11,6 +11,9 @@ import Experience from './pages/experiences/[slug]';
 import Custom404 from './pages/404';
 import AboutPage from './pages/about';
 import CredsPage from './pages/creds';
+import { detectWebGLContext } from './utils/generalHelpers';
+
+detectWebGLContext();
 
 function App() {
   return (

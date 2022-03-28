@@ -10,7 +10,7 @@ interface IAvatarCanvasProps {
 }
 const AvatarCanvas = ({ ...props }: IAvatarCanvasProps) => {
   return (
-    <Canvas dpr={[1, 2]} camera={{ position: [0, 12.5, 10], fov: 90 }}>
+    <Canvas dpr={[1, 2]} camera={{ position: [0, 5, 10], fov: 90 }}>
       <ambientLight intensity={0.6} />
       <directionalLight intensity={0.5} />
       {/* {lights.map(([x, y, z, intensity]) => (
@@ -18,8 +18,8 @@ const AvatarCanvas = ({ ...props }: IAvatarCanvasProps) => {
       ))} */}
       <OrbitControls makeDefault />
       <Suspense fallback={null}>
-        <Bounds fit clip margin={0.9}>
-          <AvatarModel {...props} scale={10.5} />
+        <Bounds fit clip margin={0.5}>
+          <AvatarModel {...props} scale={5} />
         </Bounds>
       </Suspense>
     </Canvas>
