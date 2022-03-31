@@ -89,7 +89,9 @@ export default function Icon({ isHover, isSelected, url, shape }: IIConProps) {
           }}
         />
       </group>
-      {isHover && <OrbitControls ref={ocRef} autoRotate autoRotateSpeed={10} />}
+      {isHover && (
+        <OrbitControls ref={ocRef} autoRotate autoRotateSpeed={7.5} />
+      )}
     </Canvas>
   );
 }
