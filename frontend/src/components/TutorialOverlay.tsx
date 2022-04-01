@@ -9,27 +9,28 @@ interface ITutorialOverlayProps {
 
 const TutorialOverlay: React.FC<ITutorialOverlayProps> = ({ setTutorial }) => {
   const AppContainer = styled.div`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     background: #141622cc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 300ms ease;
     transition: background-color 1000ms ease;
     z-index: 1000;
-    color: white;
+    ${tw`
+    absolute 
+    top-0 
+    left-0 
+    w-full 
+    h-full 
+    flex 
+    items-center 
+    justify-center 
+    text-white
+
+    `}
   `;
   const AppMenu = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
     min-height: 50%;
     max-width: 75%;
+    ${tw`
+    flex items-center justify-center flex-col
+    `}
   `;
 
   const buttonStyles: Record<string, TwStyle> = {
@@ -59,13 +60,15 @@ const TutorialOverlay: React.FC<ITutorialOverlayProps> = ({ setTutorial }) => {
   ]);
 
   const AppSubContainer = styled.div`
-    margin: 2rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    height: 100%;
+    ${tw`
+    m-8 
+    text-center 
+    flex 
+    flex-col 
+    items-center 
+    justify-around 
+    h-full
+    `}
   `;
   return (
     <AppContainer

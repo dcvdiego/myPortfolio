@@ -6,7 +6,8 @@ import * as THREE from 'three';
 import React, { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
-import { motion } from 'framer-motion-3d';
+import { useFrame } from '@react-three/fiber';
+
 type GLTFResult = GLTF & {
   nodes: {
     dress_: THREE.Mesh;
@@ -25,45 +26,57 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF(
     '/glb/dress.glb'
   ) as unknown as GLTFResult;
+  useFrame((state) => {
+    const t = state.clock.getElapsedTime();
+    group.current!.rotation.x = THREE.MathUtils.lerp(
+      group.current!.rotation.x,
+      Math.cos(t / 2) / 10 + 0.25,
+      0.1
+    );
+    group.current!.rotation.y = THREE.MathUtils.lerp(
+      group.current!.rotation.y,
+      t,
+      0.1
+    );
+    group.current!.rotation.z = THREE.MathUtils.lerp(
+      group.current!.rotation.z,
+      Math.sin(t / 4) / 20,
+      0.1
+    );
+    group.current!.position.y = THREE.MathUtils.lerp(
+      group.current!.position.y,
+      (-5 + Math.sin(t)) / 5,
+      0.1
+    );
+  });
+
   return (
     <group ref={group} {...props} dispose={null}>
-      <motion.mesh
+      <mesh
         geometry={nodes.dress_.geometry}
         material={materials['Material.003']}
         rotation={[Math.PI / 2, 0, 0]}
         scale={0.000974}
-        animate={{
-          rotateZ: 360,
-        }}
-        transition={{ duration: 20, type: 'tween', repeat: Infinity }}
       >
         <meshPhongMaterial color="white" emissive="black" reflectivity={0.5} />
-      </motion.mesh>
-      <motion.mesh
+      </mesh>
+      <mesh
         geometry={nodes.dressDetails.geometry}
         material={materials['Material.002']}
         rotation={[Math.PI / 2, 0, 0]}
         scale={0.000974}
-        animate={{
-          rotateZ: 360,
-        }}
-        transition={{ duration: 20, type: 'tween', repeat: Infinity }}
       >
         <meshPhongMaterial color="white" emissive="pink" reflectivity={0.5} />
-      </motion.mesh>
-      <motion.mesh
+      </mesh>
+      <mesh
         geometry={nodes.mannequin.geometry}
         material={materials['Material.013']}
         position={[0.096501, 0.079601, -0.003348]}
         rotation={[0, 0.036283, 0]}
         scale={0.020023}
-        animate={{
-          rotateZ: 360,
-        }}
-        transition={{ duration: 20, type: 'tween', repeat: Infinity }}
       >
         <meshBasicMaterial color="pink" />
-      </motion.mesh>
+      </mesh>
     </group>
   );
 }

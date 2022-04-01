@@ -7,36 +7,42 @@ import { useSnapshot } from 'valtio';
 import { appState } from '../../utils/store';
 
 const AppContainer = styled.div`
-  position: absolute;
-  /* top: 0; */
-  left: 0;
-  width: 100%;
-  height: 100%;
+  ${tw`
+absolute 
+left-0 
+w-full 
+h-full 
+flex 
+items-center 
+justify-center
+`}
   background: #141622cc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 300ms ease;
   transition: background-color 1000ms ease;
   z-index: 1000;
 `;
 const AppMenu = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  height: 100%;
+  ${tw`
+  flex 
+  items-center 
+  justify-center 
+  flex-col 
+  h-full
+  `}
 `;
 const AppMenuOptions = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 1rem;
+  ${tw`
+  flex 
+  flex-col 
+  mt-4
+  `}
 `;
 const AppMenuControls = styled.span`
-  margin-top: 2rem;
-  margin-bottom: 0.5rem;
-  font-size: 2rem;
-  color: #c1b1df;
+  ${tw`
+  mt-8 
+  mb-2 
+  text-3xl 
+  text-purple-300
+  `}
   text-shadow: 0 0 20px #5a117e;
 `;
 
@@ -67,13 +73,15 @@ const AppMenuButton = styled.button(({ color }) => [
 ]);
 
 const AppSubContainer = styled.div`
-  margin: 2rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  height: 100%;
+  ${tw`
+m-8 
+text-center 
+flex 
+flex-col 
+items-center 
+justify-around 
+h-full
+`}
 `;
 
 const Overlay = () => {

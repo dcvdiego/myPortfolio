@@ -16,10 +16,12 @@ let moveDistance;
 interface IPlayerMovementProps {
   AutoWalk: boolean;
   location: LocationName;
+  screen?: boolean;
 }
 export default function PlayerMovement({
   AutoWalk,
   location,
+  screen,
 }: IPlayerMovementProps) {
   const model = useRef<THREE.Mesh | undefined>();
 
@@ -41,12 +43,14 @@ export default function PlayerMovement({
   let cameraOffset;
 
   useEffect(() => {
+    if (screen) return;
     const { x, y, z } = model.current!.position;
     camera.lookAt(x, y + 3.5, z);
     camera.position.set(x + 0, y + 4, z + 8);
   }, []);
 
   useFrame((_state, delta) => {
+    if (screen) return;
     moveDistance = delta * 12;
     moveZ = delta * 40 * mousePosition.y;
     moveX = delta * 20 * mousePosition.x;

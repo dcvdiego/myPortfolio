@@ -2,7 +2,7 @@ import { Button } from '../../styles/global.styles';
 import { Physics } from '@react-three/cannon';
 import { Sky, PerspectiveCamera, Loader } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import Ground from './ground';
 import Icon from './models/icon';
 import PlayerMovement from './playerMovement';
@@ -18,9 +18,11 @@ import CertificationsPage from '../../pages/certifications';
 import CERTIFICATIONS_QUERY from '../../graphql/Certification/certifications';
 import { ApolloProvider } from '@apollo/client';
 import client from '../../utils/apolloClient';
+import { UIContainer } from './eApp.styles';
 
 export default function App() {
   const [autoWalk, setAutoWalk] = useState(false);
+  const [screenToggle, setScreenToggle] = useState(false);
   const snap = useSnapshot(appState);
   const handleBack = () => {
     appState.verse = null;
@@ -34,6 +36,7 @@ export default function App() {
     'pragmatic',
     'leadership',
   ];
+
   return (
     <>
       <Canvas
@@ -42,8 +45,6 @@ export default function App() {
       >
         <ApolloProvider client={client}>
           <PerspectiveCamera makeDefault />
-          {/* <ambientLight intensity={0.5} /> */}
-          {/* <directionalLight intensity={0.5} position={[0, 1, 1]} /> */}
 
           <Sky
             distance={4500}
@@ -56,11 +57,13 @@ export default function App() {
               {/* every -18 units you can add a new corridor */}
               <BaseSection scale={4} position={[-11, 4.5, -62]} />
               <Ground rotation={[-Math.PI / 2, 0, 0]} />
-              {/* maybe also add UI? for back button and other stuff */}
               {snap.verse && (
-                <PlayerMovement AutoWalk={autoWalk} location="App" />
+                <PlayerMovement
+                  AutoWalk={autoWalk}
+                  location="App"
+                  screen={screenToggle ? true : false}
+                />
               )}
-              {/* not necessarily just Icon, can be a lot of other things too, maybe a jsx component with all the meshes */}
               {snap.verse === 'IBM' && (
                 <>
                   <BaseSection scale={4} position={[-11, 4.5, -80]} />
@@ -72,10 +75,13 @@ export default function App() {
                   <Dress scale={4} position={[-11, -1, -90]} />
                   <Icon />
                   <Screen
-                    scale={0.75}
-                    position={[-11, 0, -110]}
+                    scale={0.25}
+                    position={[-1, 0, -90]}
+                    rotation={[0, -Math.PI / 2, 0]}
                     query={CERTIFICATIONS_QUERY}
                     Component={<CertificationsPage screen />}
+                    screen={screenToggle}
+                    setScreen={setScreenToggle}
                   />
                   <BaseSection scale={4} position={[-11, 4.5, -98]} door />
                 </>
@@ -94,12 +100,31 @@ export default function App() {
       </Canvas>
       <Overlay />
       <Loader />
-      {autoWalk ? (
-        <Button onClick={() => setAutoWalk(false)}>Stop</Button>
-      ) : (
-        <Button onClick={() => setAutoWalk(true)}>AutoWalk</Button>
-      )}
-      {snap.verse && <Button onClick={handleBack}>Back to menu</Button>}
+      <UIContainer>
+        {autoWalk ? (
+          <Button
+            style={{ backgroundColor: 'rgba(120, 113, 108, 0.313)' }}
+            onClick={() => setAutoWalk(false)}
+          >
+            Stop
+          </Button>
+        ) : (
+          <Button
+            style={{ backgroundColor: 'rgba(120, 113, 108, 0.313)' }}
+            onClick={() => setAutoWalk(true)}
+          >
+            AutoWalk
+          </Button>
+        )}
+        {snap.verse && (
+          <Button
+            style={{ backgroundColor: 'rgba(120, 113, 108, 0.313)' }}
+            onClick={handleBack}
+          >
+            Back to menu
+          </Button>
+        )}
+      </UIContainer>
     </>
   );
 }
