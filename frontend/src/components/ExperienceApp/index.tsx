@@ -2,7 +2,7 @@ import { Button } from '../../styles/global.styles';
 import { Physics } from '@react-three/cannon';
 import { Sky, PerspectiveCamera, Loader } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import Ground from './ground';
 import Icon from './models/icon';
 import PlayerMovement from './playerMovement';
@@ -76,7 +76,7 @@ export default function App() {
                   <Icon />
                   <Screen
                     scale={0.25}
-                    position={[-1, 0, -90]}
+                    position={[-2, 0, -90]}
                     rotation={[0, -Math.PI / 2, 0]}
                     query={CERTIFICATIONS_QUERY}
                     Component={<CertificationsPage screen />}
@@ -101,7 +101,7 @@ export default function App() {
       <Overlay />
       <Loader />
       <UIContainer>
-        {autoWalk ? (
+        {autoWalk && !screenToggle ? (
           <Button
             style={{ backgroundColor: 'rgba(120, 113, 108, 0.313)' }}
             onClick={() => setAutoWalk(false)}
@@ -109,19 +109,29 @@ export default function App() {
             Stop
           </Button>
         ) : (
-          <Button
-            style={{ backgroundColor: 'rgba(120, 113, 108, 0.313)' }}
-            onClick={() => setAutoWalk(true)}
-          >
-            AutoWalk
-          </Button>
+          !screenToggle && (
+            <Button
+              style={{ backgroundColor: 'rgba(120, 113, 108, 0.313)' }}
+              onClick={() => setAutoWalk(true)}
+            >
+              AutoWalk
+            </Button>
+          )
         )}
-        {snap.verse && (
+        {snap.verse && !screenToggle && (
           <Button
             style={{ backgroundColor: 'rgba(120, 113, 108, 0.313)' }}
             onClick={handleBack}
           >
             Back to menu
+          </Button>
+        )}
+        {screenToggle && (
+          <Button
+            style={{ backgroundColor: 'rgba(120, 113, 108, 0.313)' }}
+            onClick={() => setScreenToggle(false)}
+          >
+            Go Back
           </Button>
         )}
       </UIContainer>

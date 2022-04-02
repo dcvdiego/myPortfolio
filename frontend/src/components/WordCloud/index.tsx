@@ -28,23 +28,21 @@ const WordCloud: React.FC<IWordCloud> = ({ getTestimonial }) => {
   ];
 
   return (
-    <>
-      <Suspense fallback={null}>
-        <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 35], fov: 90 }}>
-          <fog attach="fog" args={['#202025', 0, 80]} />
-          <group dispose={null}>
-            <Cloud
-              dist={linkArray.length}
-              radius={20}
-              data={linkArray}
-              getTestimonial={getTestimonial}
-              origin="testimonial"
-            />
-            <TrackballControls noZoom />
-          </group>
-        </Canvas>
-      </Suspense>
-    </>
+    <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 35], fov: 90 }}>
+      <fog attach="fog" args={['#202025', 0, 80]} />
+      <group dispose={null}>
+        <Suspense fallback={null}>
+          <Cloud
+            dist={linkArray.length}
+            radius={20}
+            data={linkArray}
+            getTestimonial={getTestimonial}
+            origin="testimonial"
+          />
+        </Suspense>
+        <TrackballControls noZoom />
+      </group>
+    </Canvas>
   );
 };
 export default WordCloud;

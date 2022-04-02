@@ -1,12 +1,12 @@
 import * as THREE from 'three';
 import React, { useEffect, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Html, useGLTF } from '@react-three/drei';
+import { Html, useGLTF, useTexture } from '@react-three/drei';
 import tw, { styled } from 'twin.macro';
 import { GLTF } from 'three-stdlib';
 import Custom404 from '../../../pages/404';
 import { TypedDocumentNode, useQuery } from '@apollo/client';
-
+import logo from '../../../assets/london-fashion-week-logo.png';
 const Wrapper = styled.div`
   ${tw`
   p-2
@@ -45,7 +45,8 @@ export default function Screen({
   ...props
 }: JSX.IntrinsicElements['group'] & IScreenProps) {
   const group = useRef<THREE.Group>();
-  // Load 6
+  const texture = useTexture(logo);
+  texture.flipY = false;
   const { nodes, materials } = useGLTF(
     '/glb/screen.glb'
   ) as unknown as GLTFResult;
@@ -59,7 +60,7 @@ export default function Screen({
   useEffect(() => {
     if (!screen) return;
     const { x, y, z } = group.current!.position;
-    camera.position.set(x - 0.5, y + 4.5, z + 0);
+    camera.position.set(x - 0.2, y + 4.9, z + 0);
     camera.lookAt(x, y, z);
   }, [screen]);
   // Make it float
@@ -82,7 +83,7 @@ export default function Screen({
     );
     group.current!.position.y = THREE.MathUtils.lerp(
       group.current!.position.y,
-      (6 + Math.sin(t)) / 5,
+      (4 + Math.sin(t)) / 5,
       0.1
     );
   });
@@ -94,7 +95,7 @@ export default function Screen({
       dispose={null}
       onClick={() => setScreen(true)}
     >
-      <group rotation-x={-0.425} position={[0, 5, 0.41]}>
+      <group rotation-x={-1} position={[0, 5, 0.41]}>
         <group position={[0, 2.96, -0.13]} rotation={[Math.PI / 2, 0, 0]}>
           <mesh
             material={materials.aluminium}
@@ -105,17 +106,21 @@ export default function Screen({
             geometry={nodes['Cube008_1'].geometry}
           />
           <mesh geometry={nodes['Cube008_2'].geometry}>
-            {/* <StyledHtml
-              rotation-x={-Math.PI / 2}
-              position={[0, 0.05, -0.09]}
-              transform
-              occlude
-            >
-              <Wrapper> */}
-            {/* jsx element cannot have link from router, cannot have Layout, graphql queries have to be done here and passed through */}
-            {/* {error || loading ? <Custom404 /> : <ComponentClone />} */}
-            {/* </Wrapper>
-            </StyledHtml> */}
+            {screen ? (
+              <StyledHtml
+                rotation-x={-Math.PI / 2}
+                position={[0, 0.05, -0.09]}
+                transform
+                occlude
+              >
+                <Wrapper>
+                  {/* jsx element cannot have link from router, cannot have Layout, graphql queries have to be done here and passed through */}
+                  {error || loading ? <Custom404 /> : <ComponentClone />}
+                </Wrapper>
+              </StyledHtml>
+            ) : (
+              <meshBasicMaterial attach="material" map={texture} />
+            )}
           </mesh>
         </group>
       </group>
