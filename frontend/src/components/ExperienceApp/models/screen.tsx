@@ -6,7 +6,8 @@ import tw, { styled } from 'twin.macro';
 import { GLTF } from 'three-stdlib';
 import Custom404 from '../../../pages/404';
 import { TypedDocumentNode, useQuery } from '@apollo/client';
-import logo from '../../../assets/london-fashion-week-logo.png';
+import { Texture } from 'three';
+
 const Wrapper = styled.div`
   ${tw`
   p-2
@@ -37,20 +38,20 @@ type GLTFResult = GLTF & {
 interface IScreenProps {
   query: TypedDocumentNode;
   Component: JSX.Element;
-  screen: boolean;
-  setScreen: any;
+  screen: number;
+  cover: any;
 }
 
 export default function Screen({
   ...props
 }: JSX.IntrinsicElements['group'] & IScreenProps) {
   const group = useRef<THREE.Group>();
-  const texture = useTexture(logo);
-  texture.flipY = false;
   const { nodes, materials } = useGLTF(
     '/glb/screen.glb'
   ) as unknown as GLTFResult;
-  const { query, Component, screen, setScreen } = props;
+  const { query, Component, screen, cover } = props;
+  const texture = useTexture(cover);
+  (texture as Texture).flipY = false;
 
   const ComponentClone = () => {
     return React.cloneElement(Component, { componentData: data }, null);
@@ -58,7 +59,7 @@ export default function Screen({
   const { camera } = useThree();
   const { loading, error, data } = useQuery(query);
   useEffect(() => {
-    if (!screen) return;
+    if (screen === 0) return;
     const { x, y, z } = group.current!.position;
     camera.position.set(x - 0.2, y + 4.9, z + 0);
     camera.lookAt(x, y, z);
@@ -89,12 +90,7 @@ export default function Screen({
   });
 
   return (
-    <group
-      ref={group}
-      {...props}
-      dispose={null}
-      onClick={() => setScreen(true)}
-    >
+    <group ref={group} {...props} dispose={null}>
       <group rotation-x={-1} position={[0, 5, 0.41]}>
         <group position={[0, 2.96, -0.13]} rotation={[Math.PI / 2, 0, 0]}>
           <mesh
@@ -106,7 +102,7 @@ export default function Screen({
             geometry={nodes['Cube008_1'].geometry}
           />
           <mesh geometry={nodes['Cube008_2'].geometry}>
-            {screen ? (
+            {screen > 0 ? (
               <StyledHtml
                 rotation-x={-Math.PI / 2}
                 position={[0, 0.05, -0.09]}
@@ -119,7 +115,7 @@ export default function Screen({
                 </Wrapper>
               </StyledHtml>
             ) : (
-              <meshBasicMaterial attach="material" map={texture} />
+              <meshBasicMaterial attach="material" map={texture as Texture} />
             )}
           </mesh>
         </group>

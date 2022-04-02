@@ -1,8 +1,8 @@
+import React, { Suspense, useState } from 'react';
 import { Button } from '../../styles/global.styles';
 import { Physics } from '@react-three/cannon';
 import { Sky, PerspectiveCamera, Loader } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import React, { Suspense, useState } from 'react';
 import Ground from './ground';
 import Icon from './models/icon';
 import PlayerMovement from './playerMovement';
@@ -19,10 +19,14 @@ import CERTIFICATIONS_QUERY from '../../graphql/Certification/certifications';
 import { ApolloProvider } from '@apollo/client';
 import client from '../../utils/apolloClient';
 import { UIContainer } from './eApp.styles';
+import ABOUT_QUERY from '../../graphql/About/about';
+import AboutPage from '../../pages/about';
+import LFWLogo from '../../assets/london-fashion-week-logo.png';
+import Placeholder from '../../assets/placeholder.png';
 
 export default function App() {
   const [autoWalk, setAutoWalk] = useState(false);
-  const [screenToggle, setScreenToggle] = useState(false);
+  const [screenNumber, setScreenNumber] = useState(0);
   const snap = useSnapshot(appState);
   const handleBack = () => {
     appState.verse = null;
@@ -61,7 +65,7 @@ export default function App() {
                 <PlayerMovement
                   AutoWalk={autoWalk}
                   location="App"
-                  screen={screenToggle ? true : false}
+                  screen={screenNumber ? true : false}
                 />
               )}
               {snap.verse === 'IBM' && (
@@ -76,12 +80,23 @@ export default function App() {
                   <Icon />
                   <Screen
                     scale={0.25}
-                    position={[-2, 0, -90]}
+                    position={[-2, 0, -70]}
                     rotation={[0, -Math.PI / 2, 0]}
+                    cover={Placeholder}
                     query={CERTIFICATIONS_QUERY}
                     Component={<CertificationsPage screen />}
-                    screen={screenToggle}
-                    setScreen={setScreenToggle}
+                    screen={screenNumber === 1 ? screenNumber : 0}
+                    onClick={() => setScreenNumber(1)}
+                  />
+                  <Screen
+                    scale={0.25}
+                    position={[-2, 0, -90]}
+                    rotation={[0, -Math.PI / 2, 0]}
+                    cover={LFWLogo}
+                    query={ABOUT_QUERY}
+                    Component={<AboutPage screen />}
+                    screen={screenNumber === 2 ? screenNumber : 0}
+                    onClick={() => setScreenNumber(2)}
                   />
                   <BaseSection scale={4} position={[-11, 4.5, -98]} door />
                 </>
@@ -101,7 +116,7 @@ export default function App() {
       <Overlay />
       <Loader />
       <UIContainer>
-        {autoWalk && !screenToggle ? (
+        {autoWalk && screenNumber === 0 ? (
           <Button
             style={{ backgroundColor: 'rgba(120, 113, 108, 0.313)' }}
             onClick={() => setAutoWalk(false)}
@@ -109,16 +124,16 @@ export default function App() {
             Stop
           </Button>
         ) : (
-          !screenToggle && (
+          screenNumber === 0 && (
             <Button
               style={{ backgroundColor: 'rgba(120, 113, 108, 0.313)' }}
               onClick={() => setAutoWalk(true)}
             >
-              AutoWalk
+              Auto-Walk
             </Button>
           )
         )}
-        {snap.verse && !screenToggle && (
+        {snap.verse && screenNumber === 0 && (
           <Button
             style={{ backgroundColor: 'rgba(120, 113, 108, 0.313)' }}
             onClick={handleBack}
@@ -126,10 +141,10 @@ export default function App() {
             Back to menu
           </Button>
         )}
-        {screenToggle && (
+        {screenNumber > 0 && (
           <Button
             style={{ backgroundColor: 'rgba(120, 113, 108, 0.313)' }}
-            onClick={() => setScreenToggle(false)}
+            onClick={() => setScreenNumber(0)}
           >
             Go Back
           </Button>

@@ -17,7 +17,7 @@ const Project = ({ ...props }) => {
   });
 
   return (
-    <Layout title={project?.name as string} screen={screen ? true : false}>
+    <Layout title={project?.name as string} screen={screen}>
       {project ? (
         <Container>
           <Title>{project!.name}</Title>
