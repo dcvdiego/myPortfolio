@@ -4,7 +4,6 @@ import Layout from '../../components/Layout';
 import { Container, SubHeading, Title } from '../../styles/global.styles';
 import tw, { styled } from 'twin.macro';
 
-import CERTIFICATIONS_QUERY from '../../graphql/Certification/certifications';
 import Certification from '../../components/Certification';
 import { useQuery } from '@apollo/client';
 import CERTIFICATIONS_TYPE_QUERY from '../../graphql/Certification/certificationType';
@@ -27,6 +26,12 @@ const CertificationsContainer = styled.div`
 `;
 interface ICTypeProps {
   type: TypeName;
+  componentData?: any;
+  screen?: boolean;
+}
+
+interface ICTypeScreenProps {
+  componentData: any;
 }
 
 const CertificationsType: React.FC<ICTypeProps> = (type) => {
@@ -47,20 +52,41 @@ const CertificationsType: React.FC<ICTypeProps> = (type) => {
   );
 };
 
-const CertificationsPage = () => {
-  const { loading, error, data } = useQuery(CERTIFICATIONS_QUERY);
-  if (loading) return <p>Loading</p>;
-  if (error) return <p>ERROR</p>;
-  if (!data) return <p>Not found</p>;
+const CertificationsTypeScreen: React.FC<ICTypeScreenProps> = ({
+  ...props
+}) => {
+  const { componentData } = props;
   return (
-    <Layout title="Certifications">
+    <CategoryContainer>
+      {componentData.certifications.data[0].attributes.Certification.map(
+        (certification: any) => {
+          return <Certification data={certification} />;
+        }
+      )}
+    </CategoryContainer>
+  );
+};
+
+const CertificationsPage = ({ ...props }) => {
+  const { screen, componentData } = props;
+  return (
+    <Layout title="Certifications" screen={screen ? true : false}>
       <Container>
         <Title>These are my Certifications and Skills</Title>
         <CertificationsContainer>
-          <SubHeading>Technical</SubHeading>
-          <CertificationsType type="Technical" />
-          <SubHeading>Consulting</SubHeading>
-          <CertificationsType type="Consulting" />
+          {screen ? (
+            <>
+              <SubHeading>For more information...</SubHeading>
+              <CertificationsTypeScreen componentData={componentData} />
+            </>
+          ) : (
+            <>
+              <SubHeading>Technical</SubHeading>
+              <CertificationsType type="Technical" />
+              <SubHeading>Consulting</SubHeading>
+              <CertificationsType type="Consulting" />
+            </>
+          )}
         </CertificationsContainer>
       </Container>
     </Layout>

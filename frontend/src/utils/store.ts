@@ -27,12 +27,14 @@ interface IAppState {
   verse: null | string;
   appStarted: boolean;
   hasInteracted: boolean;
+  corridorEnd: number;
 }
 
 export const appState: IAppState = proxy({
   verse: null,
   appStarted: false,
   hasInteracted: false,
+  corridorEnd: -62 - 18,
 });
 
 export const tempState = proxy({

@@ -13,16 +13,16 @@ justify-between
 `;
 export const TestimonialTitle = styled.h2`
   ${tw`
-    text-lg
+    text-xl
 `};
 `;
 export const TestimonialSubtitle = styled.h3`
   ${tw`
-    text-sm
+    text-lg
 `}
 `;
 export const TestimonialContent = styled.p`
   ${tw`
-    text-xs
+    text-sm
 `}
 `;
