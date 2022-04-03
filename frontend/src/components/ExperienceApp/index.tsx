@@ -1,9 +1,7 @@
 import React, { Suspense, useState } from 'react';
 import { Button } from '../../styles/global.styles';
-import { Physics } from '@react-three/cannon';
-import { Sky, PerspectiveCamera, Loader } from '@react-three/drei';
+import { PerspectiveCamera, Loader, Stars } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import Ground from './ground';
 import Icon from './models/icon';
 import PlayerMovement from './playerMovement';
 import Overlay from './overlay';
@@ -50,67 +48,65 @@ export default function App() {
         <ApolloProvider client={client}>
           <PerspectiveCamera makeDefault />
 
-          <Sky
-            distance={4500}
-            sunPosition={[0, 1, 1]}
-            inclination={0}
-            azimuth={0.5}
+          <Stars
+            radius={100}
+            depth={50}
+            count={5000}
+            factor={4}
+            saturation={0}
           />
-          <Physics>
-            <Suspense fallback={null}>
-              {/* every -18 units you can add a new corridor */}
-              <BaseSection scale={4} position={[-11, 4.5, -62]} />
-              <Ground rotation={[-Math.PI / 2, 0, 0]} />
-              {snap.verse && (
-                <PlayerMovement
-                  AutoWalk={autoWalk}
-                  location="App"
-                  screen={screenNumber ? true : false}
+          <Suspense fallback={null}>
+            {/* every -18 units you can add a new corridor */}
+            {snap.verse && (
+              <PlayerMovement
+                AutoWalk={autoWalk}
+                location="App"
+                screen={screenNumber ? true : false}
+              />
+            )}
+            <BaseSection scale={4} position={[-11, 4.5, -62]} />
+            {snap.verse === 'IBM' && (
+              <>
+                <BaseSection scale={4} position={[-11, 4.5, -80]} />
+                <Icon />
+                <Screen
+                  scale={0.25}
+                  position={[-2, 0, -70]}
+                  rotation={[0, -Math.PI / 2, 0]}
+                  cover={Placeholder}
+                  query={CERTIFICATIONS_QUERY}
+                  Component={<CertificationsPage screen />}
+                  screen={screenNumber === 1 ? screenNumber : 0}
+                  onClick={() => setScreenNumber(1)}
                 />
-              )}
-              {snap.verse === 'IBM' && (
-                <>
-                  <BaseSection scale={4} position={[-11, 4.5, -80]} />
-                  <BalletMannequin
-                    scale={4}
-                    position={[-19, 1, -94]}
-                    rotation={[0, 20, 0]}
-                  />
-                  <Dress scale={4} position={[-11, -1, -90]} />
-                  <Icon />
-                  <Screen
-                    scale={0.25}
-                    position={[-2, 0, -70]}
-                    rotation={[0, -Math.PI / 2, 0]}
-                    cover={Placeholder}
-                    query={CERTIFICATIONS_QUERY}
-                    Component={<CertificationsPage screen />}
-                    screen={screenNumber === 1 ? screenNumber : 0}
-                    onClick={() => setScreenNumber(1)}
-                  />
-                  <Screen
-                    scale={0.25}
-                    position={[-2, 0, -90]}
-                    rotation={[0, -Math.PI / 2, 0]}
-                    cover={LFWLogo}
-                    query={ABOUT_QUERY}
-                    Component={<AboutPage screen />}
-                    screen={screenNumber === 2 ? screenNumber : 0}
-                    onClick={() => setScreenNumber(2)}
-                  />
-                  <BaseSection scale={4} position={[-11, 4.5, -98]} door />
-                </>
-              )}
-              {snap.verse === 'PP' && (
-                <Cloud
-                  dist={linkArray.length}
-                  radius={20}
-                  data={linkArray}
-                  origin="app"
+                <BalletMannequin
+                  scale={4}
+                  position={[-19, 1, -94]}
+                  rotation={[0, 20, 0]}
                 />
-              )}
-            </Suspense>
-          </Physics>
+                <Dress scale={4} position={[-11, -1, -90]} />
+                <Screen
+                  scale={0.25}
+                  position={[-2, 0, -90]}
+                  rotation={[0, -Math.PI / 2, 0]}
+                  cover={LFWLogo}
+                  query={ABOUT_QUERY}
+                  Component={<AboutPage screen />}
+                  screen={screenNumber === 2 ? screenNumber : 0}
+                  onClick={() => setScreenNumber(2)}
+                />
+                <BaseSection scale={4} position={[-11, 4.5, -98]} door />
+              </>
+            )}
+            {snap.verse === 'PP' && (
+              <Cloud
+                dist={linkArray.length}
+                radius={20}
+                data={linkArray}
+                origin="app"
+              />
+            )}
+          </Suspense>
         </ApolloProvider>
       </Canvas>
       <Overlay />

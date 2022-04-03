@@ -36,6 +36,7 @@ export default function usePlayerControls(AutoWalk: boolean) {
 
   function calculateDirection(event: TouchEvent) {
     event.preventDefault();
+    // touch does not work because we use window instead of actual canvas size
     let x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
     let y = event.touches[0].clientY / window.innerHeight - 1;
 

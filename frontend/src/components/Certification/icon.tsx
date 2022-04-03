@@ -76,22 +76,12 @@ export default function Icon({ isHover, isSelected, url, shape }: IIConProps) {
               transition: { duration: 0.7 },
             },
             hover: {
-              // rotateZ: 0,
               scale: 1.4,
-              // transition: {
-              //   rotateZ: {
-              //     duration: 1.5,
-              //     ease: 'linear',
-              //     repeat: Infinity,
-              //   },
-              // },
             },
           }}
         />
       </group>
-      {isHover && (
-        <OrbitControls ref={ocRef} autoRotate autoRotateSpeed={7.5} />
-      )}
+      <OrbitControls ref={ocRef} autoRotate={isHover} autoRotateSpeed={7.5} />
     </Canvas>
   );
 }

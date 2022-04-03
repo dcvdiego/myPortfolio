@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import React, { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
+import { appState } from '../../../../utils/store';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -28,6 +29,8 @@ export default function BaseSection({
   const { nodes, materials } = useGLTF(
     '/glb/corridorSection.glb'
   ) as unknown as GLTFResult;
+  if (door && props?.position)
+    appState.corridorEnd = (props.position as number[])[2] - 18;
   return (
     <group ref={group} {...props} dispose={null}>
       <mesh
@@ -54,7 +57,7 @@ export default function BaseSection({
           castShadow
           intensity={0.5}
           decay={2}
-          // color="#cdacb5"
+          color="#d3eceb"
           rotation={[-Math.PI / 2, 0, 0]}
         />
       </group>

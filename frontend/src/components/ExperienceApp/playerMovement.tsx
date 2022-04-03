@@ -6,6 +6,8 @@ import AvatarModel from '../AvatarModel/model';
 import { isMobile } from 'react-device-detect';
 import { ActionName, LocationName } from '../AvatarModel/avatarModel.types';
 import * as THREE from 'three';
+import { appState } from '../../utils/store';
+
 let rotateVector = new Vector3(0, 1, 0);
 let moveX;
 let moveZ;
@@ -48,6 +50,18 @@ export default function PlayerMovement({
     camera.lookAt(x, y + 3.5, z);
     camera.position.set(x + 0, y + 4, z + 8);
   }, []);
+  //border control :D
+  useEffect(() => {
+    if (model.current && model.current.position.z > -62.5)
+      model.current.position.z = -62.5;
+    if (model.current && model.current.position.z < appState.corridorEnd)
+      model.current.position.z = appState.corridorEnd;
+    if (model.current && model.current.position.x > -2)
+      model.current.position.x = -2;
+
+    if (model.current && model.current.position.x < -20)
+      model.current.position.x = -20;
+  }, [model.current?.position.x, model.current?.position.z]);
 
   useFrame((_state, delta) => {
     if (screen) return;
