@@ -66,8 +66,8 @@ export default function PlayerMovement({
   useFrame((_state, delta) => {
     if (screen) return;
     moveDistance = delta * 12;
-    moveZ = delta * 40 * mousePosition.y;
-    moveX = delta * 20 * mousePosition.x;
+    moveZ = delta * 10 * mousePosition.y;
+    moveX = delta * 10 * mousePosition.x;
     rotateAngleTouch = (Math.PI / 2) * delta * 1.5 * mousePosition.x;
     rotateAngle = (Math.PI / 2) * delta * 1.5;
 

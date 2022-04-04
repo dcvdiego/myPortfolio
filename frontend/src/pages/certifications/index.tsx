@@ -21,7 +21,7 @@ const CertificationsContainer = styled.div`
   ${tw`
     flex
     flex-col
-    w-9/12
+    // w-9/12
   `}
 `;
 interface ICTypeProps {
