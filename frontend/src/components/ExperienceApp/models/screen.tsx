@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import React, { useEffect, useRef } from 'react';
-import { useFrame, useThree } from '@react-three/fiber';
+import React, { useEffect, useRef, useState } from 'react';
+import { ThreeEvent, useFrame, useThree } from '@react-three/fiber';
 import { Html, useGLTF, useTexture } from '@react-three/drei';
 import tw, { styled } from 'twin.macro';
 import { GLTF } from 'three-stdlib';
@@ -39,19 +39,30 @@ interface IScreenProps {
   query: TypedDocumentNode;
   Component: JSX.Element;
   screen: number;
-  cover: any;
+  cover: string;
 }
 
 export default function Screen({
   ...props
 }: JSX.IntrinsicElements['group'] & IScreenProps) {
   const group = useRef<THREE.Group>();
-  const { nodes, materials } = useGLTF(
-    '/glb/screen.glb'
-  ) as unknown as GLTFResult;
+  const { nodes, materials } = useGLTF('/glb/screen.glb') as GLTFResult;
   const { query, Component, screen, cover } = props;
   const texture = useTexture(cover);
   (texture as Texture).flipY = false;
+
+  const [hovered, setHovered] = useState(false);
+  const over = (e: ThreeEvent<PointerEvent>) => {
+    return e.stopPropagation(), setHovered(true);
+  };
+  const out = () => setHovered(false);
+  // Change the mouse cursor on hover
+  useEffect(() => {
+    if (hovered) document.body.style.cursor = 'pointer';
+    return () => {
+      document.body.style.cursor = 'auto';
+    };
+  }, [hovered]);
 
   const ComponentClone = () => {
     return React.cloneElement(Component, { componentData: data }, null);
@@ -61,38 +72,39 @@ export default function Screen({
   useEffect(() => {
     if (screen === 0) return;
     const { x, y, z } = group.current!.position;
-    camera.position.set(x - 0.2, y + 4.9, z + 0);
-    camera.lookAt(x, y, z);
+    camera.position.set(x - 0.5, y + 2.5, z);
+    camera.lookAt(x, y + 2, z);
   }, [screen]);
   // Make it float
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
     group.current!.rotation.x = THREE.MathUtils.lerp(
       group.current!.rotation.x,
-      Math.cos(t / 2) / 10 + 0,
+      Math.cos(t / 2) / 30,
       0.1
     );
-    // group.current!.rotation.y = THREE.MathUtils.lerp(
-    //   group.current!.rotation.y,
-    //   Math.sin(t / 4) / 10,
-    //   0.1
-    // );
     group.current!.rotation.z = THREE.MathUtils.lerp(
       group.current!.rotation.z,
-      Math.sin(t / 4) / 20,
+      Math.sin(t / 4) / 30,
       0.1
     );
     group.current!.position.y = THREE.MathUtils.lerp(
       group.current!.position.y,
-      (4 + Math.sin(t)) / 5,
+      (20 + Math.sin(t)) / 80,
       0.1
     );
   });
 
   return (
-    <group ref={group} {...props} dispose={null}>
+    <group
+      ref={group}
+      {...props}
+      dispose={null}
+      onPointerOver={over}
+      onPointerOut={out}
+    >
       <group rotation-x={-1} position={[0, 5, 0.41]}>
-        <group position={[0, 2.96, -0.13]} rotation={[Math.PI / 2, 0, 0]}>
+        <group position={[0, 2.96, -0.13]} rotation={[Math.PI / 1.9, 0, 0]}>
           <mesh
             material={materials.aluminium}
             geometry={nodes['Cube008'].geometry}

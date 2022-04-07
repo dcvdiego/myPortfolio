@@ -16,9 +16,7 @@ type GLTFResult = GLTF & {
 };
 
 function Icon() {
-  const { nodes, materials } = useGLTF(
-    ` /glb/AWSCP.glb`
-  ) as unknown as GLTFResult;
+  const { nodes, materials } = useGLTF(` /glb/AWSCP.glb`) as GLTFResult;
   const ref = useRef<Camera>();
   useFrame(({ camera }) => {
     // face the camera

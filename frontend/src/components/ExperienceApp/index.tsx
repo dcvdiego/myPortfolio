@@ -1,6 +1,11 @@
 import React, { Suspense, useState } from 'react';
 import { Button } from '../../styles/global.styles';
-import { PerspectiveCamera, Loader, Stars } from '@react-three/drei';
+import {
+  PerspectiveCamera,
+  Loader,
+  Stars,
+  softShadows,
+} from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import Icon from './models/icon';
 import PlayerMovement from './playerMovement';
@@ -12,6 +17,7 @@ import BaseSection from './models/corridor/baseSection';
 import BalletMannequin from './models/balletMannequin';
 import Dress from './models/dress';
 import Screen from './models/screen';
+import Phone from './models/phone';
 import CertificationsPage from '../../pages/certifications';
 import CERTIFICATIONS_QUERY from '../../graphql/Certification/certifications';
 import { ApolloProvider } from '@apollo/client';
@@ -21,6 +27,9 @@ import ABOUT_QUERY from '../../graphql/About/about';
 import AboutPage from '../../pages/about';
 import LFWLogo from '../../assets/london-fashion-week-logo.png';
 import Placeholder from '../../assets/placeholder.png';
+import { isMobile } from 'react-device-detect';
+
+softShadows();
 
 export default function App() {
   const [autoWalk, setAutoWalk] = useState(false);
@@ -47,7 +56,7 @@ export default function App() {
         style={{ height: '100vh', width: '100%', overflowX: 'hidden' }}
       >
         <ApolloProvider client={client}>
-          <PerspectiveCamera makeDefault />
+          <PerspectiveCamera />
 
           <Stars
             radius={100}
@@ -98,7 +107,20 @@ export default function App() {
                   screen={screenNumber === 2 ? screenNumber : 0}
                   onClick={() => setScreenNumber(2)}
                 />
-                <BaseSection scale={4} position={[-11, 4.5, -98]} door />
+                {/* GIVEBACK SECTION */}
+                <BaseSection scale={4} position={[-11, 4.5, -98]} />
+                <Screen
+                  scale={0.25}
+                  position={[-2, 0, -110]}
+                  rotation={[0, -Math.PI / 2, 0]}
+                  cover={LFWLogo}
+                  query={ABOUT_QUERY}
+                  Component={<AboutPage screen />}
+                  screen={screenNumber === 3 ? screenNumber : 0}
+                  onClick={() => setScreenNumber(3)}
+                />
+                <Phone position={[-11, 10, -110]} scale={0.5} />
+                <BaseSection scale={4} position={[-11, 4.5, -116]} door />
               </>
             )}
             {snap.verse === 'PP' && (
@@ -115,7 +137,7 @@ export default function App() {
       <Overlay />
       <Loader />
       <UIContainer>
-        {autoWalk && screenNumber === 0 ? (
+        {autoWalk && screenNumber === 0 && !isMobile ? (
           <Button
             style={{ backgroundColor: 'rgba(120, 113, 108, 0.313)' }}
             onClick={() => setAutoWalk(false)}
@@ -123,7 +145,8 @@ export default function App() {
             Stop
           </Button>
         ) : (
-          screenNumber === 0 && (
+          screenNumber === 0 &&
+          !isMobile && (
             <Button
               style={{ backgroundColor: 'rgba(120, 113, 108, 0.313)' }}
               onClick={() => setAutoWalk(true)}

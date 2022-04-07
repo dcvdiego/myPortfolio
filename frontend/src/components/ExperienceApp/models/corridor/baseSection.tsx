@@ -28,7 +28,7 @@ export default function BaseSection({
   const group = useRef<THREE.Group>();
   const { nodes, materials } = useGLTF(
     '/glb/corridorSection.glb'
-  ) as unknown as GLTFResult;
+  ) as GLTFResult;
   if (door && props?.position)
     appState.corridorEnd = (props.position as number[])[2] - 18;
   return (
