@@ -25,7 +25,7 @@ export default function PlayerMovement({
   location,
   screen,
 }: IPlayerMovementProps) {
-  const model = useRef<THREE.Mesh | undefined>();
+  const model = useRef<THREE.Group>();
 
   const { camera } = useThree();
 
@@ -111,7 +111,7 @@ export default function PlayerMovement({
     <AvatarModel
       position={[-11, 1, -62]}
       scale={2}
-      ref={model as unknown as Ref<THREE.Group>}
+      ref={model as Ref<THREE.Group>}
       action={action}
       location={location}
       castShadow

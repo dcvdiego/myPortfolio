@@ -4,23 +4,33 @@ import React from 'react';
 import Layout from '../../components/Layout';
 import { Container, Title } from '../../styles/global.styles';
 // import Testimonial from '../../components/Testimonial';
-import projects from '../../assets/data/projects.json';
+// import projects from '../../assets/data/projects.json';
 import { useParams } from 'react-router-dom';
 import Custom404 from '../404';
+import { useQuery } from '@apollo/client';
+import PROJECT_QUERY from '../../graphql/Project/project';
 
-const Project = ({ ...props }) => {
-  const { screen, title } = props;
+const Client = ({ ...props }) => {
+  const { screen, componentData } = props;
   let { slug } = useParams();
-  const finder = title ? title : slug;
-  const project = projects.find((projectData) => {
-    projectData.slug === finder || projectData.name === finder;
-  });
-
+  if (screen) {
+    var data = componentData;
+  } else {
+    var { loading, error, data } = useQuery(PROJECT_QUERY, {
+      variables: { slug },
+    });
+  }
+  const projects = data?.dataComponents.data[0].attributes.Project;
   return (
-    <Layout title={project?.name as string} screen={screen}>
-      {project ? (
+    <Layout title={projects?.name as string} screen={screen}>
+      {!loading && projects ? (
         <Container>
-          <Title>{project!.name}</Title>
+          {projects.map((project: any) => (
+            <>
+              <Title>{project.name}</Title>
+              {project.description}
+            </>
+          ))}
           {screen && <p>props work!</p>}
           {/* <TestimonialsContainer>
             <SubHeading>Testimonials from this project</SubHeading>
@@ -32,9 +42,9 @@ const Project = ({ ...props }) => {
           </TestimonialsContainer> */}
         </Container>
       ) : (
-        <Custom404 />
+        error && <Custom404 />
       )}
     </Layout>
   );
 };
-export default Project;
+export default Client;

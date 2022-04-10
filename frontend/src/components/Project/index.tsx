@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 import {
+  ProjectClient,
   ProjectContainer,
   ProjectDates,
   ProjectDescription,
@@ -10,14 +11,16 @@ import {
 
 interface IProjectObject {
   name: string;
+  clientName?: number;
   slug?: string;
   infrastructure: string[];
-  client: number;
-  project: number;
+  projectSize: number;
+  clientSize: number;
   description: string;
-  dates: string;
+  startDate: string;
+  endDate: string;
   link?: string;
-  repository: string;
+  repo: string;
 }
 interface IData {
   data: IProjectObject;
@@ -30,7 +33,10 @@ const Project = ({ data }: IData) => {
           <a>{data.name}</a>
         </Link>
       </ProjectTitle>
-      <ProjectDates>{data.dates}</ProjectDates>
+      <ProjectClient>{data.clientName}</ProjectClient>
+      <ProjectDates>
+        {data.startDate} - {data.endDate ? data.endDate : 'Present'}
+      </ProjectDates>
       <ProjectDescription>{data.description}</ProjectDescription>
     </ProjectContainer>
   );

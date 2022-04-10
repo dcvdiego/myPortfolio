@@ -36,6 +36,9 @@
     },
     "clientName": {
       "type": "string"
+    },
+    "description": {
+      "type": "text"
     }
   }
 }

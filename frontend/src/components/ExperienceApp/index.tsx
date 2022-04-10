@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Button } from '../../styles/global.styles';
 import {
   PerspectiveCamera,
@@ -20,7 +20,7 @@ import Screen from './models/screen';
 import Phone from './models/phone';
 import CertificationsPage from '../../pages/certifications';
 import CERTIFICATIONS_QUERY from '../../graphql/Certification/certifications';
-import { ApolloProvider } from '@apollo/client';
+import { ApolloProvider, useQuery } from '@apollo/client';
 import client from '../../utils/apolloClient';
 import { UIContainer } from './eApp.styles';
 import ABOUT_QUERY from '../../graphql/About/about';
@@ -28,12 +28,16 @@ import AboutPage from '../../pages/about';
 import LFWLogo from '../../assets/london-fashion-week-logo.png';
 import Placeholder from '../../assets/placeholder.png';
 import { isMobile } from 'react-device-detect';
+import PROJECT_QUERY from '../../graphql/Project/project';
+import Client from '../../pages/projects/[slug]';
 
 softShadows();
 
 export default function App() {
   const [autoWalk, setAutoWalk] = useState(false);
   const [screenNumber, setScreenNumber] = useState(0);
+  const [index, setIndex] = useState(0);
+  const [iconObject, setIconObject] = useState();
   const snap = useSnapshot(appState);
   const handleBack = () => {
     appState.verse = null;
@@ -47,6 +51,24 @@ export default function App() {
     'pragmatic',
     'leadership',
   ];
+
+  const { loading, error, data } = useQuery(CERTIFICATIONS_QUERY);
+
+  const randomObject = (array: any[]) => {
+    return array[Math.floor(Math.random() * array.length)];
+  };
+  useEffect(() => {
+    const tick = () => setIndex((i) => i + 1);
+    const id = setInterval(tick, 7000);
+    return () => clearInterval(id);
+  }, []);
+  useEffect(() => {
+    if (!loading && !error) {
+      setIconObject(
+        randomObject(data?.certifications.data[0].attributes.Certification)
+      );
+    }
+  }, [index]);
 
   return (
     <>
@@ -78,7 +100,14 @@ export default function App() {
             {snap.verse === 'IBM' && (
               <>
                 {/* CERTIFICATIONS SECTION */}
-                <Icon />
+                {iconObject && (
+                  <Icon
+                    position={[-16, 5, -72]}
+                    url={(iconObject as any)?.threedid}
+                    shape={(iconObject as any)?.shape}
+                  />
+                )}
+
                 <Screen
                   scale={0.25}
                   position={[-2, 0, -70]}
@@ -102,8 +131,9 @@ export default function App() {
                   position={[-2, 0, -90]}
                   rotation={[0, -Math.PI / 2, 0]}
                   cover={LFWLogo}
-                  query={ABOUT_QUERY}
-                  Component={<AboutPage screen />}
+                  query={PROJECT_QUERY}
+                  variable={{ slug: 'london-fashion-week' }}
+                  Component={<Client screen />}
                   screen={screenNumber === 2 ? screenNumber : 0}
                   onClick={() => setScreenNumber(2)}
                 />
@@ -137,7 +167,7 @@ export default function App() {
       <Overlay />
       <Loader />
       <UIContainer>
-        {autoWalk && screenNumber === 0 && !isMobile ? (
+        {autoWalk && screenNumber === 0 && !isMobile && snap.verse ? (
           <Button
             style={{ backgroundColor: 'rgba(120, 113, 108, 0.313)' }}
             onClick={() => setAutoWalk(false)}
@@ -146,7 +176,8 @@ export default function App() {
           </Button>
         ) : (
           screenNumber === 0 &&
-          !isMobile && (
+          !isMobile &&
+          snap.verse && (
             <Button
               style={{ backgroundColor: 'rgba(120, 113, 108, 0.313)' }}
               onClick={() => setAutoWalk(true)}

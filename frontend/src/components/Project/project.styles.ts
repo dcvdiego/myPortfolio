@@ -15,6 +15,11 @@ export const ProjectTitle = styled.h2`
   text-lg
 `};
 `;
+export const ProjectClient = styled.h2`
+  ${tw`
+text-base
+`}
+`;
 export const ProjectDates = styled.h3`
   ${tw`
   text-sm

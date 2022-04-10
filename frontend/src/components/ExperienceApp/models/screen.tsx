@@ -40,6 +40,7 @@ interface IScreenProps {
   Component: JSX.Element;
   screen: number;
   cover: string;
+  variable?: any;
 }
 
 export default function Screen({
@@ -47,7 +48,7 @@ export default function Screen({
 }: JSX.IntrinsicElements['group'] & IScreenProps) {
   const group = useRef<THREE.Group>();
   const { nodes, materials } = useGLTF('/glb/screen.glb') as GLTFResult;
-  const { query, Component, screen, cover } = props;
+  const { query, Component, screen, cover, variable } = props;
   const texture = useTexture(cover);
   (texture as Texture).flipY = false;
 
@@ -68,7 +69,9 @@ export default function Screen({
     return React.cloneElement(Component, { componentData: data }, null);
   };
   const { camera } = useThree();
-  const { loading, error, data } = useQuery(query);
+  const { loading, error, data } = useQuery(query, {
+    variables: variable,
+  });
   useEffect(() => {
     if (screen === 0) return;
     const { x, y, z } = group.current!.position;
