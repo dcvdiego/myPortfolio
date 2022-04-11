@@ -24,10 +24,24 @@ import {
   SmallText,
 } from './footer.styles';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { Button } from '../../styles/global.styles';
+import { useSnapshot } from 'valtio';
+import { browserState } from '../../utils/store';
 
 // import { Logo } from '../logo';
 
 const Footer = () => {
+  const snap = useSnapshot(browserState);
+  const handleReaderMode = (set: boolean) => {
+    if (set) {
+      window.localStorage.setItem('readerMode', 'true');
+      browserState.readerMode = set;
+    }
+    if (!set) {
+      window.localStorage.removeItem('readerMode');
+      browserState.readerMode = set;
+    }
+  };
   return (
     <FooterContainer>
       <InnerContainer>
@@ -108,6 +122,13 @@ const Footer = () => {
             </ColoredIcon>
             <SmallText>diegochuman@gmail.com</SmallText>
           </HorizontalContainer>
+          {snap.readerMode && snap.canRun ? (
+            <Button onClick={() => handleReaderMode(false)}>
+              Experience this website fully
+            </Button>
+          ) : snap.canRun ? (
+            <Button onClick={() => handleReaderMode(true)}>ReaderMode</Button>
+          ) : null}
         </SectionContainer>
       </InnerContainer>
       <BottomContainer>

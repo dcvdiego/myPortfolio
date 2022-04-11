@@ -6,7 +6,6 @@ import CREDS_QUERY from '../graphql/Creds/creds';
 
 function CredsPage() {
   const { loading, error, data } = useQuery(CREDS_QUERY);
-  // console.log(data?.creds?.data);
   let allCreds;
   if (data)
     allCreds = data.creds.data

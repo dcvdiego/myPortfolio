@@ -24,5 +24,7 @@ export function detectWebGLContext() {
     browserState.canRun = true;
   } else {
     browserState.canRun = false;
+    window.localStorage.setItem('readerMode', 'true');
+    window.sessionStorage.setItem('bannerConsent', 'true');
   }
 }
