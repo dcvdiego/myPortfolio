@@ -9,8 +9,7 @@
   "attributes": {
     "threedid": {
       "type": "string",
-      "required": true,
-      "unique": false
+      "required": true
     },
     "name": {
       "type": "string",
@@ -29,19 +28,12 @@
     },
     "shape": {
       "type": "enumeration",
-      "enum": [
-        "Hexagon",
-        "Circle",
-        "Plane"
-      ],
+      "enum": ["Hexagon", "Circle", "Plane"],
       "required": true
     },
     "type": {
       "type": "enumeration",
-      "enum": [
-        "Consulting",
-        "Technical"
-      ],
+      "enum": ["Consulting", "Technical"],
       "required": true
     }
   }

@@ -115,7 +115,9 @@ function Home() {
           style={{ color: 'black' }}
           onInput={(e) => setInput((e.target as HTMLInputElement).value)}
         />
-        {tutorial ? <TutorialOverlay setTutorial={setTutorial} /> : null}
+        {tutorial ? (
+          <TutorialOverlay origin="home" setTutorial={setTutorial} />
+        ) : null}
       </Container>
     </Layout>
   );

@@ -8,22 +8,26 @@ import { Container, Title } from '../../styles/global.styles';
 import { useParams } from 'react-router-dom';
 import Custom404 from '../404';
 import { useQuery } from '@apollo/client';
-import PROJECT_QUERY from '../../graphql/Project/project';
+import PROJECT_QUERY from '../../graphql/Projects/project';
 
 const Client = ({ ...props }) => {
   const { screen, componentData } = props;
   let { slug } = useParams();
+  let finalData, finalLoading, finalError;
   if (screen) {
-    var data = componentData;
+    finalData = componentData;
   } else {
-    var { loading, error, data } = useQuery(PROJECT_QUERY, {
+    const { loading, error, data } = useQuery(PROJECT_QUERY, {
       variables: { slug },
     });
+    finalLoading = loading;
+    finalError = error;
+    finalData = data;
   }
-  const projects = data?.dataComponents.data[0].attributes.Project;
+  const projects = finalData?.dataComponents.data[0].attributes.Project;
   return (
-    <Layout title={projects?.name as string} screen={screen}>
-      {!loading && projects ? (
+    <Layout title={projects?.name as string} screen>
+      {!finalLoading && projects ? (
         <Container>
           {projects.map((project: any) => (
             <>
@@ -42,7 +46,7 @@ const Client = ({ ...props }) => {
           </TestimonialsContainer> */}
         </Container>
       ) : (
-        error && <Custom404 />
+        finalError && <Custom404 />
       )}
     </Layout>
   );

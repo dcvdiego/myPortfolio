@@ -24,14 +24,19 @@ interface IProjectObject {
 }
 interface IData {
   data: IProjectObject;
+  screen?: boolean;
 }
 const Project = ({ data }: IData) => {
   return (
     <ProjectContainer>
       <ProjectTitle>
-        <Link to={`/projects/${data?.slug ? data.slug : data.name}`}>
-          <a>{data.name}</a>
-        </Link>
+        {screen ? (
+          data.name
+        ) : (
+          <Link to={`/projects/${data?.slug ? data.slug : data.name}`}>
+            <a>{data.name}</a>
+          </Link>
+        )}
       </ProjectTitle>
       <ProjectClient>{data.clientName}</ProjectClient>
       <ProjectDates>

@@ -37,7 +37,7 @@ function Icon({ ...props }) {
         rotation={[
           Math.PI / 2,
           shape === 'Circle'
-            ? degreesToRadians(298)
+            ? degreesToRadians(285)
             : shape === 'Hexagon'
             ? degreesToRadians(120)
             : degreesToRadians(180),
