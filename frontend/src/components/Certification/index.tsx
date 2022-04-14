@@ -17,10 +17,11 @@ import { ICertificationObject } from './certification.types';
 
 interface IData {
   data: ICertificationObject;
+  screen?: boolean;
 }
 
 // Ported from https://codepen.io/popmotion/pen/oNGxjpr?editors=1111 and Framer Motion 3D example
-export default function Certification({ data }: IData) {
+export default function Certification({ data, screen }: IData) {
   const [isHover, setIsHover] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
 
@@ -38,24 +39,61 @@ export default function Certification({ data }: IData) {
         onHoverEnd={() => setIsHover(false)}
         onClick={() => setIsSelected(!isSelected)}
       >
-        <StyledIcon
-          className="icon"
-          variants={{
-            selected: { opacity: 0, transition: iconFadeTransition },
-            hover: isSelected
-              ? { opacity: 0, transition: iconFadeTransition }
-              : { opacity: 1 },
-          }}
-        >
-          <Suspense fallback={null}>
-            <Icon
-              isHover={isHover}
-              isSelected={isSelected}
-              url={data.threedid}
-              shape={data.shape}
+        {screen ? (
+          <StyledIcon
+            className="icon"
+            variants={{
+              selected: { opacity: 0, transition: iconFadeTransition },
+              hover: isSelected
+                ? { opacity: 0, transition: iconFadeTransition }
+                : { opacity: 1 },
+            }}
+            style={{ top: '0', left: '0' }}
+          >
+            <motion.img
+              src={`/img/${data.threedid}.png`}
+              animate={[
+                isSelected ? 'selected' : 'unselected',
+                isHover ? 'hover' : '',
+              ]}
+              variants={{
+                unselected: {
+                  x: -150,
+                  y: -25,
+                  scale: 0.3,
+                },
+                selected: {
+                  x: -146,
+                  y: [0, -1.5, 2],
+                  scale: 1,
+                  transition: { duration: 0.7 },
+                },
+                hover: {
+                  scale: 0.5,
+                },
+              }}
             />
-          </Suspense>
-        </StyledIcon>
+          </StyledIcon>
+        ) : (
+          <StyledIcon
+            className="icon"
+            variants={{
+              selected: { opacity: 0, transition: iconFadeTransition },
+              hover: isSelected
+                ? { opacity: 0, transition: iconFadeTransition }
+                : { opacity: 1 },
+            }}
+          >
+            <Suspense fallback={null}>
+              <Icon
+                isHover={isHover}
+                isSelected={isSelected}
+                url={data.threedid}
+                shape={data.shape}
+              />
+            </Suspense>
+          </StyledIcon>
+        )}
         <Label>
           <Default
             variants={

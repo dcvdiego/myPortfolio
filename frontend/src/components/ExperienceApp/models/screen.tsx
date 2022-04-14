@@ -7,10 +7,12 @@ import { GLTF } from 'three-stdlib';
 import Custom404 from '../../../pages/404';
 import { TypedDocumentNode, useQuery } from '@apollo/client';
 import { Texture } from 'three';
+import { isMobile } from 'react-device-detect';
 
 const Wrapper = styled.div`
   ${tw`
-  p-2
+  // p-2
+  overflow-y-hidden
   `}
 `;
 const StyledHtml = styled(Html)`
@@ -73,10 +75,16 @@ export default function Screen({
     variables: variable,
   });
   useEffect(() => {
+    // screen is 0 when you are wondering around, each screenNumber is different numbers so that the camera only focuses on one
     if (screen === 0) return;
     const { x, y, z } = group.current!.position;
-    camera.position.set(x - 0.5, y + 2.5, z);
-    camera.lookAt(x, y + 2, z);
+    if (!isMobile) {
+      camera.position.set(x - 0.5, y + 2.5, z);
+      camera.lookAt(x, y + 2, z);
+    } else {
+      camera.position.set(x - 2, y + 2.5, z);
+      camera.lookAt(x, y + 2, z);
+    }
   }, [screen]);
   // Make it float
   useFrame((state) => {
@@ -126,7 +134,13 @@ export default function Screen({
               >
                 <Wrapper>
                   {/* jsx element cannot have link from router, cannot have Layout, graphql queries have to be done here and passed through */}
-                  {error || loading ? <Custom404 /> : <ComponentClone />}
+                  {error ? (
+                    <Custom404 />
+                  ) : loading ? (
+                    <h3>Loading...</h3>
+                  ) : (
+                    <ComponentClone />
+                  )}
                 </Wrapper>
               </StyledHtml>
             ) : (

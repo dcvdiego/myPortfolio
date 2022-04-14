@@ -26,7 +26,7 @@ interface IData {
   data: IProjectObject;
   screen?: boolean;
 }
-const Project = ({ data }: IData) => {
+const Project = ({ data, screen }: IData) => {
   return (
     <ProjectContainer>
       <ProjectTitle>

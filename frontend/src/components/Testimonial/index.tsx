@@ -1,4 +1,5 @@
 import React from 'react';
+import ReadMore from '../ReadMore';
 import {
   TestimonialContainer,
   TestimonialContent,
@@ -9,7 +10,7 @@ import { ITestimonialObject } from './testimonial.types';
 
 interface IData {
   data: ITestimonialObject;
-  word?: string | null;
+  word?: string | undefined;
 }
 const Testimonial = ({ data, word }: IData) => {
   return (
@@ -17,13 +18,13 @@ const Testimonial = ({ data, word }: IData) => {
       <TestimonialTitle>{data.From}</TestimonialTitle>
       <TestimonialSubtitle>{data.Title}</TestimonialSubtitle>
       {word ? (
-        <TestimonialContent
-          dangerouslySetInnerHTML={{
-            __html: data.Content.replaceAll(word, `<b>${word}</b>`),
-          }}
-        />
+        <TestimonialContent>
+          <ReadMore word={word}>{data.Content}</ReadMore>
+        </TestimonialContent>
       ) : (
-        <TestimonialContent>{data.Content}</TestimonialContent>
+        <TestimonialContent>
+          <ReadMore>{data.Content}</ReadMore>
+        </TestimonialContent>
       )}
     </TestimonialContainer>
   );

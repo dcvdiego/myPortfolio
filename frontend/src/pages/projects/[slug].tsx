@@ -26,7 +26,7 @@ const Client = ({ ...props }) => {
   }
   const projects = finalData?.dataComponents.data[0].attributes.Project;
   return (
-    <Layout title={projects?.name as string} screen>
+    <Layout title={projects?.name as string} screen={screen}>
       {!finalLoading && projects ? (
         <Container>
           {projects.map((project: any) => (

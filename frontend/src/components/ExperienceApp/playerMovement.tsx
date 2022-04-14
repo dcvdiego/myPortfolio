@@ -115,6 +115,7 @@ export default function PlayerMovement({
       action={action}
       location={location}
       castShadow
+      screen={screen}
     />
   );
 }

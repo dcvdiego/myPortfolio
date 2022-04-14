@@ -20,12 +20,14 @@ const ProjectsPage = ({ ...props }) => {
   }
   const projects = finalData?.dataComponents.data[0].attributes.Project;
   return (
-    <Layout title="Projects" screen>
+    <Layout title="Projects" screen={screen}>
       <Container>
         <Title>These are my projects</Title>
         {!finalLoading &&
           !finalError &&
-          projects.map((project: any) => <Project data={project} screen />)}
+          projects.map((project: any) => (
+            <Project data={project} screen={screen} />
+          ))}
       </Container>
     </Layout>
   );

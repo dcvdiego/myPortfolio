@@ -82,7 +82,12 @@ export default function App() {
       <Canvas
         shadows
         camera={{ fov: 75, near: 0.1, far: 1000, position: [-11, 1, -62] }}
-        style={{ height: '100vh', width: '100%', overflowX: 'hidden' }}
+        style={{
+          height: '100vh',
+          width: '100%',
+          overflowX: 'hidden',
+          touchAction: 'none',
+        }}
       >
         <ApolloProvider client={client}>
           <PerspectiveCamera />
@@ -100,10 +105,11 @@ export default function App() {
               <PlayerMovement
                 AutoWalk={autoWalk}
                 location="App"
-                screen={screenNumber ? true : false}
+                screen={screenNumber > 0 ? true : false}
               />
             )}
             <BaseSection scale={4} position={[-11, 4.5, -62]} />
+            {/* Pre-Professional ExperienceVerse */}
             {snap.verse === 'PP' && (
               <>
                 <Cloud
@@ -131,6 +137,7 @@ export default function App() {
                 */}
               </>
             )}
+            {/* IBM ExperienceVerse */}
             {snap.verse === 'IBM' && (
               <>
                 {/* CERTIFICATIONS SECTION */}
