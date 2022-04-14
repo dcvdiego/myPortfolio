@@ -6,9 +6,8 @@ export const Container = styled.div`
   flex 
   flex-col 
   w-full
-  h-screen 
+  min-h-screen
   items-center
-  overflow-x-hidden
   bg-black
   text-white
   pt-4

@@ -5,16 +5,19 @@ import { Marginer } from './Marginer';
 
 interface ITutorialOverlayProps {
   setTutorial: React.Dispatch<React.SetStateAction<boolean>>;
+  origin: string;
 }
 
-const TutorialOverlay: React.FC<ITutorialOverlayProps> = ({ setTutorial }) => {
+const TutorialOverlay: React.FC<ITutorialOverlayProps> = ({
+  setTutorial,
+  origin,
+}) => {
   const AppContainer = styled.div`
     background: #141622cc;
     transition: background-color 1000ms ease;
     z-index: 1000;
     ${tw`
     absolute 
-    top-0 
     left-0 
     w-full 
     h-full 
@@ -50,6 +53,10 @@ const TutorialOverlay: React.FC<ITutorialOverlayProps> = ({ setTutorial }) => {
     bg-red-700
     hover:bg-red-800
     `,
+    purple: tw`
+    bg-purple-800
+    hover:bg-purple-700
+    `,
   };
 
   const AppMenuButton = styled.button(({ color }) => [
@@ -73,37 +80,75 @@ const TutorialOverlay: React.FC<ITutorialOverlayProps> = ({ setTutorial }) => {
   return (
     <AppContainer
       style={{
-        background: '#141622FF',
+        background: '#141622f0',
       }}
     >
       <AppMenu>
         <AppSubContainer>
-          <Title>How to add your own avatar</Title>
-          <SubHeading>Step 1: ReadyPlayerMe</SubHeading>
-          <p>
-            Go to the website
-            <a href="https://readyplayer.me"> ReadyPlayer.me</a> and create a
-            username. This will then prompt you to create your own avatar using
-            their own avatar configurator, go wild! If you already have an
-            avatar you'd like to use, skip to step 2
-          </p>
-          <Marginer direction="vertical" margin="2em" />
-          <SubHeading>Step 2: URL</SubHeading>
-          <p>
-            Enter the hub where your avatar resides. You can either click on the
-            download button at the bottom and copy the .glb URL, or head to the
-            My Avatars tab and on the three dots dropdown menu click Copy .glb
-            URL
-          </p>
-          <Marginer direction="vertical" margin="2em" />
-          <SubHeading>Step 3: Paste and customize!</SubHeading>
-          <p>
-            Paste the link and your avatar will automatically find itself here
-          </p>
-          <Marginer direction="vertical" margin="2em" />
-          <AppMenuButton color="blue" onClick={() => setTutorial(false)}>
-            I understand
-          </AppMenuButton>
+          {origin === 'app' ? (
+            <>
+              <Title>How does it work</Title>
+              <SubHeading>Explore the universe!</SubHeading>
+              <p>
+                A 3D version of the experiences I have had. Use WASD Controls (W
+                - Forward, S - Backward, A - Left, D - Right) or the directional
+                keys to roam around!
+              </p>
+              <Marginer direction="vertical" margin="2em" />
+              <SubHeading>Interact with it!</SubHeading>
+              <p>
+                Treat it like a museum. It is a showcase of my work in the
+                middle and left sides, however on the right there are small
+                screens that you can click to learn more about each experience!
+              </p>
+              <Marginer direction="vertical" margin="2em" />
+              <SubHeading>
+                Jump through other "ExperienceVerse"s, or continue navigating
+                the site!
+              </SubHeading>
+              <p>
+                Once you reach the end, you can opt to go back to the main menu
+                and choose another experience. Currently IBM is the only one
+                available. Feel free to access other parts of my site too!
+              </p>
+              <Marginer direction="vertical" margin="2em" />
+              <AppMenuButton color="purple" onClick={() => setTutorial(false)}>
+                Thank you, now take me back!
+              </AppMenuButton>
+            </>
+          ) : origin === 'home' ? (
+            <>
+              <Title>How to add your own avatar</Title>
+              <SubHeading>Step 1: ReadyPlayerMe</SubHeading>
+              <p>
+                Go to the website
+                <a href="https://readyplayer.me"> ReadyPlayer.me</a> and create
+                a username. This will then prompt you to create your own avatar
+                using their own avatar configurator, go wild! If you already
+                have an avatar you'd like to use, skip to step 2
+              </p>
+              <Marginer direction="vertical" margin="2em" />
+              <SubHeading>Step 2: URL</SubHeading>
+              <p>
+                Enter the hub where your avatar resides. You can either click on
+                the download button at the bottom and copy the .glb URL, or head
+                to the My Avatars tab and on the three dots dropdown menu click
+                Copy .glb URL
+              </p>
+              <Marginer direction="vertical" margin="2em" />
+              <SubHeading>Step 3: Paste and customize!</SubHeading>
+              <p>
+                Paste the link and your avatar will automatically find itself
+                here
+              </p>
+              <Marginer direction="vertical" margin="2em" />
+              <AppMenuButton color="blue" onClick={() => setTutorial(false)}>
+                I understand
+              </AppMenuButton>
+            </>
+          ) : (
+            <p>Error</p>
+          )}
         </AppSubContainer>
       </AppMenu>
     </AppContainer>

@@ -28,7 +28,7 @@ export default function BalletMannequin({
   const group = useRef<THREE.Group>();
   const { nodes, materials } = useGLTF(
     '/glb/balletMannequin.glb'
-  ) as unknown as GLTFResult;
+  ) as GLTFResult;
   return (
     <group ref={group} {...props} dispose={null}>
       <mesh

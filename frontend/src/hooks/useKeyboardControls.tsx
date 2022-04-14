@@ -41,7 +41,7 @@ export default function usePlayerControls(AutoWalk: boolean) {
     let y = event.touches[0].clientY / window.innerHeight - 1;
 
     setMousePosition({ x, y });
-    setAction('Idle');
+    setAction('Walk');
   }
 
   function handleKeyDown(keyCode: string) {

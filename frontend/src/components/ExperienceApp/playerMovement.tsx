@@ -25,7 +25,7 @@ export default function PlayerMovement({
   location,
   screen,
 }: IPlayerMovementProps) {
-  const model = useRef<THREE.Mesh | undefined>();
+  const model = useRef<THREE.Group>();
 
   const { camera } = useThree();
 
@@ -66,8 +66,8 @@ export default function PlayerMovement({
   useFrame((_state, delta) => {
     if (screen) return;
     moveDistance = delta * 12;
-    moveZ = delta * 40 * mousePosition.y;
-    moveX = delta * 20 * mousePosition.x;
+    moveZ = delta * 10 * mousePosition.y;
+    moveX = delta * 10 * mousePosition.x;
     rotateAngleTouch = (Math.PI / 2) * delta * 1.5 * mousePosition.x;
     rotateAngle = (Math.PI / 2) * delta * 1.5;
 
@@ -111,10 +111,11 @@ export default function PlayerMovement({
     <AvatarModel
       position={[-11, 1, -62]}
       scale={2}
-      ref={model as unknown as Ref<THREE.Group>}
+      ref={model as Ref<THREE.Group>}
       action={action}
       location={location}
       castShadow
+      screen={screen}
     />
   );
 }

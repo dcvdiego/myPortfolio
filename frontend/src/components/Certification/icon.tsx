@@ -1,20 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, useGLTF } from '@react-three/drei';
-import { motion } from 'framer-motion-3d';
-import { degreesToRadians } from 'popmotion';
-import { GLTF, OrbitControls as OrbitControlsImpl } from 'three-stdlib';
+import { OrbitControls } from '@react-three/drei';
+import { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
+import Model from './model';
 import { shapeName } from './certification.types';
-type GLTFResult = GLTF & {
-  nodes: {
-    Hexagon?: THREE.Mesh;
-    Plane?: THREE.Mesh;
-    Circle?: THREE.Mesh;
-  };
-  materials: {
-    Material: THREE.MeshStandardMaterial;
-  };
-};
+
 interface IIConProps {
   isSelected: boolean;
   isHover: boolean;
@@ -23,10 +13,6 @@ interface IIConProps {
 }
 
 export default function Icon({ isHover, isSelected, url, shape }: IIConProps) {
-  const group = useRef<THREE.Group>();
-  const { nodes, materials } = useGLTF(
-    ` /glb/${url}.glb`
-  ) as unknown as GLTFResult;
   const ocRef = useRef<OrbitControlsImpl>(null);
   useEffect(() => {
     if (!isHover && ocRef) ocRef.current?.reset();
@@ -45,42 +31,12 @@ export default function Icon({ isHover, isSelected, url, shape }: IIConProps) {
         />
       ))} */}
       <ambientLight />
-      <group ref={group} dispose={null}>
-        <motion.mesh
-          material={materials.Material}
-          geometry={nodes[shape]!.geometry}
-          rotation={[
-            Math.PI / 2,
-            shape === 'Circle'
-              ? degreesToRadians(298)
-              : shape === 'Hexagon'
-              ? degreesToRadians(120)
-              : degreesToRadians(180),
-            degreesToRadians(360),
-          ]}
-          scale={1}
-          animate={[
-            isSelected ? 'selected' : 'unselected',
-            isHover ? 'hover' : '',
-          ]}
-          variants={{
-            unselected: {
-              x: [0, 0],
-              y: [0, 0],
-              scale: 1,
-            },
-            selected: {
-              x: 4,
-              y: [0, -1.5, 2],
-              scale: 1,
-              transition: { duration: 0.7 },
-            },
-            hover: {
-              scale: 1.4,
-            },
-          }}
-        />
-      </group>
+      <Model
+        isHover={isHover}
+        isSelected={isSelected}
+        url={url}
+        shape={shape}
+      />
       <OrbitControls ref={ocRef} autoRotate={isHover} autoRotateSpeed={7.5} />
     </Canvas>
   );

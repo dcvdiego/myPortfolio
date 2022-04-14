@@ -52,6 +52,18 @@ const CloseButton = styled.button`
 
 const Navbar = () => {
   const snap = useSnapshot(browserState);
+  if (window.localStorage.getItem('readerMode')) browserState.readerMode = true;
+  if (window.sessionStorage.getItem('bannerConsent'))
+    browserState.bannerConsent = true;
+  const handleReaderMode = () => {
+    browserState.readerMode = true;
+    window.localStorage.setItem('readerMode', 'true');
+  };
+  const handleBannerConsent = () => {
+    browserState.bannerConsent = true;
+    window.sessionStorage.setItem('bannerConsent', 'true');
+  };
+
   return (
     <>
       <NavbarContainer>
@@ -62,14 +74,12 @@ const Navbar = () => {
         <ReaderModeBanner>
           <BannerText>
             Having trouble loading the page? Switch to&nbsp;
-            <ReaderModeButton onClick={() => (browserState.readerMode = true)}>
+            <ReaderModeButton onClick={handleReaderMode}>
               Reader Mode
             </ReaderModeButton>
           </BannerText>
 
-          <CloseButton onClick={() => (browserState.bannerConsent = true)}>
-            {'\u2715'}
-          </CloseButton>
+          <CloseButton onClick={handleBannerConsent}>{'\u2715'}</CloseButton>
         </ReaderModeBanner>
       )}
     </>

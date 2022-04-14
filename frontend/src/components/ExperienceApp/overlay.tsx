@@ -93,11 +93,7 @@ const Overlay = () => {
   const appStarted = snap.appStarted;
 
   useEffect(() => {
-    if (appStarted) {
-      setShown(false);
-    } else if (!appStarted) {
-      setShown(true);
-    }
+    appStarted ? setShown(false) : setShown(true);
   }, [appStarted, active]);
 
   useEffect(() => {

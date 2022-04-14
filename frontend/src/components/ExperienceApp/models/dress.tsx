@@ -23,9 +23,7 @@ type GLTFResult = GLTF & {
 
 export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>();
-  const { nodes, materials } = useGLTF(
-    '/glb/dress.glb'
-  ) as unknown as GLTFResult;
+  const { nodes, materials } = useGLTF('/glb/dress.glb') as GLTFResult;
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
     group.current!.rotation.x = THREE.MathUtils.lerp(

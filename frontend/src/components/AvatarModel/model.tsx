@@ -53,21 +53,18 @@ interface IModelProps {
   location: LocationName;
   position?: number[];
   scale?: number;
+  screen?: boolean;
 }
 
 const AvatarModel = forwardRef<
   THREE.Group,
   JSX.IntrinsicElements['group'] & IModelProps
 >((props, ref) => {
-  const { action, location } = props;
+  const { action, location, screen } = props;
   const group = useRef<THREE.Group>();
   const snap = useSnapshot(state);
-  const { animations } = useGLTF(
-    ' /glb/modelwanim.glb'
-  ) as unknown as GLTFResult;
-  const { nodes, materials } = useGLTF(
-    `${snap.avatarURL}`
-  ) as unknown as GLTFResult;
+  const { animations } = useGLTF(' /glb/modelwanim.glb') as GLTFResult;
+  const { nodes, materials } = useGLTF(`${snap.avatarURL}`) as GLTFResult;
 
   if (location === 'AvatarConfigurator') {
     const { actions } = useAnimations(animations, group);
@@ -134,7 +131,7 @@ const AvatarModel = forwardRef<
     >
       <group rotation={location === 'App' ? [0, -Math.PI, 0] : [0, 0, 0]}>
         <primitive object={nodes.Hips} />
-        {nodes?.Wolf3D_Body ? (
+        {nodes?.Wolf3D_Body && !screen ? (
           <skinnedMesh
             castShadow
             name="Wolf3D_Body"
@@ -174,22 +171,27 @@ const AvatarModel = forwardRef<
             skeleton={nodes.Wolf3D_Hair.skeleton}
           />
         ) : null}
-        <skinnedMesh
-          castShadow
-          name="Wolf3D_Outfit_Bottom"
-          geometry={nodes.Wolf3D_Outfit_Bottom.geometry}
-          material={materials.Wolf3D_Outfit_Bottom}
-          material-color={snap.items.Bottom}
-          skeleton={nodes.Wolf3D_Outfit_Bottom.skeleton}
-        />
-        <skinnedMesh
-          castShadow
-          name="Wolf3D_Outfit_Footwear"
-          geometry={nodes.Wolf3D_Outfit_Footwear.geometry}
-          material={materials.Wolf3D_Outfit_Footwear}
-          material-color={snap.items.Footwear}
-          skeleton={nodes.Wolf3D_Outfit_Footwear.skeleton}
-        />
+        {!screen && (
+          <>
+            <skinnedMesh
+              castShadow
+              name="Wolf3D_Outfit_Bottom"
+              geometry={nodes.Wolf3D_Outfit_Bottom.geometry}
+              material={materials.Wolf3D_Outfit_Bottom}
+              material-color={snap.items.Bottom}
+              skeleton={nodes.Wolf3D_Outfit_Bottom.skeleton}
+            />
+
+            <skinnedMesh
+              castShadow
+              name="Wolf3D_Outfit_Footwear"
+              geometry={nodes.Wolf3D_Outfit_Footwear.geometry}
+              material={materials.Wolf3D_Outfit_Footwear}
+              material-color={snap.items.Footwear}
+              skeleton={nodes.Wolf3D_Outfit_Footwear.skeleton}
+            />
+          </>
+        )}
         <skinnedMesh
           castShadow
           name="Wolf3D_Outfit_Top"
