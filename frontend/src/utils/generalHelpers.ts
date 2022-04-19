@@ -11,6 +11,11 @@ export function isValidHttpUrl(string: string) {
 
   return url.protocol === 'http:' || url.protocol === 'https:';
 }
+
+export function formatMyDate(value: string, locale = 'en-GB') {
+  return new Date(value).toLocaleDateString(locale);
+}
+
 export function detectWebGLContext() {
   // Create canvas element. The canvas is not added to the
   // document itself, so it is never displayed in the

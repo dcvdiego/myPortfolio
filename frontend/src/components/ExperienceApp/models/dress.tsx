@@ -49,7 +49,7 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
   });
 
   return (
-    <group ref={group} {...props} dispose={null}>
+    <group ref={group as Ref<THREE.Group>} {...props} dispose={null}>
       <mesh
         geometry={nodes.dress_.geometry}
         material={materials['Material.003']}

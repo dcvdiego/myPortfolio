@@ -40,10 +40,10 @@ import ProjectsPage from '../../pages/projects';
 softShadows();
 
 export default function App() {
-  const [autoWalk, setAutoWalk] = useState(false);
-  const [screenNumber, setScreenNumber] = useState(0);
-  const [index, setIndex] = useState(0);
-  const [iconObject, setIconObject] = useState();
+  const [autoWalk, setAutoWalk] = useState<boolean>(false);
+  const [screenNumber, setScreenNumber] = useState<number>(0);
+  // const [index, setIndex] = useState<number>(0);
+  // const [iconObject, setIconObject] = useState();
   const [tutorial, setTutorial] = useState<boolean>(false);
   const snap = useSnapshot(appState);
   const handleBack = () => {
@@ -59,23 +59,22 @@ export default function App() {
     'leadership',
   ];
 
-  const { loading, error, data } = useQuery(CERTIFICATIONS_QUERY);
-
-  const randomObject = (array: any[]) => {
-    return array[Math.floor(Math.random() * array.length)];
-  };
-  useEffect(() => {
-    const tick = () => setIndex((i) => i + 1);
-    const id = setInterval(tick, 7000);
-    return () => clearInterval(id);
-  }, []);
-  useEffect(() => {
-    if (!loading && !error) {
-      setIconObject(
-        randomObject(data?.certifications.data[0].attributes.Certification)
-      );
-    }
-  }, [index]);
+  // const { loading, error, data } = useQuery(CERTIFICATIONS_QUERY);
+  // const randomObject = (array: any[]) => {
+  //   return array[Math.floor(Math.random() * array.length)];
+  // };
+  // useEffect(() => {
+  //   const tick = () => setIndex((i) => i + 1);
+  //   const id = setInterval(tick, 7000);
+  //   return () => clearInterval(id);
+  // }, []);
+  // useEffect(() => {
+  //   if (!loading && !error) {
+  //     setIconObject(
+  //       randomObject(data?.certifications.data[0].attributes.Certification)
+  //     );
+  //   }
+  // }, [index]);
 
   return (
     <>
@@ -141,13 +140,15 @@ export default function App() {
             {snap.verse === 'IBM' && (
               <>
                 {/* CERTIFICATIONS SECTION */}
-                {iconObject && (
-                  <Icon
-                    position={[-16, 5, -70]}
-                    url={(iconObject as any)?.threedid}
-                    shape={(iconObject as any)?.shape}
-                  />
-                )}
+                {/* {iconObject && ( */}
+                <Icon
+                  position={[-16, 5, -70]}
+                  url="AWSCP"
+                  shape="Hexagon"
+                  // url={(iconObject as any)?.threedid}
+                  // shape={(iconObject as any)?.shape}
+                />
+                {/* )} */}
                 <IBMLogo position={[-11, 2, -70]} scale={0.5} />
                 <Screen
                   scale={0.25}

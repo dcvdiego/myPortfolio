@@ -30,7 +30,7 @@ export default function BalletMannequin({
     '/glb/balletMannequin.glb'
   ) as GLTFResult;
   return (
-    <group ref={group} {...props} dispose={null}>
+    <group ref={group as Ref<THREE.Group>} {...props} dispose={null}>
       <mesh
         geometry={nodes.skirt.geometry}
         material={materials['Material.004']}

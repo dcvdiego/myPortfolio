@@ -29,7 +29,7 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
     group!.current!.quaternion.copy(camera!.quaternion);
   });
   return (
-    <group ref={group} {...props} dispose={null}>
+    <group ref={group as Ref<THREE.Group>} {...props} dispose={null}>
       <group position={[-5.32, -0.93, 1.57]} scale={0.03}>
         <mesh
           geometry={nodes.Mesh.geometry}

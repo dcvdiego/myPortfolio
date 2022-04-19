@@ -60,7 +60,9 @@ const CertificationsTypeScreen: React.FC<ICTypeScreenProps> = ({
     <CategoryContainer>
       {componentData.certifications.data[0].attributes.Certification.map(
         (certification: any) => {
-          return <Certification data={certification} screen />;
+          return (
+            <Certification key={certification} data={certification} screen />
+          );
         }
       )}
     </CategoryContainer>

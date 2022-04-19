@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { Ref, useEffect, useRef, useState } from 'react';
 import { ThreeEvent, useFrame, useThree } from '@react-three/fiber';
 import { Html, useGLTF, useTexture } from '@react-three/drei';
 import tw, { styled } from 'twin.macro';
@@ -56,9 +56,9 @@ export default function Screen({
 
   const [hovered, setHovered] = useState(false);
   const over = (e: ThreeEvent<PointerEvent>) => {
-    return e.stopPropagation(), setHovered(true);
+    if (screen === 0) return e.stopPropagation(), setHovered(true);
   };
-  const out = () => setHovered(false);
+  const out = () => screen === 0 && setHovered(false);
   // Change the mouse cursor on hover
   useEffect(() => {
     if (hovered) document.body.style.cursor = 'pointer';
@@ -108,7 +108,7 @@ export default function Screen({
 
   return (
     <group
-      ref={group}
+      ref={group as Ref<THREE.Group>}
       {...props}
       dispose={null}
       onPointerOver={over}

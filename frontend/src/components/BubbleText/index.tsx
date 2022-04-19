@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 // Word wrapper
 const Wrapper: React.FC = (props) => {
   // We'll do this to prevent wrapping of words using CSS
-  return <span className="word-wrapper">{props.children}</span>;
+  return <span style={{ whiteSpace: 'nowrap' }}>{props.children}</span>;
 };
 
 // AnimatedCharacters
@@ -76,3 +76,5 @@ const AnimatedCharacters: React.FC<IAnimatedCharacterProps> = (props) => {
 };
 
 export default AnimatedCharacters;
+
+// nathan searles nathansearles.com
