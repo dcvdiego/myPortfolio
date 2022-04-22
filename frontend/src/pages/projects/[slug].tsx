@@ -2,10 +2,10 @@ import React from 'react';
 // import styled from 'twin.macro';
 
 import Layout from '../../components/Layout';
-import { Container, Title } from '../../styles/global.styles';
+import { Button, Container, Title } from '../../styles/global.styles';
 // import Testimonial from '../../components/Testimonial';
 // import projects from '../../assets/data/projects.json';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Custom404 from '../404';
 import { useQuery } from '@apollo/client';
 import PROJECT_QUERY from '../../graphql/Projects/project';
@@ -66,9 +66,14 @@ const Client = ({ ...props }) => {
     flex-wrap
     `}
   `;
+  const IconWrapper = styled.div`
+    height: 3.5rem;
+    width: auto;
+  `;
   const LanguageIcon = styled.img`
-    width: 2rem;
-    height: auto;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
     padding: 0.5rem;
   `;
   return (
@@ -84,25 +89,24 @@ const Client = ({ ...props }) => {
                     <Title noMargin>{project.name}</Title>
                     <ReadMore>{project.description}</ReadMore>
                     <br />
-                    {/* some kind of vertical line */}
-                    {/* left section with border right */}
                   </LeftContainer>
                   <RightContainer>
                     {/* pic or video */}
                     <LanguageContainer>
                       {project.infrastructure.map((language: string) => {
                         return (
-                          <LanguageIcon
-                            src={`/img/${language}_icon.png`}
-                            onError={({ currentTarget }) => {
-                              currentTarget.onerror = null; // prevents looping
-                              currentTarget.src = '/img/HTML_icon.png';
-                            }}
-                          />
+                          <IconWrapper>
+                            <LanguageIcon
+                              src={`/img/${language}_icon.png`}
+                              onError={({ currentTarget }) => {
+                                currentTarget.onerror = null; // prevents looping
+                                currentTarget.src = '/img/Typescript_icon.png';
+                              }}
+                            />
+                          </IconWrapper>
                         );
                       })}
                     </LanguageContainer>
-                    {/* map icons? that would be cool */}
                     <p>
                       {formatMyDate(project.startDate)}-
                       {formatMyDate(project.endDate)}
@@ -128,25 +132,24 @@ const Client = ({ ...props }) => {
                       {project.description}
                     </ReadMore>
                     <br />
-                    {/* some kind of vertical line */}
-                    {/* left section with border right */}
                   </LeftContainer>
                   <RightContainer>
                     {/* pic or video */}
                     <LanguageContainer>
                       {project.infrastructure.map((language: string) => {
                         return (
-                          <LanguageIcon
-                            src={`/img/${language}_icon.png`}
-                            onError={({ currentTarget }) => {
-                              currentTarget.onerror = null; // prevents looping
-                              currentTarget.src = '/img/HTML_icon.png';
-                            }}
-                          />
+                          <IconWrapper>
+                            <LanguageIcon
+                              src={`/img/${language}_icon.png`}
+                              onError={({ currentTarget }) => {
+                                currentTarget.onerror = null; // prevents looping
+                                currentTarget.src = '/img/HTML_icon.png';
+                              }}
+                            />
+                          </IconWrapper>
                         );
                       })}
                     </LanguageContainer>
-                    {/* map icons? that would be cool */}
                     <p>
                       {formatMyDate(project.startDate)}-
                       {formatMyDate(project.endDate)}
@@ -155,6 +158,9 @@ const Client = ({ ...props }) => {
                 </ProjectContainer>
               );
             })}
+            <Button>
+              <Link to="/projects">Go back to projects</Link>
+            </Button>
           </Container>
         )
       ) : (

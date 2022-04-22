@@ -2,15 +2,16 @@ import styled from 'styled-components';
 import tw, { TwStyle } from 'twin.macro';
 
 export const Container = styled.div<{ lightMode?: boolean }>`
-  background-color: ${(props) => (props.lightMode ? 'white' : 'black')};
+  background-color: ${(props) => (props.lightMode ? '#f9f4fe' : 'black')};
+  min-height: ${(props) => (props.lightMode ? '0' : '100vh')};
   ${tw`
   flex 
   flex-col 
   w-full
-  min-h-screen
   items-center
   text-white
   pt-4
+  pb-4
   `};
 `;
 

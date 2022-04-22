@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { Button } from '../../styles/global.styles';
 import {
   PerspectiveCamera,
@@ -20,7 +20,7 @@ import Screen from './models/screen';
 import Phone from './models/phone';
 import CertificationsPage from '../../pages/certifications';
 import CERTIFICATIONS_QUERY from '../../graphql/Certification/certifications';
-import { ApolloProvider, useQuery } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client';
 import client from '../../utils/apolloClient';
 import { UIBottomContainer, UITopContainer } from './eApp.styles';
 import ABOUT_QUERY from '../../graphql/About/about';
@@ -42,8 +42,6 @@ softShadows();
 export default function App() {
   const [autoWalk, setAutoWalk] = useState<boolean>(false);
   const [screenNumber, setScreenNumber] = useState<number>(0);
-  // const [index, setIndex] = useState<number>(0);
-  // const [iconObject, setIconObject] = useState();
   const [tutorial, setTutorial] = useState<boolean>(false);
   const snap = useSnapshot(appState);
   const handleBack = () => {
@@ -58,23 +56,6 @@ export default function App() {
     'pragmatic',
     'leadership',
   ];
-
-  // const { loading, error, data } = useQuery(CERTIFICATIONS_QUERY);
-  // const randomObject = (array: any[]) => {
-  //   return array[Math.floor(Math.random() * array.length)];
-  // };
-  // useEffect(() => {
-  //   const tick = () => setIndex((i) => i + 1);
-  //   const id = setInterval(tick, 7000);
-  //   return () => clearInterval(id);
-  // }, []);
-  // useEffect(() => {
-  //   if (!loading && !error) {
-  //     setIconObject(
-  //       randomObject(data?.certifications.data[0].attributes.Certification)
-  //     );
-  //   }
-  // }, [index]);
 
   return (
     <>
@@ -140,15 +121,7 @@ export default function App() {
             {snap.verse === 'IBM' && (
               <>
                 {/* CERTIFICATIONS SECTION */}
-                {/* {iconObject && ( */}
-                <Icon
-                  position={[-16, 5, -70]}
-                  url="AWSCP"
-                  shape="Hexagon"
-                  // url={(iconObject as any)?.threedid}
-                  // shape={(iconObject as any)?.shape}
-                />
-                {/* )} */}
+                <Icon position={[-16, 5, -70]} />
                 <IBMLogo position={[-11, 2, -70]} scale={0.5} />
                 <Screen
                   scale={0.25}

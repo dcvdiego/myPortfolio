@@ -1,7 +1,7 @@
 import CERTIFICATIONS_QUERY from '../../../graphql/Certification/certifications';
 import { useQuery } from '@apollo/client';
 import { useGLTF, useTexture } from '@react-three/drei';
-import { Camera, useFrame } from '@react-three/fiber';
+import { useFrame } from '@react-three/fiber';
 import { degreesToRadians } from 'popmotion';
 import React, { Ref, useEffect, useRef, useState } from 'react';
 import { LinearMipMapLinearFilter, NearestFilter, Texture } from 'three';
@@ -41,7 +41,6 @@ function Icon({ ...props }) {
   }, [index]);
   let url = (iconObject as any)?.threedid;
   let shape = (iconObject as any)?.shape;
-  // let { url, shape } = props;
   let { nodes } = useGLTF(`/glb/${shape}.glb`) as GLTFResult;
   let texture = useTexture(`/img/${url}.png`);
   texture.flipY = shape === 'Hexagon' ? true : false;

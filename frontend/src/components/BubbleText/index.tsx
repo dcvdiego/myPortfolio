@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 // Word wrapper
-const Wrapper: React.FC = (props) => {
+const Wrapper: React.FC<{ children: JSX.Element[] }> = (props) => {
   // We'll do this to prevent wrapping of words using CSS
   return <span style={{ whiteSpace: 'nowrap' }}>{props.children}</span>;
 };
