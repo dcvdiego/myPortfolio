@@ -64,6 +64,8 @@ export const StyledIcon = styled(motion.div)`
 export const Label = styled.div`
   ${tw`
   w-48
+  h-40
+  overflow-y-scroll
   `}
   padding: 20px 0;
   transform: translateZ(0);
@@ -71,7 +73,7 @@ export const Label = styled.div`
 
 export const Default = styled(motion.span)`
   ${tw`
-    block
+    // block
   `}
 `;
 
@@ -79,6 +81,7 @@ export const DescriptionContainer = styled(motion.span)`
   ${tw`
   flex
   flex-col
+
 `}
 `;
 
@@ -91,6 +94,7 @@ export const DescriptionTitle = styled(motion.span)`
 export const DescriptionContent = styled(motion.span)`
   ${tw`
   text-xs
+  text-left
   `}
 `;
 
