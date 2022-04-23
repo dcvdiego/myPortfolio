@@ -1,6 +1,11 @@
 import React from 'react';
 import Layout from '../../components/Layout';
-import { Container, SubHeading, Title } from '../../styles/global.styles';
+import {
+  Container,
+  Loader,
+  SubHeading,
+  Title,
+} from '../../styles/global.styles';
 import WordCloud from '../../components/WordCloud';
 import { useLazyQuery, useQuery } from '@apollo/client';
 import TESTIMONIAL_WORD_QUERY from '../../graphql/Testimonials/testimonialWord';
@@ -55,7 +60,7 @@ const TestimonialsPage = () => {
             <WordCloud getTestimonial={getTestimonial} />
             <TestimonialContainer>
               {loading ? (
-                <p>Loading...</p>
+                <Loader />
               ) : error ? (
                 <p>Error, please contact me!</p>
               ) : data ? (
@@ -89,7 +94,7 @@ const TestimonialsPage = () => {
             <WordCloud getTestimonial={getTestimonial} />
             <TestimonialContainer>
               {loading ? (
-                <p>Loading...</p>
+                <Loader />
               ) : error ? (
                 <p>Error, please contact me!</p>
               ) : data ? (

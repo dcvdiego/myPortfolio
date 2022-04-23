@@ -17,6 +17,13 @@ const PROJECT_QUERY = gql`
             link
             repo
             description
+            preview {
+              data {
+                attributes {
+                  url
+                }
+              }
+            }
           }
         }
       }

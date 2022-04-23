@@ -8,6 +8,7 @@ import Custom404 from '../../../pages/404';
 import { TypedDocumentNode, useQuery } from '@apollo/client';
 import { Texture } from 'three';
 import { isMobile } from 'react-device-detect';
+import { Loader } from '../../../styles/global.styles';
 
 const Wrapper = styled.div`
   ${tw`
@@ -137,7 +138,7 @@ export default function Screen({
                   {error ? (
                     <Custom404 />
                   ) : loading ? (
-                    <h3>Loading...</h3>
+                    <Loader />
                   ) : (
                     <ComponentClone />
                   )}

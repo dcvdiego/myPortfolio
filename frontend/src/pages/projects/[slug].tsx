@@ -10,7 +10,7 @@ import Custom404 from '../404';
 import { useQuery } from '@apollo/client';
 import PROJECT_QUERY from '../../graphql/Projects/project';
 import tw, { styled } from 'twin.macro';
-import { formatMyDate } from '../../utils/generalHelpers';
+import { formatMyDate, isImage } from '../../utils/generalHelpers';
 import ReadMore from '../../components/ReadMore';
 
 const Client = ({ ...props }) => {
@@ -54,6 +54,7 @@ const Client = ({ ...props }) => {
     ${tw`
     flex
     flex-wrap
+    mr-4
     `}
   `;
   const RightContainer = styled.div`
@@ -76,10 +77,11 @@ const Client = ({ ...props }) => {
     height: 100%;
     padding: 0.5rem;
   `;
+
   return (
     <Layout screen={screen}>
       {!finalLoading && projects ? (
-        // if screen then lightMode, else dark mode?
+        // if screen then lightMode, else dark mode
         screen ? (
           <Container lightMode>
             {projects.map((project: any) => {
@@ -92,6 +94,15 @@ const Client = ({ ...props }) => {
                   </LeftContainer>
                   <RightContainer>
                     {/* pic or video */}
+                    {isImage(project.preview.data.attributes.url) && (
+                      <img
+                        src={
+                          import.meta.env.VITE_BACKEND_URL +
+                          '/' +
+                          project.preview.data.attributes.url
+                        }
+                      />
+                    )}
                     <LanguageContainer>
                       {project.infrastructure.map((language: string) => {
                         return (
@@ -135,6 +146,14 @@ const Client = ({ ...props }) => {
                   </LeftContainer>
                   <RightContainer>
                     {/* pic or video */}
+                    {isImage(project.preview.data.attributes.url) && (
+                      <img
+                        src={
+                          import.meta.env.VITE_BACKEND_URL +
+                          project.preview.data.attributes.url
+                        }
+                      />
+                    )}
                     <LanguageContainer>
                       {project.infrastructure.map((language: string) => {
                         return (
