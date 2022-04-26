@@ -23,7 +23,7 @@ const ProjectsPage = ({ ...props }) => {
   return (
     <Layout title="Projects" screen={screen}>
       <Container>
-        <Title>These are my projects</Title>
+        <Title>These are my {screen && 'giveback'} projects</Title>
         {!finalLoading &&
           !finalError &&
           projects.map((project: any) => (

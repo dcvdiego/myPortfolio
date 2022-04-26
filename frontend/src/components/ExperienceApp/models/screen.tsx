@@ -111,6 +111,8 @@ export default function Screen({
     <group
       ref={group as Ref<THREE.Group>}
       {...props}
+      scale={0.25}
+      rotation={[0, -Math.PI / 2, 0]}
       dispose={null}
       onPointerOver={over}
       onPointerOut={out}

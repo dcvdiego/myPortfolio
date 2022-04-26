@@ -58,8 +58,8 @@ export default function Certification({ data, screen }: IData) {
               ]}
               variants={{
                 unselected: {
-                  x: -150,
-                  y: -25,
+                  x: -30,
+                  y: -85,
                   scale: 0.3,
                 },
                 selected: {
@@ -102,9 +102,11 @@ export default function Certification({ data, screen }: IData) {
                 : labelTextVariantsUnselected
             }
           >
-            <motion.span variants={labelTitleVariants}>
-              {data.awardingBody}
-            </motion.span>
+            {screen ? null : (
+              <motion.span variants={labelTitleVariants}>
+                {data.awardingBody}
+              </motion.span>
+            )}
             <DescriptionContainer variants={descriptionTextVariants}>
               <DescriptionTitle variants={descriptionTextVariants}>
                 Description

@@ -32,7 +32,7 @@ export default function BaseSection({
   if (door && props?.position)
     appState.corridorEnd = (props.position as number[])[2] - 18;
   return (
-    <group ref={group as Ref<THREE.Group>} {...props} dispose={null}>
+    <group ref={group as Ref<THREE.Group>} scale={4} {...props} dispose={null}>
       <mesh
         receiveShadow
         geometry={nodes.Cylinder_3.geometry}

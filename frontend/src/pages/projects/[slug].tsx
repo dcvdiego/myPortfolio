@@ -94,15 +94,16 @@ const Client = ({ ...props }) => {
                   </LeftContainer>
                   <RightContainer>
                     {/* pic or video */}
-                    {isImage(project.preview.data.attributes.url) && (
-                      <img
-                        src={
-                          import.meta.env.VITE_BACKEND_URL +
-                          '/' +
-                          project.preview.data.attributes.url
-                        }
-                      />
-                    )}
+                    {project?.preview?.data?.attributes.url &&
+                      isImage(project.preview.data.attributes.url) && (
+                        <img
+                          src={
+                            import.meta.env.VITE_BACKEND_URL +
+                            '/' +
+                            project.preview.data.attributes.url
+                          }
+                        />
+                      )}
                     <LanguageContainer>
                       {project.infrastructure.map((language: string) => {
                         return (
@@ -146,14 +147,15 @@ const Client = ({ ...props }) => {
                   </LeftContainer>
                   <RightContainer>
                     {/* pic or video */}
-                    {isImage(project.preview.data.attributes.url) && (
-                      <img
-                        src={
-                          import.meta.env.VITE_BACKEND_URL +
-                          project.preview.data.attributes.url
-                        }
-                      />
-                    )}
+                    {project?.preview?.data?.attributes.url &&
+                      isImage(project.preview.data.attributes.url) && (
+                        <img
+                          src={
+                            import.meta.env.VITE_BACKEND_URL +
+                            project.preview.data.attributes.url
+                          }
+                        />
+                      )}
                     <LanguageContainer>
                       {project.infrastructure.map((language: string) => {
                         return (
@@ -177,9 +179,9 @@ const Client = ({ ...props }) => {
                 </ProjectContainer>
               );
             })}
-            <Button>
-              <Link to="/projects">Go back to projects</Link>
-            </Button>
+            <Link to="/projects">
+              <Button>Go back to projects</Button>
+            </Link>
           </Container>
         )
       ) : (
