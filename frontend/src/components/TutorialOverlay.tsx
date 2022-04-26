@@ -2,6 +2,7 @@ import React from 'react';
 import { Title, SubHeading } from '../styles/global.styles';
 import tw, { styled, TwStyle } from 'twin.macro';
 import { Marginer } from './Marginer';
+import { isMobile } from 'react-device-detect';
 
 interface ITutorialOverlayProps {
   setTutorial: React.Dispatch<React.SetStateAction<boolean>>;
@@ -25,7 +26,6 @@ const TutorialOverlay: React.FC<ITutorialOverlayProps> = ({
     items-center 
     justify-center 
     text-white
-
     `}
   `;
   const AppMenu = styled.div`
@@ -90,9 +90,10 @@ const TutorialOverlay: React.FC<ITutorialOverlayProps> = ({
               <Title>How does it work</Title>
               <SubHeading>Explore the universe!</SubHeading>
               <p>
-                A 3D version of the experiences I have had. Use WASD Controls (W
-                - Forward, S - Backward, A - Left, D - Right) or the directional
-                keys to roam around!
+                A 3D version of the experiences I have had. Use{' '}
+                {isMobile
+                  ? 'your finger to drag and roam around!'
+                  : 'WASD Controls (W - Forward, S - Backward, A - Left, D - Right) or the directional keys to roam around! '}
               </p>
               <Marginer direction="vertical" margin="2em" />
               <SubHeading>Interact with it!</SubHeading>

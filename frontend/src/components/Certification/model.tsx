@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { Ref, useRef } from 'react';
 import { useGLTF, useTexture } from '@react-three/drei';
 import { motion } from 'framer-motion-3d';
 import { degreesToRadians } from 'popmotion';
@@ -23,7 +23,7 @@ export default function Model({ ...props }) {
   const texture = useTexture(`/img/${url}.png`);
   texture.flipY = shape === 'Hexagon' ? true : false;
   return (
-    <group ref={group} dispose={null}>
+    <group ref={group as Ref<THREE.Group>} dispose={null}>
       <motion.mesh
         material={materials.Material}
         //   @ts-ignore

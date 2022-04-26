@@ -17,6 +17,7 @@ import TutorialOverlay from '../components/TutorialOverlay';
 import { useSnapshot } from 'valtio';
 import AvatarPicture from '../assets/avatar.png';
 import { isMobile } from 'react-device-detect';
+import { Link } from 'react-router-dom';
 
 const Bubble = !isMobile
   ? styled(motion.div)`
@@ -153,7 +154,7 @@ function Home() {
           >
             <AvatarCanvas action={action} location="AvatarConfigurator" />
             <Picker />
-            <Marginer direction="vertical" margin="6em" />
+            {/* <Marginer direction="vertical" margin="2em" /> */}
             {!isMobile && (
               <Button type="button" onClick={() => setAction('Dance')}>
                 Dance
@@ -177,6 +178,15 @@ function Home() {
               style={{ color: 'black', marginBottom: '2rem' }}
               onInput={(e) => setInput((e.target as HTMLInputElement).value)}
             />
+            <Marginer direction="vertical" margin="2rem" />
+            <SubHeading>
+              Check out the <Link to="/experiences">ExperienceVerse</Link> to
+              navigate through my projects and more!
+            </SubHeading>
+            <SubHeading>
+              Alternatively, use the navbar or footer to go to specific parts of
+              my portfolio. Have fun!
+            </SubHeading>
             {tutorial ? (
               <TutorialOverlay origin="home" setTutorial={setTutorial} />
             ) : null}

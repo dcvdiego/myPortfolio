@@ -1,7 +1,12 @@
 import React from 'react';
 
 import Layout from '../../components/Layout';
-import { Container, SubHeading, Title } from '../../styles/global.styles';
+import {
+  Container,
+  Loader,
+  SubHeading,
+  Title,
+} from '../../styles/global.styles';
 import tw, { styled } from 'twin.macro';
 
 import Certification from '../../components/Certification';
@@ -38,7 +43,7 @@ const CertificationsType: React.FC<ICTypeProps> = (type) => {
   const { loading, error, data } = useQuery(CERTIFICATIONS_TYPE_QUERY, {
     variables: type,
   });
-  if (loading) return <p>Loading</p>;
+  if (loading) return <Loader />;
   if (error) return <p>ERROR</p>;
   if (!data) return <p>Not found</p>;
   return (
@@ -60,7 +65,9 @@ const CertificationsTypeScreen: React.FC<ICTypeScreenProps> = ({
     <CategoryContainer>
       {componentData.certifications.data[0].attributes.Certification.map(
         (certification: any) => {
-          return <Certification data={certification} screen />;
+          return (
+            <Certification key={certification} data={certification} screen />
+          );
         }
       )}
     </CategoryContainer>

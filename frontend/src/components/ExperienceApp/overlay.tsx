@@ -5,6 +5,9 @@ import tw, { styled, TwStyle } from 'twin.macro';
 import { useSnapshot } from 'valtio';
 
 import { appState } from '../../utils/store';
+import { isMobile } from 'react-device-detect';
+
+// all overlays are broken in mobile (they go beyond the box)
 
 const AppContainer = styled.div`
   ${tw`
@@ -136,7 +139,10 @@ const Overlay = () => {
               </AppMenuButton>
               <AppMenuOptions>
                 <AppMenuControls>
-                  <p>Controls</p> WASD or ← arrows →
+                  <p>Controls</p>{' '}
+                  {isMobile
+                    ? 'touch and drag to move around'
+                    : 'WASD or ← arrows →'}
                 </AppMenuControls>
               </AppMenuOptions>
             </>

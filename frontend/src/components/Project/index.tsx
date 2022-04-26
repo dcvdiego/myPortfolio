@@ -5,7 +5,6 @@ import {
   ProjectClient,
   ProjectContainer,
   ProjectDates,
-  ProjectDescription,
   ProjectTitle,
 } from './project.styles';
 
@@ -29,6 +28,7 @@ interface IData {
 const Project = ({ data, screen }: IData) => {
   return (
     <ProjectContainer>
+      {/* preview above, ask designer? */}
       <ProjectTitle>
         {screen ? (
           data.name
@@ -42,7 +42,6 @@ const Project = ({ data, screen }: IData) => {
       <ProjectDates>
         {data.startDate} - {data.endDate ? data.endDate : 'Present'}
       </ProjectDates>
-      <ProjectDescription>{data.description}</ProjectDescription>
     </ProjectContainer>
   );
 };

@@ -1,11 +1,11 @@
 import { gql } from '@apollo/client';
 
-const PROJECT_QUERY = gql`
-  query Project($slug: String) {
+const GIVEBACK_PROJECTS_QUERY = gql`
+  query GivebackProjects {
     dataComponents {
       data {
         attributes {
-          Project(filters: { slug: { eq: $slug } }) {
+          Project(filters: { link: { eq: "Giveback" } }) {
             name
             clientName
             slug
@@ -31,4 +31,4 @@ const PROJECT_QUERY = gql`
   }
 `;
 
-export default PROJECT_QUERY;
+export default GIVEBACK_PROJECTS_QUERY;

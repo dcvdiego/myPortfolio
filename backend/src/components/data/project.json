@@ -39,6 +39,14 @@
     },
     "description": {
       "type": "text"
+    },
+    "preview": {
+      "allowedTypes": [
+        "images",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

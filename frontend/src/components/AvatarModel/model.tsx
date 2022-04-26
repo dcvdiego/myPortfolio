@@ -1,4 +1,10 @@
-import React, { forwardRef, useEffect, useLayoutEffect, useRef } from 'react';
+import React, {
+  forwardRef,
+  MutableRefObject,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+} from 'react';
 import * as THREE from 'three';
 
 import { useGLTF, useAnimations } from '@react-three/drei';
@@ -107,7 +113,11 @@ const AvatarModel = forwardRef<
   }
   return (
     <group
-      ref={location === 'AvatarConfigurator' ? group : ref}
+      ref={
+        location === 'AvatarConfigurator'
+          ? (group as MutableRefObject<THREE.Group>)
+          : ref
+      }
       {...props}
       dispose={null}
       onPointerMissed={() => (state.current = null)}

@@ -18,11 +18,12 @@ const ProjectsPage = ({ ...props }) => {
     finalError = error;
     finalData = data;
   }
+  // TODO: when there is more than one experience it is not only data[0], when I finish Pre-University I need to take that off...
   const projects = finalData?.dataComponents.data[0].attributes.Project;
   return (
     <Layout title="Projects" screen={screen}>
       <Container>
-        <Title>These are my projects</Title>
+        <Title>These are my {screen && 'giveback'} projects</Title>
         {!finalLoading &&
           !finalError &&
           projects.map((project: any) => (

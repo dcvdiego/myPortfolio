@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
-import { Link } from 'react-router-dom';
 
 const ExperienceContainer = styled.div`
   ${tw`
@@ -23,34 +22,41 @@ const ExperienceDates = styled.h3`
     text-sm
 `}
 `;
-const ExperienceDescription = styled.p`
+const ExperienceRole = styled.p`
   ${tw`
     text-xs
+    font-bold
 `}
 `;
-interface IExperienceObject {
-  name: string;
-  level?: string;
-  role?: string;
-  slug?: string;
-  projects: string[];
-  description: string;
-  dates: string;
-  testimonials: string[];
-}
-interface IData {
-  data: IExperienceObject;
-}
-const Experience = ({ data }: IData) => {
+// interface IExperienceObject {
+//   name: string;
+//   level?: string;
+//   role?: string;
+//   slug?: string;
+//   projects: string[];
+//   description: string;
+//   dates: string;
+//   testimonials: string[];
+// }
+// interface IData {
+//   data: IExperienceObject;
+// }
+const Experience = ({ data, setActive }: any) => {
   return (
     <ExperienceContainer>
       <ExperienceTitle>
-        <Link to={`/experiences/${data?.slug ? data.slug : data.name}`}>
-          <a>{data.name}</a>
-        </Link>
+        <span
+          style={{ cursor: 'pointer' }}
+          onClick={() => setActive(data.attributes.name)}
+        >
+          {data.attributes.name}
+        </span>
       </ExperienceTitle>
-      <ExperienceDates>{data.dates}</ExperienceDates>
-      <ExperienceDescription>{data.description}</ExperienceDescription>
+      <ExperienceDates>
+        {data.attributes.startDate} -
+        {data.attributes.endDate ? data.attributes.endDate : 'Present'}
+      </ExperienceDates>
+      <ExperienceRole>{data.attributes.role}</ExperienceRole>
     </ExperienceContainer>
   );
 };
