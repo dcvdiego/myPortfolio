@@ -13,6 +13,7 @@ justify-between
 export const ProjectTitle = styled.h2`
   ${tw`
   text-lg
+  underline
 `};
 `;
 export const ProjectClient = styled.h2`

@@ -18,6 +18,7 @@ import BalletMannequin from './models/balletMannequin';
 import Dress from './models/dress';
 import Screen from './models/screen';
 import Phone from './models/phone';
+import Headset from './models/headset';
 import CertificationsPage from '../../pages/certifications';
 import CERTIFICATIONS_QUERY from '../../graphql/Certification/certifications';
 import { ApolloProvider } from '@apollo/client';
@@ -29,6 +30,7 @@ import LFWLogo from '../../assets/london-fashion-week-logo.png';
 import AwardCover from '../../assets/award.png';
 import GivebackCover from '../../assets/giveback.jpeg';
 import AvatarCover from '../../assets/avatar.png';
+import BlockchainCover from '../../assets/blockchain.jpeg';
 import { isMobile } from 'react-device-detect';
 import PROJECT_QUERY from '../../graphql/Projects/project';
 import Client from '../../pages/projects/[slug]';
@@ -36,6 +38,7 @@ import IBMLogo from './models/IBM';
 import TutorialOverlay from '../TutorialOverlay';
 import ProjectsPage from '../../pages/projects';
 import GIVEBACK_PROJECTS_QUERY from '../../graphql/Projects/givebackProjects';
+import CustomAvatar from './models/customAvatar';
 
 softShadows();
 
@@ -146,18 +149,31 @@ export default function App() {
                   screen={screenNumber === 2 ? screenNumber : 0}
                   onClick={() => setScreenNumber(2)}
                 />
-                {/* GIVEBACK SECTION */}
+                {/* METAVERSE SECTION */}
                 <BaseSection position={[-11, 4.5, -98]} />
+                <Headset position={[-11, 4.5, -105]} scale={2} />
                 <Screen
-                  position={[-2, 0, -110]}
-                  cover={GivebackCover}
-                  query={GIVEBACK_PROJECTS_QUERY}
-                  Component={<ProjectsPage screen />}
+                  position={[-2, 0, -105]}
+                  cover={BlockchainCover}
+                  query={PROJECT_QUERY}
+                  variable={{ slug: 'metaverse' }}
+                  Component={<Client screen />}
                   screen={screenNumber === 3 ? screenNumber : 0}
                   onClick={() => setScreenNumber(3)}
                 />
-                <Phone position={[-11, 10, -110]} scale={0.5} />
-                <BaseSection position={[-11, 4.5, -116]} door />
+                <CustomAvatar scale={3} position={[-19, 1, -114]} />
+                {/* GIVEBACK SECTION */}
+                <BaseSection position={[-11, 4.5, -116]} />
+                <Screen
+                  position={[-2, 0, -128]}
+                  cover={GivebackCover}
+                  query={GIVEBACK_PROJECTS_QUERY}
+                  Component={<ProjectsPage screen />}
+                  screen={screenNumber === 4 ? screenNumber : 0}
+                  onClick={() => setScreenNumber(4)}
+                />
+                <Phone position={[-11, 10, -128]} scale={0.5} />
+                <BaseSection position={[-11, 4.5, -134]} door />
               </>
             )}
           </Suspense>
