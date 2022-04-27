@@ -169,7 +169,14 @@ function Home() {
             <SubHeading>
               If you want to use your own
               <p> </p>
-              <button onClick={() => setTutorial(true)}> avatar</button>:
+              <button
+                onClick={() => setTutorial(true)}
+                style={{ textDecoration: 'underline' }}
+              >
+                {' '}
+                avatar
+              </button>
+              :
             </SubHeading>
             {input === 'invalid' && (
               <SubHeading>Please upload a valid url</SubHeading>
@@ -180,8 +187,11 @@ function Home() {
             />
             <Marginer direction="vertical" margin="2rem" />
             <SubHeading>
-              Check out the <Link to="/experiences">ExperienceVerse</Link> to
-              navigate through my projects and more!
+              Check out the{' '}
+              <Link to="/experiences" style={{ textDecoration: 'underline' }}>
+                ExperienceVerse
+              </Link>{' '}
+              to navigate through my projects and more!
             </SubHeading>
             <SubHeading>
               Alternatively, use the navbar or footer to go to specific parts of
