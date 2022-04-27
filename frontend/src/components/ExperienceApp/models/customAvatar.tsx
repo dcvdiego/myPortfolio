@@ -1,23 +1,23 @@
 import * as THREE from 'three';
-import React, { useEffect, forwardRef, useState, useRef, Ref } from 'react';
+import React, { useEffect, useState, useRef, Ref } from 'react';
 import { useGLTF, useAnimations } from '@react-three/drei';
-import { GLTF } from 'three-stdlib';
+// import { GLTF } from 'three-stdlib';
 import usePrevious from '../../../hooks/usePrevious';
 
-interface avatarInterface {
-  character: string;
-  top: any;
-  bottom: any;
-  shoes: any;
-  action: any;
-}
+// interface avatarInterface {
+//   character: string;
+//   top: any;
+//   bottom: any;
+//   shoes: any;
+//   action: any;
+// }
 
 // type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 const CustomAvatar = ({ ...props }) => {
   const { nodes, materials, animations } = useGLTF(
     '/glb/customAvatar.glb'
   ) as any;
-  const group = useRef();
+  const group = useRef<THREE.Group>();
   const filteredByGarment = (garment: string) =>
     Object.fromEntries(
       Object.entries(materials).filter(([key]) => key.includes(garment))
