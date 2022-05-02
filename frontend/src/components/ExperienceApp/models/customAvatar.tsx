@@ -31,7 +31,7 @@ const CustomAvatar = ({ ...props }) => {
   const [top, setTop] = useState(xGarment('Top'));
   const [bottom, setBottom] = useState(xGarment('Bottom'));
   const [shoes, setShoes] = useState(xGarment('Footwear'));
-  const action = 'Idle';
+  const [action, setAction] = useState<string>('Idle');
 
   const { actions } = useAnimations(animations, group);
   let previousAction: any = usePrevious(action);
@@ -60,11 +60,13 @@ const CustomAvatar = ({ ...props }) => {
         <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
           <primitive object={nodes.mixamorigHips} />
           <skinnedMesh
+            onClick={() => setAction('Wave')}
             geometry={nodes.Body.geometry}
             material={materials.Body}
             skeleton={nodes.Body.skeleton}
           />
           <skinnedMesh
+            onClick={() => setAction('Wave')}
             geometry={nodes.Hair.geometry}
             material={materials.Hair}
             skeleton={nodes.Hair.skeleton}
@@ -87,6 +89,7 @@ const CustomAvatar = ({ ...props }) => {
           />
           <skinnedMesh
             name="Head"
+            onClick={() => setAction('Wave')}
             geometry={nodes.Head.geometry}
             material={materials.Skin}
             skeleton={nodes.Head.skeleton}
@@ -102,12 +105,14 @@ const CustomAvatar = ({ ...props }) => {
             morphTargetInfluences={nodes.Teeth.morphTargetInfluences}
           />
           <skinnedMesh
+            onClick={() => setAction('Wave')}
             geometry={nodes[`Bottom${bottom}`].geometry}
             material={materials[`Bottom.${bottom}`]}
             skeleton={nodes[`Bottom${bottom}`].skeleton}
           />
 
           <skinnedMesh
+            onClick={() => setAction('Wave')}
             geometry={nodes[`Top${top}`].geometry}
             material={materials[`Top.${top}`]}
             material-color="#000000"
@@ -115,6 +120,7 @@ const CustomAvatar = ({ ...props }) => {
           />
 
           <skinnedMesh
+            onClick={() => setAction('Wave')}
             geometry={nodes[`Footwear${shoes}`].geometry}
             material={materials[`Footwear.${shoes}`]}
             skeleton={nodes[`Footwear${shoes}`].skeleton}

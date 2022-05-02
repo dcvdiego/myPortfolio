@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Layout from '../../components/Layout';
-import { Container, Title } from '../../styles/global.styles';
+import { Container, Loader, Title } from '../../styles/global.styles';
 import Project from '../../components/Project';
 // import projects from '../../assets/data/projects.json';
 import PROJECTS_QUERY from '../../graphql/Projects/projects';
 import { useQuery } from '@apollo/client';
 
 const ProjectsPage = ({ ...props }) => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }, []);
   const { screen, componentData } = props;
   let finalData, finalLoading, finalError;
   if (screen) {
@@ -24,6 +27,7 @@ const ProjectsPage = ({ ...props }) => {
     <Layout title="Projects" screen={screen}>
       <Container>
         <Title>These are my {screen && 'giveback'} projects</Title>
+        {finalLoading && <Loader />}
         {!finalLoading &&
           !finalError &&
           projects.map((project: any) => (

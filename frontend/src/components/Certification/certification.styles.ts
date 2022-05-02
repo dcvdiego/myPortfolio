@@ -67,8 +67,14 @@ export const Label = styled.div`
   h-40
   overflow-y-scroll
   `}
+
   padding: 20px 0;
   transform: translateZ(0);
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const Default = styled(motion.span)`

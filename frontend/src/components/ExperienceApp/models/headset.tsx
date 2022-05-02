@@ -147,4 +147,4 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
   );
 }
 
-useGLTF.preload('/headset.glb');
+useGLTF.preload('/glb/headset.glb');

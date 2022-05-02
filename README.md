@@ -1,5 +1,5 @@
 <h2 align="center">
-  MyPortfolio ✨ 🚀
+  MyPortfolio ✨ 🚀 -Beta
 </h2>
 
 My name is Diego Chuman. I am an aspiring full stack developer and this is my portfolio repository, why not keep it open-source :D.
@@ -29,5 +29,6 @@ yarn start # npm start
 
 ### CURRENT BUGS
 
-- In ExperienceApp, there is a bug in that the character/camera can go through the tunnel, must be a useEffect limit
-- Figure out how to do something when first loop ends so it goes back to being Idle!
+- Figure out how to do something when first loop ends so it goes back to being Idle for avatar animations!
+- Can't interact with CustomAvatar for some reason
+- In mobile, in the ExperienceApp, scrolling is way too sensitive, not sure why

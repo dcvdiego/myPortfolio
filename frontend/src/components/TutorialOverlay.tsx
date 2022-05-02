@@ -20,7 +20,7 @@ const TutorialOverlay: React.FC<ITutorialOverlayProps> = ({
     ${tw`
     absolute 
     left-0 
-    w-full 
+    w-full
     h-full 
     flex 
     items-center 
@@ -77,6 +77,24 @@ const TutorialOverlay: React.FC<ITutorialOverlayProps> = ({
     h-full
     `}
   `;
+  const TutorialContainer = styled.div`
+    ${tw`
+flex
+    flex-row
+    flex-basis[0]
+    flex-grow
+
+    `};
+    div {
+      ${tw`
+      flex-basis[0]
+    flex-grow
+      `}
+      p {
+        word-wrap: break-word;
+      }
+    }
+  `;
   return (
     <AppContainer
       style={{
@@ -88,31 +106,41 @@ const TutorialOverlay: React.FC<ITutorialOverlayProps> = ({
           {origin === 'app' ? (
             <>
               <Title>How does it work</Title>
-              <SubHeading>Explore the universe!</SubHeading>
-              <p>
-                A 3D version of the experiences I have had. Use{' '}
-                {isMobile
-                  ? 'your finger to drag and roam around!'
-                  : 'WASD Controls (W - Forward, S - Backward, A - Left, D - Right) or the directional keys to roam around! '}
-              </p>
-              <Marginer direction="vertical" margin="2em" />
-              <SubHeading>Interact with it!</SubHeading>
-              <p>
-                Treat it like a museum. It is a showcase of my work in the
-                middle and left sides, however on the right there are small
-                screens that you can click to learn more about each experience!
-              </p>
-              <Marginer direction="vertical" margin="2em" />
-              <SubHeading>
-                Jump through other "ExperienceVerse"s, or continue navigating
-                the site!
-              </SubHeading>
-              <p>
-                Once you reach the end, you can opt to go back to the main menu
-                and choose another experience. Currently IBM is the only one
-                available. Feel free to access other parts of my site too!
-              </p>
-              <Marginer direction="vertical" margin="2em" />
+              <TutorialContainer>
+                <div>
+                  <SubHeading>Explore the universe!</SubHeading>
+                  <p>
+                    A 3D version of the experiences I have had. Use{' '}
+                    {isMobile
+                      ? 'your finger to drag and roam around!'
+                      : 'WASD Controls (W - Forward, S - Backward, A - Left, D - Right) or the directional keys to roam around! '}
+                  </p>
+                  <Marginer direction="horizontal" margin="1em" />
+                </div>
+                <div>
+                  <SubHeading>Interact with it!</SubHeading>
+                  <p>
+                    Treat it like a museum. It is a showcase of my work in the
+                    middle and left sides, however on the right there are small
+                    screens that you can click to learn more about each
+                    experience!
+                  </p>
+                  <Marginer direction="horizontal" margin="1em" />
+                </div>
+                <div>
+                  <SubHeading>
+                    Jump through other "ExperienceVerse"s!
+                  </SubHeading>
+                  <p>
+                    Once you reach the end, you can opt to go back to the main
+                    menu and choose another experience. Currently IBM is the
+                    only one available. Feel free to access other parts of my
+                    site too!
+                  </p>
+                  <Marginer direction="horizontal" margin="1em" />
+                </div>
+              </TutorialContainer>
+              <Marginer direction="vertical" margin="1em" />
               <AppMenuButton color="purple" onClick={() => setTutorial(false)}>
                 Thank you, now take me back!
               </AppMenuButton>
@@ -120,28 +148,37 @@ const TutorialOverlay: React.FC<ITutorialOverlayProps> = ({
           ) : origin === 'home' ? (
             <>
               <Title>How to add your own avatar</Title>
-              <SubHeading>Step 1: ReadyPlayerMe</SubHeading>
-              <p>
-                Go to the website
-                <a href="https://readyplayer.me"> ReadyPlayer.me</a> and create
-                a username. This will then prompt you to create your own avatar
-                using their own avatar configurator, go wild! If you already
-                have an avatar you'd like to use, skip to step 2
-              </p>
-              <Marginer direction="vertical" margin="2em" />
-              <SubHeading>Step 2: URL</SubHeading>
-              <p>
-                Enter the hub where your avatar resides. You can either click on
-                the download button at the bottom and copy the .glb URL, or head
-                to the My Avatars tab and on the three dots dropdown menu click
-                Copy .glb URL
-              </p>
-              <Marginer direction="vertical" margin="2em" />
-              <SubHeading>Step 3: Paste and customize!</SubHeading>
-              <p>
-                Paste the link and your avatar will automatically find itself
-                here
-              </p>
+
+              <TutorialContainer>
+                <div>
+                  <SubHeading>Step 1: ReadyPlayerMe</SubHeading>
+                  <p>
+                    Go to the website
+                    <a href="https://readyplayer.me"> ReadyPlayer.me</a> and
+                    create a username. This will then prompt you to create your
+                    own avatar using their own avatar configurator, go wild! If
+                    you already have an avatar you'd like to use, skip to step 2
+                  </p>
+                </div>
+                <Marginer direction="horizontal" margin="2em" />
+                <div>
+                  <SubHeading>Step 2: URL</SubHeading>
+                  <p>
+                    Enter the hub where your avatar resides. You can either
+                    click on the download button at the bottom and copy the .glb
+                    URL, or head to the My Avatars tab and on the three dots
+                    dropdown menu click Copy .glb URL
+                  </p>
+                </div>
+                <Marginer direction="horizontal" margin="2em" />
+                <div>
+                  <SubHeading>Step 3: Paste and customize!</SubHeading>
+                  <p>
+                    Paste the link and your avatar will automatically find
+                    itself here
+                  </p>
+                </div>
+              </TutorialContainer>
               <Marginer direction="vertical" margin="2em" />
               <AppMenuButton color="blue" onClick={() => setTutorial(false)}>
                 I understand

@@ -39,6 +39,9 @@ import TutorialOverlay from '../TutorialOverlay';
 import ProjectsPage from '../../pages/projects';
 import GIVEBACK_PROJECTS_QUERY from '../../graphql/Projects/givebackProjects';
 import CustomAvatar from './models/customAvatar';
+import BigScreen from './models/bigScreen';
+import testVideo from '../../assets/test.mp4';
+import givebackPlusVideo from '../../assets/giveback+.mp4';
 
 softShadows();
 
@@ -46,6 +49,7 @@ export default function App() {
   const [autoWalk, setAutoWalk] = useState<boolean>(false);
   const [screenNumber, setScreenNumber] = useState<number>(0);
   const [tutorial, setTutorial] = useState<boolean>(false);
+  const [transparent, setTransparent] = useState<boolean>(false);
   const snap = useSnapshot(appState);
   const handleBack = () => {
     appState.verse = null;
@@ -74,7 +78,6 @@ export default function App() {
       >
         <ApolloProvider client={client}>
           <PerspectiveCamera />
-
           <Stars
             radius={100}
             depth={50}
@@ -89,9 +92,10 @@ export default function App() {
                 AutoWalk={autoWalk}
                 location="App"
                 screen={screenNumber > 0 ? true : false}
+                setTransparent={setTransparent}
               />
             )}
-            <BaseSection position={[-11, 4.5, -62]} />
+            <BaseSection transparent={transparent} position={[-11, 4.5, -62]} />
             {/* Pre-Professional ExperienceVerse */}
             {snap.verse === 'PP' && (
               <>
@@ -109,7 +113,11 @@ export default function App() {
                   screen={screenNumber === 1 ? screenNumber : 0}
                   onClick={() => setScreenNumber(1)}
                 />
-                <BaseSection position={[-11, 4.5, -80]} door />
+                <BaseSection
+                  transparent={transparent}
+                  position={[-11, 4.5, -80]}
+                  door
+                />
                 {/* IDEAS:
                 Pre-Uni: Not sure... added about me already!
                 Uni: Add University badge and Gaming society tech
@@ -132,8 +140,12 @@ export default function App() {
                   screen={screenNumber === 1 ? screenNumber : 0}
                   onClick={() => setScreenNumber(1)}
                 />
+                <BigScreen url={testVideo} position={[-2, 0, -70]} />
                 {/* LONDON FASHION WEEK SECTION */}
-                <BaseSection position={[-11, 4.5, -80]} />
+                <BaseSection
+                  transparent={transparent}
+                  position={[-11, 4.5, -80]}
+                />
                 <BalletMannequin
                   scale={4}
                   position={[-19, 1, -94]}
@@ -149,11 +161,15 @@ export default function App() {
                   screen={screenNumber === 2 ? screenNumber : 0}
                   onClick={() => setScreenNumber(2)}
                 />
+                <BigScreen url={testVideo} position={[-2, 0, -90]} />
                 {/* METAVERSE SECTION */}
-                <BaseSection position={[-11, 4.5, -98]} />
-                <Headset position={[-11, 4.5, -105]} scale={2} />
+                <BaseSection
+                  transparent={transparent}
+                  position={[-11, 4.5, -98]}
+                />
+                <Headset position={[-11, 4.5, -107]} scale={2} />
                 <Screen
-                  position={[-2, 0, -105]}
+                  position={[-2, 0, -108]}
                   cover={BlockchainCover}
                   query={PROJECT_QUERY}
                   variable={{ slug: 'metaverse' }}
@@ -161,19 +177,31 @@ export default function App() {
                   screen={screenNumber === 3 ? screenNumber : 0}
                   onClick={() => setScreenNumber(3)}
                 />
-                <CustomAvatar scale={3} position={[-19, 1, -114]} />
+                <CustomAvatar
+                  scale={2.25}
+                  position={[-19, 1, -114]}
+                  rotation={[0, Math.PI / 6, 0]}
+                />
                 {/* GIVEBACK SECTION */}
-                <BaseSection position={[-11, 4.5, -116]} />
+                <BaseSection
+                  transparent={transparent}
+                  position={[-11, 4.5, -116]}
+                />
                 <Screen
-                  position={[-2, 0, -128]}
+                  position={[-2, 0, -125]}
                   cover={GivebackCover}
                   query={GIVEBACK_PROJECTS_QUERY}
                   Component={<ProjectsPage screen />}
                   screen={screenNumber === 4 ? screenNumber : 0}
                   onClick={() => setScreenNumber(4)}
                 />
+                <BigScreen url={givebackPlusVideo} position={[-2, 0, -125]} />
                 <Phone position={[-11, 10, -128]} scale={0.5} />
-                <BaseSection position={[-11, 4.5, -134]} door />
+                <BaseSection
+                  transparent={transparent}
+                  position={[-11, 4.5, -134]}
+                  door
+                />
               </>
             )}
           </Suspense>

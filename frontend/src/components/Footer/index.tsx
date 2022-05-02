@@ -133,8 +133,8 @@ const Footer = () => {
       </InnerContainer>
       <BottomContainer>
         <OSText>
-          Open Source project made by Diego Chuman and everyone in creds. Check
-          out the GitHub repo!
+          Open Source project made by Diego Chuman and everyone in{' '}
+          <Link to="/creds">Creds</Link>. Check out the GitHub repo!
         </OSText>
       </BottomContainer>
     </FooterContainer>

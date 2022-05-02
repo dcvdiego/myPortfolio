@@ -31,7 +31,7 @@ const NavItem = styled.li<{ menu?: any }>`
     css`
       ${tw`
     text-white
-    text-3xl
+    text-2xl
     mb-3
     focus:text-white
     `};
