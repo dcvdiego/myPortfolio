@@ -165,7 +165,7 @@ const Client = ({ ...props }) => {
                       >
                         {project.name}
                       </Title>
-                      <ReadMore style={{ alignItems: 'center' }}>
+                      <ReadMore style={{ alignItems: 'center' } as const}>
                         {project?.description}
                       </ReadMore>
                       <br />

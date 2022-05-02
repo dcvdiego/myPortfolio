@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
-const ReadMore = (props: any) => {
-  const text = props.children;
+
+interface IReadMoreProps {
+  children: React.ReactNode;
+  word?: string;
+  style?: React.CSSProperties;
+}
+const ReadMore: React.FunctionComponent<IReadMoreProps> = ({ ...props }) => {
+  const { children, word } = props;
+  const text = children;
   const [isReadMore, setIsReadMore] = useState(true);
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
@@ -10,10 +17,14 @@ const ReadMore = (props: any) => {
       <p
         dangerouslySetInnerHTML={{
           __html: isReadMore
-            ? text
-                .replaceAll(props.word, `<b>${props.word}</b>`)
-                .slice(0, 150) + '...'
-            : text.replaceAll(props.word, `<b>${props.word}</b>`),
+            ? word
+              ? (text as string)!
+                  .replaceAll(word, `<b>${word}</b>`)
+                  .slice(0, 150) + '...'
+              : (text as string)!.slice(0, 150)
+            : word
+            ? (text as string)!.replaceAll(word, `<b>${word}</b>`)
+            : (text as string),
         }}
       />
       <span style={{ cursor: 'pointer' }} onClick={toggleReadMore}>

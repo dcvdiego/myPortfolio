@@ -43,7 +43,9 @@ interface IScreenProps {
   Component: JSX.Element;
   screen: number;
   cover: string;
-  variable?: any;
+  variable?: {
+    [key: string]: string;
+  };
 }
 
 export default function Screen({

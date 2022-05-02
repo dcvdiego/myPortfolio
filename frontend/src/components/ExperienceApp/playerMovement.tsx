@@ -19,7 +19,7 @@ interface IPlayerMovementProps {
   AutoWalk: boolean;
   location: LocationName;
   screen?: boolean;
-  setTransparent: any;
+  setTransparent: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export default function PlayerMovement({
   AutoWalk,

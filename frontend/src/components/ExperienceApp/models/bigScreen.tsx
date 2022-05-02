@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import React, { Ref, useEffect, useRef, useState } from 'react';
 
-import { Html, useGLTF, useTexture } from '@react-three/drei';
+import { useGLTF } from '@react-three/drei';
 
 import { GLTF } from 'three-stdlib';
 
