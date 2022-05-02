@@ -28,20 +28,9 @@ const ExperienceRole = styled.p`
     font-bold
 `}
 `;
-// interface IExperienceObject {
-//   name: string;
-//   level?: string;
-//   role?: string;
-//   slug?: string;
-//   projects: string[];
-//   description: string;
-//   dates: string;
-//   testimonials: string[];
-// }
-// interface IData {
-//   data: IExperienceObject;
-// }
-const Experience = ({ data, setActive }: any) => {
+
+const Experience = ({ ...props }) => {
+  const { data, setActive } = props;
   return (
     <ExperienceContainer>
       <ExperienceTitle>

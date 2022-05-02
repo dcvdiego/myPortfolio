@@ -19,10 +19,12 @@ type GLTFResult = GLTF & {
 
 interface IBaseSectionProps {
   door?: boolean;
+  transparent: boolean;
 }
 
 export default function BaseSection({
   door,
+  transparent,
   ...props
 }: JSX.IntrinsicElements['group'] & IBaseSectionProps) {
   const group = useRef<THREE.Group>();
@@ -63,10 +65,13 @@ export default function BaseSection({
       </group>
       <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
         <mesh
-          receiveShadow
           geometry={nodes.Mesh001.geometry}
           material={nodes.Mesh001.material}
+          material-opacity={transparent ? 0.5 : 1}
+          // material-alphaTest={1}
+          material-transparent
         />
+
         <mesh
           receiveShadow
           geometry={nodes.Mesh001_1.geometry}

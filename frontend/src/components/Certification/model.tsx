@@ -26,8 +26,7 @@ export default function Model({ ...props }) {
     <group ref={group as Ref<THREE.Group>} dispose={null}>
       <motion.mesh
         material={materials.Material}
-        //   @ts-ignore
-        geometry={nodes[shape]!.geometry}
+        geometry={nodes[shape as keyof typeof nodes]!.geometry}
         rotation={[
           Math.PI / 2,
           shape === 'Circle'

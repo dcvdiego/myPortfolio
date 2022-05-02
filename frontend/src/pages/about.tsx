@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ABOUT_QUERY from '../graphql/About/about';
 import { useQuery } from '@apollo/client';
 import Layout from '../components/Layout';
@@ -7,6 +7,9 @@ import { styled } from 'twin.macro';
 import ReactMarkdown from 'react-markdown';
 
 function AboutPage({ ...props }) {
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }, []);
   const { screen, componentData } = props;
   let finalData, finalLoading, finalError;
   if (screen) {

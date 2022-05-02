@@ -1,22 +1,50 @@
 import * as THREE from 'three';
 import React, { useEffect, useState, useRef, Ref } from 'react';
 import { useGLTF, useAnimations } from '@react-three/drei';
-// import { GLTF } from 'three-stdlib';
+import { GLTF } from 'three-stdlib';
 import usePrevious from '../../../hooks/usePrevious';
 
-// interface avatarInterface {
-//   character: string;
-//   top: any;
-//   bottom: any;
-//   shoes: any;
-//   action: any;
-// }
+type GLTFResult = GLTF & {
+  nodes: {
+    Body: THREE.SkinnedMesh;
+    Bottomblack: THREE.SkinnedMesh;
+    Bottomgrey: THREE.SkinnedMesh;
+    BottomheartPants: THREE.SkinnedMesh;
+    FootwearbigWhiteTrainers: THREE.SkinnedMesh;
+    FootwearblackBoots: THREE.SkinnedMesh;
+    FootwearblackWork: THREE.SkinnedMesh;
+    FootwearwhiteLow: THREE.SkinnedMesh;
+    Hair: THREE.SkinnedMesh;
+    TopwhiteTop: THREE.SkinnedMesh;
+    TopyellowHoodie: THREE.SkinnedMesh;
+    EyeLeft: THREE.SkinnedMesh;
+    EyeRight: THREE.SkinnedMesh;
+    Head: THREE.SkinnedMesh;
+    Teeth: THREE.SkinnedMesh;
+    mixamorigHips: THREE.Bone;
+  };
+  materials: {
+    Body: THREE.MeshStandardMaterial;
+    ['Bottom.black']: THREE.MeshStandardMaterial;
+    ['Bottom.grey']: THREE.MeshStandardMaterial;
+    ['Bottom.heartPants']: THREE.MeshStandardMaterial;
+    ['Footwear.bigWhiteTrainers']: THREE.MeshStandardMaterial;
+    ['Footwear.blackBoots']: THREE.MeshStandardMaterial;
+    ['Footwear.blackWork']: THREE.MeshStandardMaterial;
+    ['Footwear.whiteLow']: THREE.MeshStandardMaterial;
+    Hair: THREE.MeshStandardMaterial;
+    ['Top.whiteTop']: THREE.MeshStandardMaterial;
+    ['Top.yellowHoodie']: THREE.MeshStandardMaterial;
+    Eye: THREE.MeshStandardMaterial;
+    Skin: THREE.MeshStandardMaterial;
+    Teeth: THREE.MeshStandardMaterial;
+  };
+};
 
-// type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 const CustomAvatar = ({ ...props }) => {
   const { nodes, materials, animations } = useGLTF(
     '/glb/customAvatar.glb'
-  ) as any;
+  ) as GLTFResult;
   const group = useRef<THREE.Group>();
   const filteredByGarment = (garment: string) =>
     Object.fromEntries(
@@ -31,7 +59,7 @@ const CustomAvatar = ({ ...props }) => {
   const [top, setTop] = useState(xGarment('Top'));
   const [bottom, setBottom] = useState(xGarment('Bottom'));
   const [shoes, setShoes] = useState(xGarment('Footwear'));
-  const action = 'Idle';
+  const [action, setAction] = useState<string>('Idle');
 
   const { actions } = useAnimations(animations, group);
   let previousAction: any = usePrevious(action);
@@ -60,11 +88,13 @@ const CustomAvatar = ({ ...props }) => {
         <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
           <primitive object={nodes.mixamorigHips} />
           <skinnedMesh
+            onClick={() => setAction('Wave')}
             geometry={nodes.Body.geometry}
             material={materials.Body}
             skeleton={nodes.Body.skeleton}
           />
           <skinnedMesh
+            onClick={() => setAction('Wave')}
             geometry={nodes.Hair.geometry}
             material={materials.Hair}
             skeleton={nodes.Hair.skeleton}
@@ -87,6 +117,7 @@ const CustomAvatar = ({ ...props }) => {
           />
           <skinnedMesh
             name="Head"
+            onClick={() => setAction('Wave')}
             geometry={nodes.Head.geometry}
             material={materials.Skin}
             skeleton={nodes.Head.skeleton}
@@ -102,21 +133,29 @@ const CustomAvatar = ({ ...props }) => {
             morphTargetInfluences={nodes.Teeth.morphTargetInfluences}
           />
           <skinnedMesh
+            onClick={() => setAction('Wave')}
+            // @ts-ignore
             geometry={nodes[`Bottom${bottom}`].geometry}
-            material={materials[`Bottom.${bottom}`]}
-            skeleton={nodes[`Bottom${bottom}`].skeleton}
+            material={materials[`Bottom.${bottom}` as keyof typeof materials]}
+            // @ts-ignore
+            skeleton={nodes[`Bottom${bottom}` as keyof typeof nodes].skeleton}
           />
 
           <skinnedMesh
+            onClick={() => setAction('Wave')}
+            // @ts-ignore
             geometry={nodes[`Top${top}`].geometry}
-            material={materials[`Top.${top}`]}
-            material-color="#000000"
+            material={materials[`Top.${top}` as keyof typeof materials]}
+            // @ts-ignore
             skeleton={nodes[`Top${top}`].skeleton}
           />
 
           <skinnedMesh
+            onClick={() => setAction('Wave')}
+            // @ts-ignore
             geometry={nodes[`Footwear${shoes}`].geometry}
-            material={materials[`Footwear.${shoes}`]}
+            material={materials[`Footwear.${shoes}` as keyof typeof materials]}
+            // @ts-ignore
             skeleton={nodes[`Footwear${shoes}`].skeleton}
           />
         </group>

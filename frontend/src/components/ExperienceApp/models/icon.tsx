@@ -39,8 +39,8 @@ function Icon({ ...props }) {
       );
     }
   }, [index]);
-  let url = (iconObject as any)?.threedid;
-  let shape = (iconObject as any)?.shape;
+  let url = iconObject?.threedid;
+  let shape = iconObject?.shape;
   let { nodes } = useGLTF(`/glb/${shape}.glb`) as GLTFResult;
   let texture = useTexture(`/img/${url}.png`);
   texture.flipY = shape === 'Hexagon' ? true : false;
@@ -55,9 +55,7 @@ function Icon({ ...props }) {
   return (
     <group ref={ref as Ref<THREE.Group>} {...props} dispose={null} scale={1}>
       <mesh
-        // material={materials.Material}
-        // @ts-ignore
-        geometry={nodes[shape]!.geometry}
+        geometry={nodes[shape as keyof typeof nodes]!.geometry}
         rotation={[
           Math.PI / 2,
           shape === 'Circle'

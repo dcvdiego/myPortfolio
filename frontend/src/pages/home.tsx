@@ -79,9 +79,10 @@ const ModelContainer = !isMobile
     `
   : styled(motion.div)`
       height: 35rem;
-      /* width: 20%; */
-      /* position: absolute; */
+      width: 16rem;
       left: 10rem;
+
+      box-shadow: 0px 0px 40px 20px #503264;
     `;
 const AvatarPictureContainer = !isMobile
   ? styled.div`
@@ -152,6 +153,14 @@ function Home() {
             onHoverStart={() => setAction('Wave')}
             onHoverEnd={() => setAction('Idle')}
           >
+            {isMobile && (
+              <>
+                <span />
+                <span />
+                <span />
+                <span />
+              </>
+            )}
             <AvatarCanvas action={action} location="AvatarConfigurator" />
             <Picker />
             {/* <Marginer direction="vertical" margin="2em" /> */}

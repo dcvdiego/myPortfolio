@@ -35,7 +35,9 @@ export const BottomContainer = styled.div`
     justify-center
     md:justify-start
     mt-7
+    ml-2
     md:mt-1
+    md:ml-2
     `};
 `;
 

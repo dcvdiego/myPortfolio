@@ -200,16 +200,16 @@ const AvatarModel = forwardRef<
               material-color={snap.items.Footwear}
               skeleton={nodes.Wolf3D_Outfit_Footwear.skeleton}
             />
+            <skinnedMesh
+              castShadow
+              name="Wolf3D_Outfit_Top"
+              geometry={nodes.Wolf3D_Outfit_Top.geometry}
+              material={materials.Wolf3D_Outfit_Top}
+              material-color={snap.items.Top}
+              skeleton={nodes.Wolf3D_Outfit_Top.skeleton}
+            />
           </>
         )}
-        <skinnedMesh
-          castShadow
-          name="Wolf3D_Outfit_Top"
-          geometry={nodes.Wolf3D_Outfit_Top.geometry}
-          material={materials.Wolf3D_Outfit_Top}
-          material-color={snap.items.Top}
-          skeleton={nodes.Wolf3D_Outfit_Top.skeleton}
-        />
         <skinnedMesh
           name="EyeLeft"
           geometry={nodes.EyeLeft.geometry}

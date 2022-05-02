@@ -88,9 +88,9 @@ const CertificationsPage = ({ ...props }) => {
             </>
           ) : (
             <>
-              <SubHeading>Technical</SubHeading>
+              <SubHeading style={{ marginLeft: '3rem' }}>Technical</SubHeading>
               <CertificationsType type="Technical" />
-              <SubHeading>Consulting</SubHeading>
+              <SubHeading style={{ marginLeft: '3rem' }}>Consulting</SubHeading>
               <CertificationsType type="Consulting" />
             </>
           )}
