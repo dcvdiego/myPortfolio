@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import tw from 'twin.macro';
 import { useSnapshot } from 'valtio';
@@ -49,6 +50,45 @@ const CloseButton = styled.button`
   mr-10
   `}
 `;
+const Logo = () => {
+  const DContainer = styled.span`
+    position: relative;
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 15px;
+      background: #000;
+      bottom: 5px;
+      transition: all 0.2s ease-out;
+    }
+    &:hover:before {
+      transform: translateY(18px);
+    }
+  `;
+  const DContent = styled.p`
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    font-size: 3rem;
+    background: linear-gradient(to bottom, #000, #000 60%, #fff 60%, #fff 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-repeat: no-repeat;
+    transition: background 0.2s ease-out;
+    white-space: nowrap;
+    &:hover {
+      background-position: 0 11px;
+    }
+  `;
+  return (
+    <DContainer>
+      <DContent>DC</DContent>
+    </DContainer>
+  );
+};
 
 const Navbar = () => {
   const snap = useSnapshot(browserState);
@@ -67,7 +107,11 @@ const Navbar = () => {
   return (
     <>
       <NavbarContainer>
-        <LogoContainer>{/* <Logo /> */}</LogoContainer>
+        <Link to="/">
+          <LogoContainer>
+            <Logo />
+          </LogoContainer>
+        </Link>
         <NavItems />
       </NavbarContainer>
       {snap.readerMode || snap.bannerConsent ? null : (

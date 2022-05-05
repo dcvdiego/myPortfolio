@@ -15,6 +15,7 @@ justify-between
 const ExperienceTitle = styled.h2`
   ${tw`
     text-lg
+    underline
 `};
 `;
 const ExperienceDates = styled.h3`

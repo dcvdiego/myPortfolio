@@ -15,6 +15,9 @@ import StyledCertification, {
 } from './certification.styles';
 import { ICertificationObject } from './certification.types';
 
+import { useSnapshot } from 'valtio';
+import { browserState } from '../../utils/store';
+
 interface IData {
   data: ICertificationObject;
   screen?: boolean;
@@ -24,6 +27,7 @@ interface IData {
 export default function Certification({ data, screen }: IData) {
   const [isHover, setIsHover] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
+  const snap = useSnapshot(browserState);
 
   return (
     <StyledCertification>
@@ -39,7 +43,7 @@ export default function Certification({ data, screen }: IData) {
         onHoverEnd={() => setIsHover(false)}
         onClick={() => setIsSelected(!isSelected)}
       >
-        {screen ? (
+        {screen || snap.readerMode ? (
           <StyledIcon
             className="icon"
             variants={{
@@ -51,7 +55,9 @@ export default function Certification({ data, screen }: IData) {
             style={{ top: '0', left: '0' }}
           >
             <motion.img
-              src={`/img/${data.threedid}.png`}
+              src={`/img/${
+                data.threedid === 'AWSCP' ? data.threedid + 'f' : data.threedid
+              }.png`}
               animate={[
                 isSelected ? 'selected' : 'unselected',
                 isHover ? 'hover' : '',
@@ -102,7 +108,7 @@ export default function Certification({ data, screen }: IData) {
                 : labelTextVariantsUnselected
             }
           >
-            {screen ? null : (
+            {screen || snap.readerMode ? null : (
               <motion.span variants={labelTitleVariants}>
                 {data.awardingBody}
               </motion.span>

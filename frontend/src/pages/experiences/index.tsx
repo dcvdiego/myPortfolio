@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Layout from '../../components/Layout';
-import { Container, SubHeading } from '../../styles/global.styles';
+import { Container, Loader, SubHeading } from '../../styles/global.styles';
 import ExperienceApp from '../../components/ExperienceApp';
 import { appState, browserState } from '../../utils/store';
 import { useSnapshot } from 'valtio';
@@ -39,7 +39,9 @@ const ExperiencesPage = () => {
   return (
     <Layout title="Experiences">
       <Container ref={canvas} onClick={triggerScroll}>
-        {bSnap.readerMode && !loading && !error ? (
+        {loading ? (
+          <Loader />
+        ) : bSnap.readerMode && !loading && !error ? (
           <>
             {data.experiences.data.map((experience: any) => (
               <Experience data={experience} setActive={setActiveX} />
@@ -49,7 +51,7 @@ const ExperiencesPage = () => {
                 <Marginer direction="vertical" margin="2rem" />
                 <p>{activeXData.description}</p>
                 <SubHeading>Projects from this experience:</SubHeading>
-                {/* we need to check whetehr stuff exists, even tho it should always anyways I guess? */}
+                {/* we need to check whether stuff exists, even tho it should always anyways I guess? */}
                 {activeXData.data_components.data[0].attributes.Project &&
                   activeXData.data_components.data[0].attributes.Project.map(
                     (project: any) => {

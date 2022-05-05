@@ -9,7 +9,7 @@ justify-center
 flex-row
 `}
   z-index: 1000;
-  bottom: -5rem;
+  bottom: 0rem;
 `;
 export const UITopContainer = styled.div`
   ${tw`

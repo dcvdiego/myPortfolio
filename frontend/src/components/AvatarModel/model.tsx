@@ -69,7 +69,7 @@ const AvatarModel = forwardRef<
   const { action, location, screen } = props;
   const group = useRef<THREE.Group>();
   const snap = useSnapshot(state);
-  const { animations } = useGLTF(' /glb/modelwanim.glb') as GLTFResult;
+  const { animations } = useGLTF('/glb/modelwanim.glb') as GLTFResult;
   const { nodes, materials } = useGLTF(`${snap.avatarURL}`) as GLTFResult;
 
   if (location === 'AvatarConfigurator') {

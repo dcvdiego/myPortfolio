@@ -46,7 +46,7 @@ const NavItems = () => {
       <Menu right styles={menuStyles}>
         <ListContainer>
           <NavItem menu>
-            <Link to="/">Home</Link>
+            <Link to="/about">About Me</Link>
           </NavItem>
           <NavItem menu>
             <Link to="/certifications">Certifications</Link>
@@ -67,7 +67,7 @@ const NavItems = () => {
   return (
     <ListContainer>
       <NavItem>
-        <Link to="/">Home</Link>
+        <Link to="/about">About Me</Link>
       </NavItem>
       <NavItem>
         <Link to="/certifications">Certifications</Link>

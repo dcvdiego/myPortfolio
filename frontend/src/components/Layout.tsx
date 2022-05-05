@@ -1,6 +1,8 @@
 import * as React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { useSnapshot } from 'valtio';
+import { appState } from '../utils/store';
 
 type Props = {
   title?: string;
@@ -10,16 +12,17 @@ type Props = {
 
 const Layout: React.FunctionComponent<Props> = ({ children, ...props }) => {
   const { screen } = props;
+  const snap = useSnapshot(appState);
   return (
     <>
-      {screen ? null : (
+      {screen || snap.verse ? null : (
         <>
           <Navbar />
           {/* <TempOverlay /> */}
         </>
       )}
       {children}
-      {screen ? null : <Footer />}
+      {screen || snap.verse ? null : <Footer />}
     </>
   );
 };
