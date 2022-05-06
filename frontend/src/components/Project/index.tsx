@@ -6,6 +6,7 @@ import {
   ProjectContainer,
   ProjectDates,
   ProjectTitle,
+  ProjectDescription,
 } from './project.styles';
 
 interface IProjectObject {
@@ -42,6 +43,7 @@ const Project = ({ data, screen }: IData) => {
       <ProjectDates>
         {data.startDate} - {data.endDate ? data.endDate : 'Present'}
       </ProjectDates>
+      {screen && <ProjectDescription>{data.description}</ProjectDescription>}
     </ProjectContainer>
   );
 };

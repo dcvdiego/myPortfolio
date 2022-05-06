@@ -42,6 +42,7 @@ import CustomAvatar from './models/customAvatar';
 import BigScreen from './models/bigScreen';
 import testVideo from '../../assets/test.mp4';
 import givebackPlusVideo from '../../assets/giveback+.mp4';
+import LFWVideo from '../../assets/LFWPromo.mp4';
 
 softShadows();
 
@@ -173,7 +174,7 @@ export default function App() {
                   screen={screenNumber === 2 ? screenNumber : 0}
                   onClick={() => setScreenNumber(2)}
                 />
-                <BigScreen url={testVideo} position={[-2, 0, -90]} />
+                <BigScreen url={LFWVideo} position={[-2, 0, -90]} />
                 {/* METAVERSE SECTION */}
                 <BaseSection
                   transparent={transparent}
