@@ -1,6 +1,6 @@
 import React from 'react';
 import { Title, SubHeading } from '../styles/global.styles';
-import tw, { styled, TwStyle } from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 import { Marginer } from './Marginer';
 import { isMobile } from 'react-device-detect';
 
@@ -39,35 +39,35 @@ const TutorialOverlay: React.FC<ITutorialOverlayProps> = ({
     `}
   `;
 
-  const buttonStyles: Record<string, TwStyle> = {
-    blue: tw`
-      bg-blue-700
-      hover:bg-blue-600
-      `,
-    orange: tw`
-    bg-orange-600
-    hover:bg-orange-400
-    `,
-    green: tw`
-    bg-green-500
-    hover:bg-green-400
-    `,
-    red: tw`
-    bg-red-700
-    hover:bg-red-800
-    `,
-    purple: tw`
-    bg-purple-800
-    hover:bg-purple-700
-    `,
-  };
+  // const buttonStyles: Record<string, TwStyle> = {
+  //   blue: tw`
+  //     bg-blue-700
+  //     hover:bg-blue-600
+  //     `,
+  //   orange: tw`
+  //   bg-orange-600
+  //   hover:bg-orange-400
+  //   `,
+  //   green: tw`
+  //   bg-green-500
+  //   hover:bg-green-400
+  //   `,
+  //   red: tw`
+  //   bg-red-700
+  //   hover:bg-red-800
+  //   `,
+  //   purple: tw`
+  //   bg-purple-800
+  //   hover:bg-purple-700
+  //   `,
+  // };
 
-  const AppMenuButton = styled.button(({ color }) => [
-    tw`
-     text-6xl
-        `,
-    color && buttonStyles[color],
-  ]);
+  // const AppMenuButton = styled.button(({ color }) => [
+  //   tw`
+  //    text-6xl
+  //       `,
+  //   color && buttonStyles[color],
+  // ]);
   const NewButton = styled.button`
     padding: 1.3em 3em;
     font-size: 12px;

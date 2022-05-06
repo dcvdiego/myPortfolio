@@ -68,13 +68,13 @@ export const buttonStyles: Record<string, TwStyle> = {
   `,
 };
 
-const AppMenuButton = styled.button(({ color }) => [
-  tw`
-   text-6xl
-   m-16
-      `,
-  color && buttonStyles[color],
-]);
+// const AppMenuButton = styled.button(({ color }) => [
+//   tw`
+//    text-6xl
+//    m-16
+//       `,
+//   color && buttonStyles[color],
+// ]);
 // will make the new button style reusable at some point
 const NewButtonIBM = styled.button`
   margin: 3rem;
