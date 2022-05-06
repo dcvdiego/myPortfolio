@@ -21,7 +21,7 @@ const TutorialOverlay: React.FC<ITutorialOverlayProps> = ({
     absolute 
     left-0 
     w-full
-    h-full 
+    h-full
     flex 
     items-center 
     justify-center 
@@ -32,7 +32,10 @@ const TutorialOverlay: React.FC<ITutorialOverlayProps> = ({
     min-height: 50%;
     max-width: 75%;
     ${tw`
-    flex items-center justify-center flex-col
+    flex 
+    items-center 
+    justify-center 
+    flex-col
     `}
   `;
 
@@ -65,7 +68,30 @@ const TutorialOverlay: React.FC<ITutorialOverlayProps> = ({
         `,
     color && buttonStyles[color],
   ]);
-
+  const NewButton = styled.button`
+    padding: 1.3em 3em;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    &:hover {
+      background-color: #a22ee5;
+      box-shadow: 0px 15px 20px rgba(110, 46, 229, 0.4);
+      color: #fff;
+      transform: translateY(-7px);
+    }
+    &:active {
+      transform: translateY(-1px);
+    }
+  `;
   const AppSubContainer = styled.div`
     ${tw`
     m-8 
@@ -79,7 +105,7 @@ const TutorialOverlay: React.FC<ITutorialOverlayProps> = ({
   `;
   const TutorialContainer = styled.div`
     ${tw`
-flex
+    flex
     flex-row
     flex-basis[0]
     flex-grow
@@ -113,7 +139,7 @@ flex
                     A 3D version of the experiences I have had. Use{' '}
                     {isMobile
                       ? 'your finger to drag and roam around!'
-                      : 'WASD Controls (W - Forward, S - Backward, A - Left, D - Right) or the directional keys to roam around! '}
+                      : 'WASD Controls (W - Forward, S - Backward, A - Left, D - Right) or the directional keys to roam around! Hold shift while moving to run.'}
                   </p>
                   <Marginer direction="horizontal" margin="1em" />
                 </div>
@@ -141,9 +167,9 @@ flex
                 </div>
               </TutorialContainer>
               <Marginer direction="vertical" margin="1em" />
-              <AppMenuButton color="purple" onClick={() => setTutorial(false)}>
+              <NewButton onClick={() => setTutorial(false)}>
                 Thank you, now take me back!
-              </AppMenuButton>
+              </NewButton>
             </>
           ) : origin === 'home' ? (
             <>
@@ -180,9 +206,9 @@ flex
                 </div>
               </TutorialContainer>
               <Marginer direction="vertical" margin="2em" />
-              <AppMenuButton color="blue" onClick={() => setTutorial(false)}>
+              <NewButton onClick={() => setTutorial(false)}>
                 I understand
-              </AppMenuButton>
+              </NewButton>
             </>
           ) : (
             <p>Error</p>

@@ -8,26 +8,27 @@ flex
 flex-col
 items-center
 justify-between
+m-8
 `}
 `;
 export const ProjectTitle = styled.h2`
   ${tw`
-  text-lg
+  text-2xl
   underline
 `};
 `;
 export const ProjectClient = styled.h2`
   ${tw`
-text-base
+text-xl
 `}
 `;
 export const ProjectDates = styled.h3`
   ${tw`
-  text-sm
+  text-base
 `}
 `;
 export const ProjectDescription = styled.p`
   ${tw`
-  text-xs
+  text-sm
 `}
 `;

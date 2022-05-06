@@ -172,7 +172,10 @@ function Home() {
           </ModelContainer>
         )}
         {snap.readerMode ? (
-          <p>There will be stuff here soon!</p>
+          <SubHeading>
+            Use the navbar or footer to go to specific parts of my portfolio.
+            Have fun!
+          </SubHeading>
         ) : (
           <>
             <SubHeading>

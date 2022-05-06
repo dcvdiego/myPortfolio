@@ -154,6 +154,18 @@ const Client = ({ ...props }) => {
           </Container>
         ) : (
           <Container>
+            <Link
+              to="/projects"
+              style={{
+                marginTop: '1rem',
+                marginBottom: '2rem',
+                marginRight: '25%',
+              }}
+            >
+              <Button style={{ padding: '0.5rem', marginRight: '1em' }}>
+                {isMobile ? '←' : '← Go back to projects'}
+              </Button>
+            </Link>
             {projects.map((project: any) => {
               return (
                 <ProjectContainer>
@@ -208,24 +220,16 @@ const Client = ({ ...props }) => {
                 </ProjectContainer>
               );
             })}
-            <Link
-              to="/projects"
-              style={
-                isMobile
-                  ? { left: '0%', position: 'absolute', top: '15%' }
-                  : { position: 'absolute', left: '20%' }
-              }
-            >
-              <Button style={{ padding: '0.5rem' }}>
-                {isMobile ? '<-' : 'Go back to projects'}
-              </Button>
-            </Link>
           </Container>
         )
       ) : (
         <>
           {finalError && <Custom404 />}
-          {finalLoading && <Loader />}
+          {finalLoading && (
+            <Container>
+              <Loader />
+            </Container>
+          )}
         </>
       )}
     </Layout>

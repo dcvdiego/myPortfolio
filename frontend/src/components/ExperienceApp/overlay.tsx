@@ -71,9 +71,61 @@ export const buttonStyles: Record<string, TwStyle> = {
 const AppMenuButton = styled.button(({ color }) => [
   tw`
    text-6xl
+   m-16
       `,
   color && buttonStyles[color],
 ]);
+// will make the new button style reusable at some point
+const NewButtonIBM = styled.button`
+  margin: 3rem;
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  &:hover {
+    background-color: #2e31e5;
+    box-shadow: 0px 15px 20px rgba(46, 49, 229, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+  }
+  &:active {
+    transform: translateY(-1px);
+  }
+`;
+const NewButtonPP = styled.button`
+  margin: 3rem;
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  &:hover {
+    background-color: #e5802e;
+    box-shadow: 0px 15px 20px rgba(229, 134, 46, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+  }
+  &:active {
+    transform: translateY(-1px);
+  }
+`;
 
 const AppSubContainer = styled.div`
   ${tw`
@@ -84,6 +136,13 @@ flex-col
 items-center 
 justify-around 
 h-full
+`}
+`;
+
+const ButtonsContainer = styled.div`
+  ${tw`
+flex
+flex-row
 `}
 `;
 
@@ -131,18 +190,20 @@ const Overlay = () => {
           ) : (
             <>
               <Title>Select the ExperienceVerse</Title>
-              <AppMenuButton color="orange" onClick={() => handleStart('PP')}>
-                Pre-Professional
-              </AppMenuButton>
-              <AppMenuButton color="blue" onClick={() => handleStart('IBM')}>
-                IBM
-              </AppMenuButton>
+              <ButtonsContainer>
+                <NewButtonPP onClick={() => handleStart('PP')}>
+                  Pre-Professional
+                </NewButtonPP>
+                <NewButtonIBM onClick={() => handleStart('IBM')}>
+                  IBM
+                </NewButtonIBM>
+              </ButtonsContainer>
               <AppMenuOptions>
                 <AppMenuControls>
                   <p>Controls</p>{' '}
                   {isMobile
                     ? 'touch and drag to move around'
-                    : 'WASD or ← arrows →'}
+                    : 'WASD or ← arrows →, hold shift to run'}
                 </AppMenuControls>
               </AppMenuOptions>
             </>

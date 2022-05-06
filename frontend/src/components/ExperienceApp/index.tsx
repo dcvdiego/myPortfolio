@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useCallback, useEffect, useState } from 'react';
 import { Button } from '../../styles/global.styles';
 import {
   PerspectiveCamera,
@@ -42,6 +42,7 @@ import CustomAvatar from './models/customAvatar';
 import BigScreen from './models/bigScreen';
 import testVideo from '../../assets/test.mp4';
 import givebackPlusVideo from '../../assets/giveback+.mp4';
+import LFWVideo from '../../assets/LFWPromo.mp4';
 
 softShadows();
 
@@ -63,12 +64,24 @@ export default function App() {
     'pragmatic',
     'leadership',
   ];
+  const escFunction = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Escape' && snap.verse) handleBack();
+    //Do whatever when esc is pressed
+  }, []);
 
+  useEffect(() => {
+    document.addEventListener('keydown', escFunction, false);
+
+    return () => {
+      document.removeEventListener('keydown', escFunction, false);
+    };
+  }, []);
   return (
     <>
       <Canvas
         shadows
-        camera={{ fov: 75, near: 0.1, far: 1000, position: [-11, 1, -62] }}
+        // if rendering starts to be weird, increase far
+        camera={{ fov: 70, near: 1, far: 350, position: [-11, 1, -62] }}
         style={{
           height: '100vh',
           width: '100%',
@@ -161,7 +174,7 @@ export default function App() {
                   screen={screenNumber === 2 ? screenNumber : 0}
                   onClick={() => setScreenNumber(2)}
                 />
-                <BigScreen url={testVideo} position={[-2, 0, -90]} />
+                <BigScreen url={LFWVideo} position={[-2, 0, -90]} />
                 {/* METAVERSE SECTION */}
                 <BaseSection
                   transparent={transparent}
@@ -219,6 +232,7 @@ export default function App() {
             style={{
               backgroundColor: 'rgba(120, 113, 108, 0.313)',
               padding: '0.5rem 1rem 0.5rem 1rem',
+              color: 'white',
             }}
           >
             ?
@@ -232,7 +246,10 @@ export default function App() {
         snap.verse &&
         !tutorial ? (
           <Button
-            style={{ backgroundColor: 'rgba(120, 113, 108, 0.313)' }}
+            style={{
+              backgroundColor: 'rgba(120, 113, 108, 0.313)',
+              color: 'white',
+            }}
             onClick={() => setAutoWalk(false)}
           >
             Stop
@@ -243,7 +260,11 @@ export default function App() {
           snap.verse &&
           !tutorial && (
             <Button
-              style={{ backgroundColor: 'rgba(120, 113, 108, 0.313)' }}
+              style={{
+                backgroundColor: 'rgba(120, 113, 108, 0.313)',
+                color: 'white',
+                margin: '1rem',
+              }}
               onClick={() => setAutoWalk(true)}
             >
               Auto-Walk
@@ -252,7 +273,11 @@ export default function App() {
         )}
         {snap.verse && screenNumber === 0 && (
           <Button
-            style={{ backgroundColor: 'rgba(120, 113, 108, 0.313)' }}
+            style={{
+              backgroundColor: 'rgba(120, 113, 108, 0.313)',
+              color: 'white',
+              margin: '1rem',
+            }}
             onClick={handleBack}
           >
             Back to menu
@@ -260,7 +285,11 @@ export default function App() {
         )}
         {screenNumber > 0 && (
           <Button
-            style={{ backgroundColor: 'rgba(120, 113, 108, 0.313)' }}
+            style={{
+              backgroundColor: 'rgba(120, 113, 108, 0.313)',
+              color: 'white',
+              margin: '1rem',
+            }}
             onClick={() => setScreenNumber(0)}
           >
             Go Back

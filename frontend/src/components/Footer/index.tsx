@@ -27,6 +27,8 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { Button } from '../../styles/global.styles';
 import { useSnapshot } from 'valtio';
 import { browserState } from '../../utils/store';
+import { Marginer } from '../Marginer';
+import { styled } from 'twin.macro';
 
 // import { Logo } from '../logo';
 
@@ -42,11 +44,59 @@ const Footer = () => {
       browserState.readerMode = set;
     }
   };
+  // I know, I am lazy
+  const InvertLogo = () => {
+    const DContainer = styled.span`
+      position: relative;
+      &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 15px;
+        background: #fff;
+        bottom: 5px;
+        transition: all 0.2s ease-out;
+      }
+      &:hover:before {
+        transform: translateY(18px);
+      }
+    `;
+    const DContent = styled.p`
+      cursor: pointer;
+      position: relative;
+      display: inline-block;
+      font-size: 3rem;
+      background: linear-gradient(
+        to bottom,
+        #fff,
+        #fff 60%,
+        #000 60%,
+        #000 100%
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      background-repeat: no-repeat;
+      transition: background 0.2s ease-out;
+      white-space: nowrap;
+      &:hover {
+        background-position: 0 11px;
+      }
+    `;
+    return (
+      <DContainer>
+        <DContent>DC</DContent>
+      </DContainer>
+    );
+  };
   return (
     <FooterContainer>
       <InnerContainer>
         <AboutContainer>
-          {/* <Logo color="white" /> */}
+          <Link to="/">
+            <InvertLogo />
+          </Link>
           <AboutText>
             This is my portfolio websites where I will showcase my journey in
             development
@@ -56,16 +106,16 @@ const Footer = () => {
           <LinksList>
             <HeaderTitle>Get Started</HeaderTitle>
             <ListItem>
-              <Link to="/">Home</Link>
+              <Link to="/experiences">ExperienceApp</Link>
             </ListItem>
             <ListItem>
               <Link to="/about">About Me</Link>
             </ListItem>
             <ListItem>
-              <Link to="/projects">Projects</Link>
+              <Link to="/testimonials">Testimonials</Link>
             </ListItem>
             <ListItem>
-              <Link to="/experiences">ExperienceApp</Link>
+              <Link to="/projects">Projects</Link>
             </ListItem>
             <ListItem>
               <Link to="/creds">Creds</Link>
@@ -122,10 +172,9 @@ const Footer = () => {
             </ColoredIcon>
             <SmallText>diegochuman@gmail.com</SmallText>
           </HorizontalContainer>
+          <Marginer direction="vertical" margin="1em" />
           {snap.readerMode && snap.canRun ? (
-            <Button onClick={() => handleReaderMode(false)}>
-              Experience this website fully
-            </Button>
+            <Button onClick={() => handleReaderMode(false)}>NormalMode</Button>
           ) : snap.canRun ? (
             <Button onClick={() => handleReaderMode(true)}>ReaderMode</Button>
           ) : null}

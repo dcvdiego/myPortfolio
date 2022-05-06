@@ -11,6 +11,7 @@ const keyCodeMapping: Record<string, string> = {
   ArrowLeft: 'left',
   ArrowRight: 'right',
   ShiftLeft: 'shift',
+  ShiftRight: 'shift',
   AutoWalk: 'forward',
 };
 
@@ -55,6 +56,7 @@ export default function usePlayerControls(AutoWalk: boolean) {
       keyCode === 'ArrowLeft' ||
       keyCode === 'ArrowRight' ||
       keyCode === 'ShiftLeft' ||
+      keyCode === 'ShiftRight' ||
       keyCode === 'AutoWalk'
     ) {
       setMovement((m) => ({ ...m, [moveFieldByKey(keyCode)]: true }));
