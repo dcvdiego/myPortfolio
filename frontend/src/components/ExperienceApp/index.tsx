@@ -5,6 +5,9 @@ import {
   Loader,
   Stars,
   softShadows,
+  // Stats,
+  AdaptiveDpr,
+  AdaptiveEvents,
 } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import Icon from './models/icon';
@@ -43,6 +46,7 @@ import BigScreen from './models/bigScreen';
 import testVideo from '../../assets/test.mp4';
 import givebackPlusVideo from '../../assets/giveback+.mp4';
 import LFWVideo from '../../assets/LFWPromo.mp4';
+// import { Loader as Loader2D } from '../../styles/global.styles';
 
 softShadows();
 
@@ -78,27 +82,29 @@ export default function App() {
   }, []);
   return (
     <>
-      <Canvas
-        shadows
-        // if rendering starts to be weird, increase far
-        camera={{ fov: 70, near: 1, far: 350, position: [-11, 1, -62] }}
-        style={{
-          height: '100vh',
-          width: '100%',
-          overflowX: 'hidden',
-          touchAction: 'none',
-        }}
-      >
-        <ApolloProvider client={client}>
-          <PerspectiveCamera />
-          <Stars
-            radius={100}
-            depth={50}
-            count={5000}
-            factor={4}
-            saturation={0}
-          />
-          <Suspense fallback={null}>
+      <Suspense fallback={<Loader />}>
+        <Canvas
+          shadows
+          // if rendering starts to be weird, increase far
+          camera={{ fov: 70, near: 1, far: 350, position: [-11, 1, -62] }}
+          style={{
+            height: '100vh',
+            width: '100%',
+            overflowX: 'hidden',
+            touchAction: 'none',
+          }}
+        >
+          <ApolloProvider client={client}>
+            <AdaptiveDpr />
+            <AdaptiveEvents />
+            <PerspectiveCamera />
+            <Stars
+              radius={100}
+              depth={50}
+              count={5000}
+              factor={4}
+              saturation={0}
+            />
             {/* every -18 units you can add a new corridor */}
             {snap.verse && (
               <PlayerMovement
@@ -217,9 +223,11 @@ export default function App() {
                 />
               </>
             )}
-          </Suspense>
-        </ApolloProvider>
-      </Canvas>
+            {/* <Stats /> */}
+            {/* <FPSLimiter fps={24} /> */}
+          </ApolloProvider>
+        </Canvas>
+      </Suspense>
       <Overlay />
       {tutorial ? (
         <TutorialOverlay origin="app" setTutorial={setTutorial} />

@@ -11,6 +11,8 @@ import {
   QueryLazyOptions,
 } from '@apollo/client';
 
+import { Loader } from '../../styles/global.styles';
+
 interface IWordCloud {
   getTestimonial?: (
     options?: QueryLazyOptions<OperationVariables> | undefined
@@ -31,7 +33,7 @@ const WordCloud: React.FC<IWordCloud> = ({ getTestimonial }) => {
     <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 35], fov: 90 }}>
       <fog attach="fog" args={['#202025', 0, 80]} />
       <group dispose={null}>
-        <Suspense fallback={null}>
+        <Suspense fallback={<Loader />}>
           <Cloud
             dist={linkArray.length}
             radius={20}
