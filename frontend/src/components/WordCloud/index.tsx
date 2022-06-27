@@ -27,6 +27,8 @@ const WordCloud: React.FC<IWordCloud> = ({ getTestimonial }) => {
     'commitment',
     'pragmatic',
     'leadership',
+    'responsibility',
+    'impress',
   ];
 
   return (

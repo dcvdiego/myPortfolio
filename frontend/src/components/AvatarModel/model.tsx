@@ -91,8 +91,8 @@ const AvatarModel = forwardRef<
     const { size } = useThree();
     useFrame((fState, _delta) => {
       const mouse = {
-        x: size.width / 2 + (fState.mouse.x * size.width) / 2,
-        y: size.height / 2 + (-fState.mouse.y * size.height) / 2,
+        x: size.width / 2 + (fState.pointer.x * size.width) / 2,
+        y: size.height / 2 + (-fState.pointer.y * size.height) / 2,
       };
       // every joint to move you must specify the bone in the GLTF type
 
