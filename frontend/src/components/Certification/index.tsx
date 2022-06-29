@@ -17,6 +17,7 @@ import { ICertificationObject } from './certification.types';
 
 import { useSnapshot } from 'valtio';
 import { browserState } from '../../utils/store';
+import { Loader } from '../../styles/global.styles';
 
 interface IData {
   data: ICertificationObject;
@@ -90,7 +91,7 @@ export default function Certification({ data, screen }: IData) {
                 : { opacity: 1 },
             }}
           >
-            <Suspense fallback={null}>
+            <Suspense fallback={<Loader />}>
               <Icon
                 isHover={isHover}
                 isSelected={isSelected}

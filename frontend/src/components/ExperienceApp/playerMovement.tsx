@@ -45,7 +45,6 @@ export default function PlayerMovement({
   const { forward, backward, left, right, shift } = movement;
   let relativeCameraOffset = new Vector3();
   let cameraOffset;
-
   useEffect(() => {
     if (screen) return;
     const { x, y, z } = model.current!.position;

@@ -126,7 +126,7 @@ export default function Cloud({
       ))}
     </group>
   ) : (
-    <>
+    <group dispose={null}>
       {words.map(([pos, word], index) => (
         <Word
           key={index}
@@ -136,6 +136,6 @@ export default function Cloud({
           origin={origin}
         />
       ))}
-    </>
+    </group>
   );
 }
