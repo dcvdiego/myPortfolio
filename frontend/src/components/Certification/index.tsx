@@ -57,7 +57,9 @@ export default function Certification({ data, screen }: IData) {
           >
             <motion.img
               src={`/img/${
-                data.threedid === 'AWSCP' ? data.threedid + 'f' : data.threedid
+                data.threedid === 'AWSCP' || 'AWSSAA'
+                  ? data.threedid + 'f'
+                  : data.threedid
               }.png`}
               animate={[
                 isSelected ? 'selected' : 'unselected',

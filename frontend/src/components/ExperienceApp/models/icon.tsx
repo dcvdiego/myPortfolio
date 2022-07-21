@@ -20,7 +20,7 @@ type GLTFResult = GLTF & {
 function Icon({ ...props }) {
   const [index, setIndex] = useState<number>(0);
   const [iconObject, setIconObject] = useState({
-    threedid: 'AWSCP',
+    threedid: 'AWSSAA',
     shape: 'Hexagon',
   });
   const { loading, error, data } = useQuery(CERTIFICATIONS_QUERY);
