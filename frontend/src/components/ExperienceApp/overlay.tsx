@@ -191,8 +191,10 @@ const Overlay = () => {
             <>
               <Title>Select the ExperienceVerse</Title>
               <ButtonsContainer>
-                <NewButtonPP onClick={() => handleStart('PP')}>
-                  Pre-Professional
+                <NewButtonPP
+                // onClick={() => handleStart('PP')}
+                >
+                  Pre-Professional (Coming Soon)
                 </NewButtonPP>
                 <NewButtonIBM onClick={() => handleStart('IBM')}>
                   IBM
