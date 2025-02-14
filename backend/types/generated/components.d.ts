@@ -1,6 +1,6 @@
-import type { Attribute, Schema } from '@strapi/strapi';
+import type { Schema, Struct } from '@strapi/strapi';
 
-export interface DataCertifications extends Schema.Component {
+export interface DataCertifications extends Struct.ComponentSchema {
   collectionName: 'components_data_certifications';
   info: {
     description: '';
@@ -8,32 +8,32 @@ export interface DataCertifications extends Schema.Component {
     icon: 'award';
   };
   attributes: {
-    awardingBody: Attribute.String & Attribute.Required;
-    date: Attribute.Date;
-    description: Attribute.Text & Attribute.Required;
-    name: Attribute.String & Attribute.Required;
-    shape: Attribute.Enumeration<['Hexagon', 'Circle', 'Plane']> &
-      Attribute.Required;
-    threedid: Attribute.String & Attribute.Required;
-    type: Attribute.Enumeration<['Consulting', 'Technical']> &
-      Attribute.Required;
+    awardingBody: Schema.Attribute.String & Schema.Attribute.Required;
+    date: Schema.Attribute.Date;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    shape: Schema.Attribute.Enumeration<['Hexagon', 'Circle', 'Plane']> &
+      Schema.Attribute.Required;
+    threedid: Schema.Attribute.String & Schema.Attribute.Required;
+    type: Schema.Attribute.Enumeration<['Consulting', 'Technical']> &
+      Schema.Attribute.Required;
   };
 }
 
-export interface DataCred extends Schema.Component {
+export interface DataCred extends Struct.ComponentSchema {
   collectionName: 'components_data_creds';
   info: {
     displayName: 'Cred';
     icon: 'code';
   };
   attributes: {
-    contribution: Attribute.Text;
-    link: Attribute.String;
-    name: Attribute.String;
+    contribution: Schema.Attribute.Text;
+    link: Schema.Attribute.String;
+    name: Schema.Attribute.String;
   };
 }
 
-export interface DataProject extends Schema.Component {
+export interface DataProject extends Struct.ComponentSchema {
   collectionName: 'components_data_projects';
   info: {
     description: '';
@@ -41,22 +41,22 @@ export interface DataProject extends Schema.Component {
     icon: 'campground';
   };
   attributes: {
-    clientName: Attribute.String;
-    clientSize: Attribute.Integer;
-    description: Attribute.Text;
-    endDate: Attribute.Date;
-    infrastructure: Attribute.JSON;
-    link: Attribute.String;
-    name: Attribute.String;
-    preview: Attribute.Media<'images' | 'videos'>;
-    projectSize: Attribute.Integer;
-    repo: Attribute.String;
-    slug: Attribute.String;
-    startDate: Attribute.Date;
+    clientName: Schema.Attribute.String;
+    clientSize: Schema.Attribute.Integer;
+    description: Schema.Attribute.Text;
+    endDate: Schema.Attribute.Date;
+    infrastructure: Schema.Attribute.JSON;
+    link: Schema.Attribute.String;
+    name: Schema.Attribute.String;
+    preview: Schema.Attribute.Media<'images' | 'videos'>;
+    projectSize: Schema.Attribute.Integer;
+    repo: Schema.Attribute.String;
+    slug: Schema.Attribute.String;
+    startDate: Schema.Attribute.Date;
   };
 }
 
-export interface DataTestimonial extends Schema.Component {
+export interface DataTestimonial extends Struct.ComponentSchema {
   collectionName: 'components_testimonial_testimonials';
   info: {
     description: '';
@@ -64,16 +64,16 @@ export interface DataTestimonial extends Schema.Component {
     icon: 'check';
   };
   attributes: {
-    Content: Attribute.Text;
-    From: Attribute.String;
-    Project: Attribute.String;
-    Title: Attribute.Text;
+    Content: Schema.Attribute.Text;
+    From: Schema.Attribute.String;
+    Project: Schema.Attribute.String;
+    Title: Schema.Attribute.Text;
   };
 }
 
-declare module '@strapi/types' {
-  export module Shared {
-    export interface Components {
+declare module '@strapi/strapi' {
+  export module Public {
+    export interface ComponentSchemas {
       'data.certifications': DataCertifications;
       'data.cred': DataCred;
       'data.project': DataProject;
