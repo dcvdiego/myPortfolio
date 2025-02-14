@@ -1,20 +1,20 @@
-import type { Schema, Attribute } from '@strapi/strapi';
+import type { Attribute, Schema } from '@strapi/strapi';
 
 export interface DataCertifications extends Schema.Component {
   collectionName: 'components_data_certifications';
   info: {
+    description: '';
     displayName: 'Certification';
     icon: 'award';
-    description: '';
   };
   attributes: {
-    threedid: Attribute.String & Attribute.Required;
-    name: Attribute.String & Attribute.Required;
     awardingBody: Attribute.String & Attribute.Required;
-    description: Attribute.Text & Attribute.Required;
     date: Attribute.Date;
+    description: Attribute.Text & Attribute.Required;
+    name: Attribute.String & Attribute.Required;
     shape: Attribute.Enumeration<['Hexagon', 'Circle', 'Plane']> &
       Attribute.Required;
+    threedid: Attribute.String & Attribute.Required;
     type: Attribute.Enumeration<['Consulting', 'Technical']> &
       Attribute.Required;
   };
@@ -27,47 +27,47 @@ export interface DataCred extends Schema.Component {
     icon: 'code';
   };
   attributes: {
-    name: Attribute.String;
     contribution: Attribute.Text;
     link: Attribute.String;
+    name: Attribute.String;
   };
 }
 
 export interface DataProject extends Schema.Component {
   collectionName: 'components_data_projects';
   info: {
+    description: '';
     displayName: 'Project';
     icon: 'campground';
-    description: '';
   };
   attributes: {
-    name: Attribute.String;
-    slug: Attribute.String;
-    infrastructure: Attribute.JSON;
-    clientSize: Attribute.Integer;
-    projectSize: Attribute.Integer;
-    startDate: Attribute.Date;
-    endDate: Attribute.Date;
-    link: Attribute.String;
-    repo: Attribute.String;
     clientName: Attribute.String;
+    clientSize: Attribute.Integer;
     description: Attribute.Text;
-    preview: Attribute.Media;
+    endDate: Attribute.Date;
+    infrastructure: Attribute.JSON;
+    link: Attribute.String;
+    name: Attribute.String;
+    preview: Attribute.Media<'images' | 'videos'>;
+    projectSize: Attribute.Integer;
+    repo: Attribute.String;
+    slug: Attribute.String;
+    startDate: Attribute.Date;
   };
 }
 
 export interface DataTestimonial extends Schema.Component {
   collectionName: 'components_testimonial_testimonials';
   info: {
+    description: '';
     displayName: 'Testimonial';
     icon: 'check';
-    description: '';
   };
   attributes: {
-    From: Attribute.String;
-    Title: Attribute.Text;
-    Project: Attribute.String;
     Content: Attribute.Text;
+    From: Attribute.String;
+    Project: Attribute.String;
+    Title: Attribute.Text;
   };
 }
 
