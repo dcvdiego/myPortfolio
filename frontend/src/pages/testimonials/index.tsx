@@ -14,7 +14,6 @@ import { ITestimonialObject } from '../../components/Testimonial/testimonial.typ
 import tw, { styled } from 'twin.macro';
 import { Marginer } from '../../components/Marginer';
 import { isMobile } from 'react-device-detect';
-import { TestimonialSubtitle } from '../../components/Testimonial/testimonial.styles';
 import TESTIMONIALS_QUERY from '../../graphql/Testimonials/testimonials';
 
 const CloudContainer = styled.div`
@@ -41,6 +40,7 @@ const CloudContainerMobile = styled.div`
   flex-col
   p-20
   `}
+  padding-top: 1rem;
 `;
 
 const TestimonialsPage = () => {
@@ -57,6 +57,7 @@ const TestimonialsPage = () => {
         <Title>These are my testimonials</Title>
         {!isMobile ? (
           <CloudContainer>
+            {/* @ts-ignore */}
             <WordCloud getTestimonial={getTestimonial} />
             <TestimonialContainer>
               {loading ? (
@@ -87,11 +88,6 @@ const TestimonialsPage = () => {
           </CloudContainer>
         ) : (
           <CloudContainerMobile>
-            <TestimonialSubtitle>
-              Unfortunately, onClick does not work in mobile for three.js. So
-              see all of my testimonials below
-            </TestimonialSubtitle>
-            <WordCloud getTestimonial={getTestimonial} />
             <TestimonialContainer>
               {loading ? (
                 <Loader />

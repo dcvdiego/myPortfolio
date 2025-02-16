@@ -156,15 +156,6 @@ const Footer = () => {
           </LinksList>
         </SectionContainer>
         <SectionContainer>
-          <HeaderTitle>Find me on WhatsApp!</HeaderTitle>
-          <HorizontalContainer>
-            <ColoredIcon color="green">
-              <FontAwesomeIcon icon={faPhoneAlt as IconProp} />
-            </ColoredIcon>
-            <SmallText>+4407832646484</SmallText>
-          </HorizontalContainer>
-        </SectionContainer>
-        <SectionContainer>
           <HeaderTitle>Email me!</HeaderTitle>
           <HorizontalContainer>
             <ColoredIcon color="red">

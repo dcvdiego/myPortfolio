@@ -53,7 +53,7 @@ export const AboutContainer = styled.div`
     flex
     flex-col
     mr-2
-    md:mr-16
+    md:mr-72
     pl-10
     pr-10
     md:pl-3
