@@ -3,15 +3,11 @@ import { gql } from '@apollo/client';
 const TESTIMONIALS_QUERY = gql`
   query AllTestimonials {
     dataComponents {
-      data {
-        attributes {
-          Testimonial {
-            From
-            Title
-            Project
-            Content
-          }
-        }
+      Testimonial {
+        From
+        Title
+        Project
+        Content
       }
     }
   }

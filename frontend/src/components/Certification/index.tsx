@@ -1,5 +1,5 @@
 import React, { useState, Suspense } from 'react';
-import { motion, Variants, Transition } from 'framer-motion';
+import { motion, Variants, Transition } from 'motion/react';
 import Icon from './icon';
 import StyledCertification, {
   CertificationContainer,
@@ -29,7 +29,7 @@ export default function Certification({ data, screen }: IData) {
   const [isHover, setIsHover] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
   const snap = useSnapshot(browserState);
-
+  console.log(data);
   return (
     <StyledCertification>
       <CertificationContainer
@@ -57,7 +57,7 @@ export default function Certification({ data, screen }: IData) {
           >
             <motion.img
               src={`/img/${
-                data.threedid === 'AWSCP' || 'AWSSAA'
+                data.threedid === 'AWSCP' || data.threedid === 'AWSSAA'
                   ? data.threedid + 'f'
                   : data.threedid
               }.png`}

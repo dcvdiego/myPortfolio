@@ -48,11 +48,9 @@ const CertificationsType: React.FC<ICTypeProps> = (type) => {
   if (!data) return <p>Not found</p>;
   return (
     <CategoryContainer>
-      {data.certifications.data[0].attributes.Certification.map(
-        (certification: any) => {
-          return <Certification data={certification} />;
-        }
-      )}
+      {data.certifications[0].Certification.map((certification: any) => {
+        return <Certification data={certification} />;
+      })}
     </CategoryContainer>
   );
 };
@@ -63,7 +61,7 @@ const CertificationsTypeScreen: React.FC<ICTypeScreenProps> = ({
   const { componentData } = props;
   return (
     <CategoryContainer>
-      {componentData.certifications.data[0].attributes.Certification.map(
+      {componentData.certifications[0].Certification.map(
         (certification: any) => {
           return (
             <Certification key={certification} data={certification} screen />

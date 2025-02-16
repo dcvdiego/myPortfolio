@@ -20,8 +20,7 @@ function AboutPage({ ...props }) {
     finalError = error;
     finalData = data;
   }
-  const aboutData = finalData?.about?.data?.attributes;
-
+  const aboutData = finalData?.about;
   const AboutContainer = styled.div`
     margin: 0 auto;
     width: 80%;

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import AvatarCanvas from '../components/AvatarModel';
 import { Marginer } from '../components/Marginer';
-import { motion, Variants } from 'framer-motion';
+import { motion, Variants } from 'motion/react';
 import styled from 'styled-components';
 import { Button, Container, SubHeading, Title } from '../styles/global.styles';
 

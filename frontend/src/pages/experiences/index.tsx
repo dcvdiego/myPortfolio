@@ -31,11 +31,12 @@ const ExperiencesPage = () => {
   useEffect(() => {
     if (!activeX) return;
     setActiveXData(
-      data.experiences.data.filter(
-        (experience: any) => experience.attributes.name === activeX
-      )[0].attributes
+      data.experiences.filter(
+        (experience: any) => experience.name === activeX
+      )[0]
     );
   }, [activeX]);
+  console.log(activeXData);
   return (
     <Layout title="Experiences">
       <Container ref={canvas} onClick={triggerScroll}>
@@ -43,7 +44,7 @@ const ExperiencesPage = () => {
           <Loader />
         ) : bSnap.readerMode && !loading && !error ? (
           <>
-            {data.experiences.data.map((experience: any) => (
+            {data.experiences.map((experience: any) => (
               <Experience data={experience} setActive={setActiveX} />
             ))}
             {activeX && activeXData && (
@@ -52,16 +53,14 @@ const ExperiencesPage = () => {
                 <p>{activeXData.description}</p>
                 <SubHeading>Projects from this experience:</SubHeading>
                 {/* we need to check whether stuff exists, even tho it should always anyways I guess? */}
-                {activeXData.data_components.data[0].attributes.Project &&
-                  activeXData.data_components.data[0].attributes.Project.map(
-                    (project: any) => {
-                      return <Project data={project} />;
-                    }
-                  )}
+                {activeXData.data_components[0].Project &&
+                  activeXData.data_components[0].Project.map((project: any) => {
+                    return <Project data={project} />;
+                  })}
                 <Marginer direction="vertical" margin="2rem" />
                 <SubHeading>Testimonials from this experience:</SubHeading>
-                {activeXData.data_components.data[0].attributes.Testimonial &&
-                  activeXData.data_components.data[0].attributes.Testimonial.map(
+                {activeXData.data_components[0].Testimonial &&
+                  activeXData.data_components[0].Testimonial.map(
                     (testimonial: any) => {
                       return <Testimonial data={testimonial} />;
                     }

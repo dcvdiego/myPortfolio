@@ -28,7 +28,7 @@ const Client = ({ ...props }) => {
     finalError = error;
     finalData = data;
   }
-  const projects = finalData?.dataComponents.data[0].attributes.Project;
+  const projects = finalData?.dataComponents[0].Project;
   const ProjectContainer = !isMobile
     ? styled.div<{ lightMode?: boolean }>`
         color: ${(props) => (props.lightMode ? 'black' : 'white')} !important;
@@ -138,16 +138,15 @@ const Client = ({ ...props }) => {
                     </RightContainer>
                   </ProjectInfoContainer>
                   {/* pic or video */}
-                  {project?.preview?.data?.attributes.url &&
-                    isImage(project.preview.data.attributes.url) && (
-                      <img
-                        src={
-                          import.meta.env.VITE_BACKEND_URL +
-                          '/' +
-                          project.preview.data.attributes.url
-                        }
-                      />
-                    )}
+                  {project?.preview?.url && isImage(project.preview.url) && (
+                    <img
+                      src={
+                        import.meta.env.VITE_BACKEND_URL +
+                        '/' +
+                        project.preview.url
+                      }
+                    />
+                  )}
                 </ProjectContainerScreen>
               );
             })}
@@ -208,15 +207,13 @@ const Client = ({ ...props }) => {
                     </RightContainer>
                   </ProjectInfoContainer>
                   {/* pic or video */}
-                  {project?.preview?.data?.attributes.url &&
-                    isImage(project.preview.data.attributes.url) && (
-                      <img
-                        src={
-                          import.meta.env.VITE_BACKEND_URL +
-                          project.preview.data.attributes.url
-                        }
-                      />
-                    )}
+                  {project?.preview?.url && isImage(project.preview.url) && (
+                    <img
+                      src={
+                        import.meta.env.VITE_BACKEND_URL + project.preview.url
+                      }
+                    />
+                  )}
                 </ProjectContainer>
               );
             })}

@@ -64,7 +64,7 @@ const TestimonialsPage = () => {
               ) : error ? (
                 <p>Error, please contact me!</p>
               ) : data ? (
-                data?.dataComponents?.data[0].attributes.Testimonial.map(
+                data?.dataComponents[0]?.Testimonial.map(
                   (testimonial: ITestimonialObject) => {
                     return (
                       <>
@@ -98,7 +98,7 @@ const TestimonialsPage = () => {
               ) : error ? (
                 <p>Error, please contact me!</p>
               ) : data ? (
-                data?.dataComponents?.data[0].attributes.Testimonial.map(
+                data?.dataComponents[0]?.Testimonial.map(
                   (testimonial: ITestimonialObject) => {
                     return (
                       <>

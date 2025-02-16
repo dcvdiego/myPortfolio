@@ -34,9 +34,7 @@ function Icon({ ...props }) {
   }, []);
   useEffect(() => {
     if (!loading && !error) {
-      setIconObject(
-        randomObject(data?.certifications.data[0].attributes.Certification)
-      );
+      setIconObject(randomObject(data?.certifications[0]?.Certification));
     }
   }, [index]);
   let url = iconObject?.threedid;

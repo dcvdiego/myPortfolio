@@ -37,16 +37,15 @@ const Experience = ({ ...props }) => {
       <ExperienceTitle>
         <span
           style={{ cursor: 'pointer' }}
-          onClick={() => setActive(data.attributes.name)}
+          onClick={() => setActive(data.name)}
         >
-          {data.attributes.name}
+          {data.name}
         </span>
       </ExperienceTitle>
       <ExperienceDates>
-        {data.attributes.startDate} -
-        {data.attributes.endDate ? data.attributes.endDate : 'Present'}
+        {data.startDate} -{data.endDate ? data.endDate : 'Present'}
       </ExperienceDates>
-      <ExperienceRole>{data.attributes.role}</ExperienceRole>
+      <ExperienceRole>{data.role}</ExperienceRole>
     </ExperienceContainer>
   );
 };

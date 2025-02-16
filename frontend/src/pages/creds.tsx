@@ -11,10 +11,7 @@ function CredsPage() {
   }, []);
   const { loading, error, data } = useQuery(CREDS_QUERY);
   let allCreds;
-  if (data)
-    allCreds = data.creds.data
-      .map((origin: any) => origin.attributes.Cred)
-      .flat();
+  if (data) allCreds = data.creds.map((origin: any) => origin.Cred).flat();
   return (
     <Layout title="creds">
       <Container>

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
 
@@ -68,7 +68,7 @@ export const Label = styled.div`
   overflow-y-scroll
   `}
 
-  padding: 20px 0;
+  padding: 50px 0;
   transform: translateZ(0);
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none; /* Firefox */

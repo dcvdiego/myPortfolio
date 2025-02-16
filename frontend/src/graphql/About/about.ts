@@ -3,12 +3,8 @@ import { gql } from '@apollo/client';
 const ABOUT_QUERY = gql`
   query About {
     about {
-      data {
-        attributes {
-          Title
-          Content
-        }
-      }
+      Title
+      Content
     }
   }
 `;
